@@ -1,0 +1,19 @@
+{
+  "name": "color-thief-site",
+  "homepage": "http://lokeshdhakar.com/projects/color-thief/",
+  "authors": [
+    "Lokesh Dhakar <lokesh.dhakar@gmail.com>"
+  ],
+  "description": "Demos of Color Thief. Lives at lokeshdhakar.com/projects/lightbox2/.",
+  "main": [
+    "./index.html"
+  ],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components"
+  ],
+  "dependencies": {
+    "color-thief": "latest"
+  }
+}
