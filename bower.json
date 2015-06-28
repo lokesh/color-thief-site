@@ -4,7 +4,7 @@
   "authors": [
     "Lokesh Dhakar <lokesh.dhakar@gmail.com>"
   ],
-  "description": "Demos of Color Thief. Lives at lokeshdhakar.com/projects/lightbox2/.",
+  "description": "Demo site for Color Thief. Lives at lokeshdhakar.com/projects/color-thief/.",
   "main": [
     "./index.html"
   ],
