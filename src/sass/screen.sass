@@ -1,0 +1,421 @@
+@import "normalize"
+@import "highlightjs-github-gist-theme"
+
+// VARIABLES ------------------------------------------------------------------
+
+// == COLORS & BACKGROUNDS
+
+$orange:     #FF5722
+$red:        #E53935
+$blue:       #4ae
+$light-blue: #29B6F6
+$green:      #61c227
+$gray:       #777
+$light-gray: #f3f3f3
+$dark-gray:  #222
+
+$color:                 #444
+$code-color:            #df5000 // Match Highlight.js orange color
+$bg-color:              #fff
+$heading-color:         $dark-gray
+$section-heading-color: $orange
+$link-color:            $blue
+$code-bg-color:         darken($bg-color, 4%)
+$border-color:          darken($bg-color, 4%)
+
+$backdrop-bg-color:     darken($bg-color, 4%)
+
+$nav-bg-color:     white
+$header-color:     $color
+$header-bg-color:  white
+$section-bg-color: white
+$footer-bg-color:  white
+
+//== TYPE
+
+$font-family: "Roboto", "Helvetica", "lucida grande", sans-serif
+$code-font-family: Menlo, Monaco, Consolas, monospace
+
+//== LAYOUT
+
+$max-column-width: 1000px
+
+$backdrop-z-index: 5
+$content-z-index: 10
+$sharing-z-index: 20
+
+//== UI COMPONENTS
+
+$radius: 4px
+
+//== BREAKPOINTS
+
+$sm-screen: 640px
+$md-screen: 960px
+$lg-screen: 1280px
+
+
+/* Typography
+ *----------------------------------------------- */
+
+html
+  font: 14px / 1.8 $font-family, sans-serif
+  font-weight: 300
+
+body
+  color: $color
+  background-color: $bg-color
+
+h1, h2, h3, h4, h5
+  color: $heading-color
+  line-height: 1.2em
+  font-family: $font-family
+  font-weight: 400
+
+h1
+  font-size: 60px
+  font-weight: 400
+  margin: 0
+
+@media (min-width: $sm-screen)
+  h1
+    font-size: 80px
+
+h2
+  color: $section-heading-color
+  margin-top: 0
+  margin-bottom: 2rem
+  text-align: center
+  font-size: 34px
+
+@media (min-width: $sm-screen)
+  h2
+    text-align: left
+  
+h3
+  margin-bottom: 1rem
+  text-align: center
+  font-size: 20px
+  font-weight: 400
+
+@media (min-width: $sm-screen)
+  h3
+    text-align: left
+
+p
+  margin: 0 auto 2rem auto
+
+.lead
+  margin-bottom: 1.1rem
+  font-size: 1.25rem
+  color: lighten($color, 10%)
+
+ol
+  list-style-type: decimal
+
+ul,
+ol
+  margin: 0 0 2rem 0
+  padding-left: 18px
+
+@media (min-width: $sm-screen)
+  ul,
+  ol
+    padding-left: 40px
+
+li
+  margin-bottom: 0.5rem
+
+strong
+  font-weight: 500
+
+em
+  font-style: normal
+
+a
+  color: $link-color
+  text-decoration: none
+  outline: 0
+  &:hover
+    text-decoration: underline
+
+.sub-point
+  display: block
+  font-size: 0.75rem
+
+
+
+
+/* Code
+ * ========================================================================== */
+
+code
+  background-color: $code-bg-color
+  border-radius: $radius
+  font-family: $code-font-family
+  font-size: 12px
+  padding: 0.1rem 0.3rem
+  position: relative
+  top: -1px
+
+pre
+  background-color: $code-bg-color
+  border-radius: $radius
+  padding: 0 0.5rem 0.1rem 0.5rem
+  code
+    padding: 0
+    color: inherit
+
+
+/* Lists
+ * ========================================================================== */
+
+ul
+  margin: 0
+  text-align: left
+
+
+/* Tables
+ * ========================================================================== */
+
+th,
+td
+  vertical-align: top
+
+th
+  text-align: left
+
+
+/* Buttons
+ * ========================================================================== */
+
+.button
+  display: block
+  padding: 0.5rem 2rem
+  margin-bottom: 8px
+  border: 2px solid $link-color
+  color: $link-color
+  text-transform: uppercase
+  letter-spacing: 0.05em
+  border-radius: $radius
+  vertical-align: middle
+  white-space: nowrap
+  &:hover
+    color: white
+    background-color: $link-color
+    text-decoration: none
+
+@media (min-width: $sm-screen)
+  .button
+    display: inline-block
+    margin-right: 8px
+
+
+/* Elements
+ * ========================================================================== */
+
+hr
+  width: 348px
+  border: 0
+  border-top: 2px solid $border-color
+  
+@media (min-width: $sm-screen)  
+  hr
+    width: 480px
+    margin-left: 0
+
+
+/* -- Layout ------------------------------------------------------------------ */
+
+*, *:before, *:after
+  box-sizing: border-box
+
+body
+  margin: 0
+  padding: 0
+  background: $bg-color
+
+.nav
+  display: none
+  position: fixed
+  width: 120px
+  height: 100%
+  padding-top: 6.9rem
+  text-align: right
+  background: $nav-bg-color
+  border-right: 2px solid $border-color
+
+@media (min-width: $sm-screen)
+  .nav
+    display: block
+    width: 20%
+
+.nav-item
+  display: block
+  padding: 2px 32px 2px 0
+  
+a.nav-item:focus
+  outline: 0
+
+.content
+  margin-left: 0
+
+@media (min-width: $sm-screen)
+  .content
+    margin-left: 20%
+
+section
+  border-top: 2px solid $border-color
+  padding: 2rem 0
+  background-color: $section-bg-color
+
+@media (min-width: $sm-screen)
+  section
+    padding: 4rem 0
+
+.container
+  margin: 0 auto
+  max-width: $max-column-width
+  padding: 0 8px
+
+@media (min-width: $sm-screen)
+  .container
+    padding: 0 32px
+
+
+
+.row
+  // pie-clearfix
+  &:after
+    content: ""
+    display: table
+    clear: both
+
+
+//== Header
+
+header
+  background-color: $header-bg-color
+  padding-top: 5rem
+  text-align: center
+  color: $header-color
+
+@media (min-width: $sm-screen)
+  header
+    padding-top: 6.5rem
+    text-align: left
+
+.picture-icon
+  width: 45px
+  height: 45px
+  margin-right: 0.5rem
+
+.logo-credit
+  display: block
+  margin-bottom: 1em
+  color: $color
+
+@media (min-width: $sm-screen)
+  .logo-credit
+    position: relative
+    top: -3px
+    padding-left: 57px
+
+.primary-actions
+  padding-bottom: 5rem
+
+
+/* -- Examples -- */
+
+.example-image-link
+  display: inline-block
+  padding: 2px
+  margin: 0 0.5rem 1rem 0.5rem
+  background-color: $bg-color
+  line-height: 0
+  border-radius: $radius  
+  transition: background-color 0.5s ease-out
+  &:hover
+    background-color: $link-color
+    transition: none
+
+.example-image
+  width: 7rem
+  border-radius: $radius
+
+
+/* -- Getting started -- */    
+
+.getting-started-section
+  p,
+  ol,
+  ul,
+  pre
+    text-align: left
+
+  li
+    margin-bottom: 2rem
+    li
+      margin-bottom: 1rem
+
+.getting-started-list
+  p
+    margin-bottom: 1rem
+
+
+
+/* -- Options -- */
+
+.options-section
+  th,
+  td
+    padding: 8px 16px 8px 1px
+    border-bottom: 1px solid $border-color
+    &:last-child
+      padding-right: 0
+
+@media (max-width: $sm-screen)
+  .options-table
+    thead
+      display: none
+    tr
+      display: block
+      margin-bottom: 24px
+    td
+      display: block
+      padding: 4px 8px
+    td:first-child
+      font-weight: 500
+    .default-row
+      color: $gray
+      &:before
+        content: attr(data-label)
+        float: left
+        padding-right: 8px
+
+
+
+
+/* -- Credits -- */
+
+footer
+  padding: 2rem 0
+  border-top: 2px solid $border-color
+  background-color: $footer-bg-color
+  text-align: center
+  .button
+    margin-top: 0.5rem
+
+@media (min-width: $sm-screen)
+  footer
+    text-align: left
+
+/* -- Sharing -- */
+
+.sharing-section
+  position: fixed
+  z-index: $sharing-z-index
+  top: 16px
+  right: 16px
+
+
