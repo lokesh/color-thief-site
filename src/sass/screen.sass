@@ -242,10 +242,11 @@ header
 .examples-section
   .image-section
     .target-image
-      border-radius: 0 0 $radius $radius
+      border-radius: $radius
+      transition: border-radius 0.2s 0.3s
   .image-section.with-color-thief-output
     .target-image
-      border-radius: 0
+      border-radius: $radius $radius 0 0
 
 .run-functions-button
   position: absolute
@@ -299,7 +300,7 @@ header
   background-color: white
   border: 1px solid $border-color
   border-top-width: 0
-  border-bottom-radius: $radius
+  border-radius: 0 0 $radius $radius
 
 .function-title
   margin-top: 0
@@ -353,7 +354,7 @@ footer
   position: fixed
   z-index: $sharing-section-z-index
   top: 20px
-  right: 0
+  right: 20px
 
 
 /* -- Drag and drop ------------------------------------------------------------------ */
