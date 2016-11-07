@@ -31,9 +31,19 @@ module.exports = function(grunt) {
           }
         ],
       },
+      'demo-js': {
+        files: {
+            'dist/js/demo.js': 'src/js/demo.js'
+        }
+      },
       jquery: {
         files: {
-            'dist/js/jquery.min.js': 'bower_components/jquery/dist/jquery.min.js'
+            'dist/js/jquery.min.js': 'node_modules/jquery/dist/jquery.min.js'
+        }
+      },
+      mustache: {
+        files: {
+            'dist/js/mustache.min.js': 'node_modules/mustache/mustache.min.js'
         }
       },
       'color-thief': {
@@ -42,7 +52,7 @@ module.exports = function(grunt) {
             expand: true,
             cwd: 'bower_components/color-thief/dist',
             src: ['**'],
-            dest: 'dist/'
+            dest: 'dist/js/'
           }
         ]
       }
@@ -64,7 +74,7 @@ module.exports = function(grunt) {
       task: {
         files: {
           'dist/index.html': ['src/index.html']
-        }    
+        }
       }
     },
     htmllint: {
@@ -89,7 +99,11 @@ module.exports = function(grunt) {
       htmllint: {
         files: ['dist/index.html'],
         tasks: ['htmllint'],
-      }
+      },
+      javascript: {
+        files: ['src/js/*.js'],
+        tasks: ['copy'],
+      },
     }
   });
 
@@ -100,10 +114,10 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-ftp-deploy');
   grunt.loadNpmTasks('grunt-highlight');
-  grunt.loadNpmTasks('grunt-html');  
+  grunt.loadNpmTasks('grunt-html');
   grunt.loadNpmTasks('grunt-sass');
 
   grunt.registerTask('default', ['build', 'connect', 'watch']);
-  grunt.registerTask('build', ['highlight', 'htmllint', 'sass','autoprefixer', 'copy', 'clean']);
+  grunt.registerTask('build', ['highlight', 'htmllint', 'sass', 'autoprefixer', 'copy', 'clean']);
   grunt.registerTask('deploy', ['ftp-deploy']);
 };

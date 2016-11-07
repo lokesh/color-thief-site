@@ -9,9 +9,9 @@ $(document).ready(function () {
   // Color Thief demo code
   // ---------------------
   var imageArray = {images: [
-      {'file': 'examples/img/photo1.jpg'},
-      {'file': 'examples/img/photo2.jpg'},
-      {'file': 'examples/img/photo3.jpg'}
+      {'file': 'images/image-1.jpg'},
+      {'file': 'images/image-2.jpg'},
+      {'file': 'images/image-3.jpg'}
   ]};
 
   // Render example images
