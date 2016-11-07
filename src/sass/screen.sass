@@ -1,66 +1,57 @@
 @import "normalize"
 @import "highlightjs-github-gist-theme"
 
-// VARIABLES ------------------------------------------------------------------
+// COLORS & BACKGROUNDS --------------------------------------------------------
 
-// == COLORS & BACKGROUNDS
-
-$orange:     #FF5722
-$red:        #E53935
+$yellow:     #fdf485
+$orange:     #e67e39
 $blue:       #4ae
-$light-blue: #29B6F6
 $green:      #61c227
 $gray:       #777
-$light-gray: #f3f3f3
-$dark-gray:  #222
+$gray-light: #aaa
+$gray-dark:  #222
 
-$color:                 #444
-$code-color:            #df5000 // Match Highlight.js orange color
-$bg-color:              #fff
-$heading-color:         $dark-gray
+$color:                 $gray
+$bg-color:              #f3f3f3
+$border-color:          darken($bg-color, 5%)
+$header-bg-color:       #fff
 $section-heading-color: $orange
+$heading-color:         $gray-dark
 $link-color:            $blue
-$code-bg-color:         darken($bg-color, 4%)
-$border-color:          darken($bg-color, 4%)
+$code-color:            $gray-light
 
-$backdrop-bg-color:     darken($bg-color, 4%)
+// TYPE --------------------------------------------------------
 
-$nav-bg-color:     white
-$header-color:     $color
-$header-bg-color:  white
-$section-bg-color: white
-$footer-bg-color:  white
+$body-font-family:    "Karla", "lucida grande", sans-serif
+$heading-font-family: "Montserrat", "Helvetica", sans-serif
+$code-font-family:    "Karla", "lucida grande", sans-serif
 
-//== TYPE
+// LAYOUT --------------------------------------------------------
 
-$font-family: "Roboto", "Helvetica", "lucida grande", sans-serif
-$code-font-family: Menlo, Monaco, Consolas, monospace
+$gutter: 30px
+$max-column-width: 600px
 
-//== LAYOUT
+$sharing-section-z-index: 10
 
-$max-column-width: 1000px
+// UI COMPONENTS --------------------------------------------------------
 
-$backdrop-z-index: 5
-$content-z-index: 10
-$sharing-z-index: 20
-
-//== UI COMPONENTS
-
-$radius: 4px
-
-//== BREAKPOINTS
-
-$sm-screen: 640px
-$md-screen: 960px
-$lg-screen: 1280px
+$radius: 8px
 
 
 /* Typography
  *----------------------------------------------- */
 
 html
-  font: 14px / 1.8 $font-family, sans-serif
-  font-weight: 300
+  font: 87% / 1.5 $body-font-family, sans-serif
+  font-weight: 400
+
+@media (min-width: 40rem)
+  html
+    font-size: 100%
+
+@media (min-width: 64rem)
+  html
+    font-size: 106%
 
 body
   color: $color
@@ -69,102 +60,75 @@ body
 h1, h2, h3, h4, h5
   color: $heading-color
   line-height: 1.2em
-  font-family: $font-family
-  font-weight: 400
+  font-family: $heading-font-family
+  font-weight: 700
 
 h1
-  font-size: 60px
-  font-weight: 400
-  margin: 0
+  font-size: 4rem
+  margin: 0 0 0.2em 0
+  line-height: 1.1em
 
-@media (min-width: $sm-screen)
+@media (min-width: 40rem)
   h1
-    font-size: 80px
+    font-size: 4.5rem
+
+@media (min-width: 64rem)
+  h1
+    font-size: 5rem
 
 h2
   color: $section-heading-color
-  margin-top: 0
-  margin-bottom: 2rem
-  text-align: center
-  font-size: 34px
+  margin-bottom: 1.5rem
+  font-size: 1.5rem
+  text-transform: uppercase
 
-@media (min-width: $sm-screen)
+@media (min-width: 40rem)
   h2
-    text-align: left
-  
-h3
-  margin-bottom: 1rem
-  text-align: center
-  font-size: 20px
-  font-weight: 400
+    font-size: 2rem
 
-@media (min-width: $sm-screen)
-  h3
-    text-align: left
+h3
+  font-size: 1.2rem
+  margin-bottom: .5rem
 
 p
-  margin: 0 auto 2rem auto
+  margin: 0 auto 2em auto
+  text-align: left
 
 .lead
-  margin-bottom: 1.1rem
-  font-size: 1.25rem
-  color: lighten($color, 10%)
+  max-width: 50rem
+  margin-bottom: 1.4rem
+  font-size: 1.1rem
 
-ol
-  list-style-type: decimal
-
-ul,
-ol
-  margin: 0 0 2rem 0
-  padding-left: 18px
-
-@media (min-width: $sm-screen)
-  ul,
-  ol
-    padding-left: 40px
-
-li
-  margin-bottom: 0.5rem
+@media (min-width: 40rem)
+  .lead
+    font-size: 1.25rem
 
 strong
-  font-weight: 500
-
-em
-  font-style: normal
+  font-weight: bold
 
 a
   color: $link-color
   text-decoration: none
-  outline: 0
   &:hover
     text-decoration: underline
 
-.sub-point
-  display: block
-  font-size: 0.75rem
-
-
+::-moz-selection,
+::selection
+  background: $orange
+  color: white
 
 
 /* Code
  * ========================================================================== */
 
 code
-  background-color: $code-bg-color
+  color: $code-color
   border-radius: $radius
-  font-family: $code-font-family
-  font-size: 12px
+  font-family: Consolas, Courier, monospace
+  font-size: 0.9rem
   padding: 0.1rem 0.3rem
   position: relative
   top: -1px
-
-pre
-  background-color: $code-bg-color
-  border-radius: $radius
-  padding: 0 0.5rem 0.1rem 0.5rem
-  code
-    padding: 0
-    color: inherit
 
 
 /* Lists
@@ -174,16 +138,9 @@ ul
   margin: 0
   text-align: left
 
-
-/* Tables
- * ========================================================================== */
-
-th,
-td
-  vertical-align: top
-
-th
-  text-align: left
+@media (min-width: 40rem)
+  ul
+    display: inline-block
 
 
 /* Buttons
@@ -191,39 +148,48 @@ th
 
 .button
   display: block
-  padding: 0.5rem 2rem
-  margin-bottom: 8px
-  border: 2px solid $link-color
-  color: $link-color
+  padding: 0.7rem 2rem
+  margin-bottom: 0.5rem
+  border: none
+  color: #fff
+  background-color: $link-color
+  font-size: 1.1rem
+  font-weight: bold
   text-transform: uppercase
-  letter-spacing: 0.05em
   border-radius: $radius
   vertical-align: middle
   white-space: nowrap
   &:hover
-    color: white
-    background-color: $link-color
+    background: darken($link-color, 10%)
     text-decoration: none
 
-@media (min-width: $sm-screen)
+@media (min-width: 40rem)
   .button
     display: inline-block
-    margin-right: 8px
+    margin: 0 0.25rem
+
+.button-minor
+  padding: 0.35rem 1rem
+  border: 2px solid $link-color
+  color: $link-color
+  background-color: transparent
+  font-size: 0.8rem
+  &:hover
+    color: white
 
 
 /* Elements
  * ========================================================================== */
 
 hr
-  width: 348px
   border: 0
   border-top: 2px solid $border-color
-  
-@media (min-width: $sm-screen)  
-  hr
-    width: 480px
-    margin-left: 0
+  margin: 2rem auto
+  width: 3rem
 
+@media (min-width: 40rem)
+  hr
+    margin: 2.5rem auto
 
 /* -- Layout ------------------------------------------------------------------ */
 
@@ -235,187 +201,203 @@ body
   padding: 0
   background: $bg-color
 
-.nav
-  display: none
-  position: fixed
-  width: 120px
-  height: 100%
-  padding-top: 6.9rem
-  text-align: right
-  background: $nav-bg-color
-  border-right: 2px solid $border-color
-
-@media (min-width: $sm-screen)
-  .nav
-    display: block
-    width: 20%
-
-.nav-item
-  display: block
-  padding: 2px 32px 2px 0
-  
-a.nav-item:focus
-  outline: 0
-
-.content
-  margin-left: 0
-
-@media (min-width: $sm-screen)
-  .content
-    margin-left: 20%
-
 section
   border-top: 2px solid $border-color
-  padding: 2rem 0
-  background-color: $section-bg-color
+  text-align: center
+  padding: 1.5rem 0
+  &:first-of-type
+    border-top: none
 
-@media (min-width: $sm-screen)
+@media (min-width: 40rem)
   section
-    padding: 4rem 0
+    padding: 2rem 0
 
 .container
   margin: 0 auto
-  max-width: $max-column-width
-  padding: 0 8px
+  max-width: 40rem
+  width: 90%
 
-@media (min-width: $sm-screen)
-  .container
-    padding: 0 32px
-
-
-
-.row
-  // pie-clearfix
-  &:after
-    content: ""
-    display: table
-    clear: both
-
-
-//== Header
+/* -- Header -- */
 
 header
+  padding: 4rem 0 2rem 0
   background-color: $header-bg-color
-  padding-top: 5rem
   text-align: center
-  color: $header-color
+  p
+    text-align: center
 
-@media (min-width: $sm-screen)
+@media (min-width: 40rem)
   header
-    padding-top: 6.5rem
-    text-align: left
-
-.picture-icon
-  width: 45px
-  height: 45px
-  margin-right: 0.5rem
-
-.logo-credit
-  display: block
-  margin-bottom: 1em
-  color: $color
-
-@media (min-width: $sm-screen)
-  .logo-credit
-    position: relative
-    top: -3px
-    padding-left: 57px
-
-.primary-actions
-  padding-bottom: 5rem
+    padding: 2rem 0
 
 
 /* -- Examples -- */
 
-.example-image-link
-  display: inline-block
-  padding: 2px
-  margin: 0 0.5rem 1rem 0.5rem
-  background-color: $bg-color
-  line-height: 0
-  border-radius: $radius  
-  transition: background-color 0.5s ease-out
+.image-section
+  margin-bottom: 80px
+  .image-wrap
+    position: relative
+    line-height: 1em
+
+.examples-section
+  .image-section
+    .target-image
+      border-radius: 0 0 $radius $radius
+  .image-section.with-color-thief-output
+    .target-image
+      border-radius: 0
+
+.run-functions-button
+  position: absolute
+  top: 50%
+  left: 50%
+  width: 8rem
+  height: 8rem
+  margin-top: -4rem
+  margin-left: -4rem
+  border: none
+  border-radius: 50%
+  color: $color
+  background-color: $yellow
+  font-size: 2rem
+  font-weight: bold
+  cursor: pointer
+  text-transform: uppercase
+  outline: none
   &:hover
-    background-color: $link-color
-    transition: none
+    transform: scale(1.1)
+    transition: transform .2s
+  &:active
+    transform: scale(0.9)
+  &.hide
+    background-color: $yellow
+    color: $color
+    transition: transform .6s, top .6s cubic-bezier(0.220, -0.370, 0.750, 0.750)
+    top: 105%
+    transform: scale(0)
 
-.example-image
-  width: 7rem
-  border-radius: $radius
+// Use Modernizr to check for touch support
+.touch
+  .touch-label
+    display: inline
+  .no-touch-label
+    display: none
+.no-touch
+  .touch-label
+    display: none
+  .no-touch-label
+    display: inline
 
+.target-image
+  display: block
+  width: 100%
+  border-radius: $radius $radius 0 0
 
-/* -- Getting started -- */    
+.color-thief-output
+  display: none
+  padding: 1.5rem
+  background-color: white
+  border: 1px solid $border-color
+  border-top-width: 0
+  border-bottom-radius: $radius
 
-.getting-started-section
-  p,
-  ol,
-  ul,
-  pre
-    text-align: left
+.function-title
+  margin-top: 0
 
-  li
-    margin-bottom: 2rem
-    li
-      margin-bottom: 1rem
+.function
+  margin-bottom: 1.5rem
 
-.getting-started-list
-  p
-    margin-bottom: 1rem
+.swatch
+  display: inline-block
+  margin: 0
+  background: #dddddd
 
+@media (min-width: 40rem)
+  .swatch
+    margin-right: -2px
 
+.get-color
+  .swatch
+    width: 6rem
+    height: 3rem
 
-/* -- Options -- */
+.get-palette
+  .swatch
+    width: 3rem
+    height: 2rem
 
-.options-section
-  th,
-  td
-    padding: 8px 16px 8px 1px
-    border-bottom: 1px solid $border-color
-    &:last-child
-      padding-right: 0
+@media (min-width: 40rem)
+  .get-palette
+    .swatch
+      width: 4rem
+      height: 2.7rem
 
-@media (max-width: $sm-screen)
-  .options-table
-    thead
-      display: none
-    tr
-      display: block
-      margin-bottom: 24px
-    td
-      display: block
-      padding: 4px 8px
-    td:first-child
-      font-weight: 500
-    .default-row
-      color: $gray
-      &:before
-        content: attr(data-label)
-        float: left
-        padding-right: 8px
-
-
+canvas
+  display: none
 
 
 /* -- Credits -- */
 
 footer
   padding: 2rem 0
-  border-top: 2px solid $border-color
-  background-color: $footer-bg-color
+  background-color: $header-bg-color
   text-align: center
+  p
+    text-align: center
   .button
     margin-top: 0.5rem
-
-@media (min-width: $sm-screen)
-  footer
-    text-align: left
 
 /* -- Sharing -- */
 
 .sharing-section
   position: fixed
-  z-index: $sharing-z-index
-  top: 16px
-  right: 16px
+  z-index: $sharing-section-z-index
+  top: 20px
+  right: 0
+
+
+/* -- Drag and drop ------------------------------------------------------------------ */
+
+.drag-drop-section
+  display: none
+
+.drop-zone
+  height: 25rem
+  margin-bottom: 4rem
+  background-color: $gray-dark
+  border-radius: $radius
+  &.dragging
+    font-weight: 700
+    box-shadow: inset 0 0 0 8px $link-color
+    .drop-zone-label
+      color: $link-color
+    .default-label
+      display: none
+    .dragging-label
+      display: block
+
+.drop-zone-label
+  position: relative
+  top: 11rem
+  color: $yellow
+  font-size: 1.8rem
+  text-align: center
+  pointer-events: none
+  text-transform: uppercase
+  border-radius: $radius
+
+@media (min-width: 40rem)
+  .drop-zone-label
+    top: 10.5rem
+    font-size: 2.4rem
+
+.dragging-label
+  display: none
+
+.dropped-image
+  .run-functions-button
+    display: none
+  .targetImage
+    // width: 100%
 
 
