@@ -1,6 +1,6 @@
 {
   "name": "color-thief-site",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "author": "Lokesh Dhakar",
   "description": "Demo site for Color Thief. Lives at lokeshdhakar.com/projects/color-thief/.",
   "homepage": "http://lokeshdhakar.com/projects/color-thief/",
@@ -23,5 +23,11 @@
   "dependencies": {
     "jquery": "^3.1.1",
     "mustache": "^2.2.1"
-  }
+  },
+  "private": true,
+  "licenses": [
+    {
+      "type": "UNLICENSED"
+    }
+  ]
 }

@@ -15,5 +15,7 @@
   ],
   "dependencies": {
     "color-thief": "latest"
-  }
+  },
+  "private": true,
+  "license": "UNLICENSED"
 }
