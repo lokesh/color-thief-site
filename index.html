@@ -1,0 +1,396 @@
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+	<meta charset="utf-8">
+
+	<title>Color Thief</title>
+
+  <meta name="description" content="Get the dominant color or color palette from an image.">
+  <meta name="author" content="Lokesh Dhakar">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+
+  <link rel="stylesheet" href="css/legacy.css">
+  <link rel="stylesheet" href="css/screen.css">
+  <link rel="stylesheet" href="css/prism.css">
+
+
+</head>
+<body>
+
+  <header>
+    <div class="container">
+      <h1 class="logo">Color Thief</h1>
+      <p class="lead">
+        Grab the color palette from an image.<br /> Uses Javascript and the canvas tag to make it happen.
+      </p>
+
+      <a href="https://github.com/lokesh/color-thief/" class="button">
+        Download from Github</small>
+      </a>
+
+    </div>
+  </header>
+
+  <section id="examples" class="examples-section">
+    <div class="container">
+      <h2>Examples</h2>
+      <div id="example-images"></div>
+    </div>
+  </section>
+
+  <section id="drag-drop" class="drag-drop-section">
+    <div class="container">
+      <h2>Try it yourself</h2>
+      <div id="drop-zone" class="drop-zone">
+        <div class="drop-zone-label default-label">Drag an image here</div>
+        <div class="drop-zone-label dragging-label">Drop it!</div>
+      </div>
+      <div id="dragged-images" class="dragged-images"></div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <p>
+        Created by Lokesh Dhakar<br />
+        <a href="https://twitter.com/lokesh" class="button button-minor">Follow me on Twitter</a>
+      </p>
+    </div>
+  </footer>
+
+ <header class="header">
+    <div class="column">
+
+      <div class="sidebar">
+      </div>
+
+      <div class="content">
+
+        <h1 class="logo">
+          Color Thief
+        </h1>
+        <a href="https://lokeshdhakar.com" class="logo-credit">by Lokesh Dhakar</a>
+        <p class="lead">
+          The original lightbox script.
+          <br />Eight years later &mdash; still going strong!
+        </p>
+
+        <div class="primary-actions">
+          <a href="https://github.com/lokesh/lightbox2/archive/master.zip" class="button">
+            Download
+          </a>
+          <a href="https://github.com/lokesh/lightbox2/" class="button">
+            View on Github
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </header>
+
+
+
+  <div class="main">
+    <div class="column">
+
+    <div class="sidebar">
+      <nav id="nav" class="nav">
+        <ul class="nav-list">
+          <li class="nav-list-item"><a href="#examples" class="nav-link">Examples</a></li>
+          <li class="nav-list-item"><a href="#getting-started" class="nav-link">Getting started</a></li>
+          <li class="nav-list-item"><a href="#api" class="nav-link">API</a></li>
+          <li class="nav-list-item"><a href="#usage" class="nav-link">Usage</a></li>
+          <li class="nav-list-item"><a href="#license" class="nav-link">License</a></li>
+          <li class="nav-list-item"><a href="#help" class="nav-link">Help</a></li>
+        </ul>
+      </nav>
+    </div>
+
+    <div class="content">
+
+      <!-- EXAMPLES -->
+
+      <section id="examples" class="examples-section">
+        <h2>Examples</h2>
+        <h3>Two individual images</h3>
+        <div class="image-row">
+          <a class="example-image-link" href="images/image-1.jpg" data-lightbox="example-1"><img class="example-image" src="images/thumb-1.jpg" alt="Girl looking out people on beach" /></a>
+          <a class="example-image-link" href="images/image-2.jpg" data-lightbox="example-2" data-title="Optional caption."><img class="example-image" src="images/thumb-2.jpg" alt="Two men in bicycle jerseys sitting outside at table having coffee" /></a>
+        </div>
+
+        <h3 style="clear: both;">Four image set</h3>
+        <div class="image-row">
+          <div class="image-set">
+            <a class="example-image-link" href="images/image-3.jpg" data-lightbox="example-set" data-title="Click the right half of the image to move forward."><img class="example-image" src="images/thumb-3.jpg" alt="Golden Gate Bridge with San Francisco in distance" /></a>
+            <a class="example-image-link" href="images/image-4.jpg" data-lightbox="example-set" data-title="Or press the right arrow on your keyboard."><img class="example-image" src="images/thumb-4.jpg" alt="Forest with mountains behind" /></a>
+            <a class="example-image-link" href="images/image-5.jpg" data-lightbox="example-set" data-title="The next image in the set is preloaded as you're viewing."><img class="example-image" src="images/thumb-5.jpg" alt="Bicyclist looking out over hill at ocean" /></a>
+            <a class="example-image-link" href="images/image-6.jpg" data-lightbox="example-set" data-title="Click anywhere outside the image or the X to the right to close."><img class="example-image" src="images/thumb-6.jpg" alt="Small lighthouse at bottom with ocean behind" /></a>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- GETTING STARTED -->
+
+      <section id="getting-started" class="getting-started-section">
+        <h2>Getting started</h2>
+
+        <h3>Using in Node</h3>
+
+        <ol>
+          <li><strong>Install and import.</strong> The name of the package is <em>colorthief</em>, not <em>color-thief</em>.
+<pre><code class="prism language-javascript">npm i --save colorthief
+</code></pre>
+
+<pre><code class="prism language-javascript">const ColorThief = require('colorthief');
+</code></pre>
+          </li>
+          <li><strong>Get colors.</strong> Both the <code>getColor()</code> and <code>getPalette()</code> methods return a Promise when used in Node.
+<pre><code class="prism language-javascript">const img = resolve(process.cwd(), 'rainbow.png');
+
+ColorThief.getColor(img)
+    .then(color => { console.log(color) })
+    .catch(err => { console.log(err) })
+
+ColorThief.getPalette(img, 5)
+    .then(palette => { console.log(palette) })
+    .catch(err => { console.log(err) })
+ </code></pre>
+          </li>
+        </ol>
+
+         <h3>Using in the browser</h3>
+
+        <ol class="getting-started-list">
+          <li>
+            <p><a href="https://github.com/lokesh/lightbox2/archive/master.zip">Download the latest version as a zip file</a><br />
+            Or use a package manager...<br />
+            NPM: <code>npm install lightbox2 --save</code></p>
+            Bower: <code>bower install lightbox --save</code><br />
+          </li>
+          <li>
+            <p>Open up the zip file and take a peek at the barebones, working example that is included in the <code>/examples</code> folder.</p>
+          </li>
+          <li>
+            <p>Ready to set Lightbox up on your page? Start by including the Lightbox CSS and Javascript. You can grab both these files from the <code>/dist</code> folder.</p>
+            <ul>
+              <li>Include the CSS at the top of your page in your <code>&lt;head&gt;</code> tag:
+<pre><code class="prism language-xml"><!--<link href="path/to/lightbox.css" rel="stylesheet" />--></code></pre>
+</li>
+<li>Include the Javascript at the bottom of your page before the closing <code>&lt;/body&gt;</code> tag:
+<pre><code class="prism language-xml"><!--<script src="path/to/lightbox.js"></script>--></code></pre>
+</li>
+</ul>
+            </li>
+            <li>
+              <p>Make sure jQuery, which is required by Lightbox, is also loaded.</p>
+              <ul>
+                <li>If you already use jQuery on your page, make sure it is loaded before <code>lightbox.js</code>. jQuery 1.7 or greater is required.</li>
+                <li>If you are not currently using jQuery, I've created a packaged file that includes both Lightbox and jQuery. Include <code>dist/js/lightbox-plus-jquery.js</code> instead of <code>lightbox.js</code>.</li>
+              </ul>
+            </li>
+            <li>Confirm that the four images loaded by <code>lightbox.css</code> are in the correct location. You can grab the images from the <code>/dist/images</code> folder.
+          </ol>
+
+          <h3>Initialize with HTML</h3>
+          <ul>
+            <li><strong>Single images.</strong> Add a <code>data-lightbox</code> attribute to any image link to enable Lightbox. For the value of the attribute, use a unique name for each image. For example:
+<pre><code class="prism language-xml"><!--<a href="images/image-1.jpg" data-lightbox="image-1" data-title="My caption">Image #1</a>--></code></pre>
+              <em>Optional:</em>
+              <ul>
+                <li>Add a <code>data-title</code> attribute if you want to show a caption.</li>
+                <li>Add a <code>data-alt</code> attribute if you want to set the alt attribute of the linked image.</li>
+              </ul>
+            </li>
+            <li><strong>Image sets.</strong> If you have a group of related images that you would like to combine into a set, use the same <code>data-lightbox</code> attribute value for all of the images. For example:
+<pre><code class="prism language-xml"><!--<a href="images/image-2.jpg" data-lightbox="roadtrip">Image #2</a>
+<a href="images/image-3.jpg" data-lightbox="roadtrip">Image #3</a>
+<a href="images/image-4.jpg" data-lightbox="roadtrip">Image #4</a>--></code></pre>
+          </li>
+        </ul>
+      </section>
+
+
+      <!-- API -->
+
+      <section id="api" class="options-section">
+        <h2>API</h2>
+
+        <div class="options-code">
+<pre><code class="prism language-javascript"><!--<script>
+    lightbox.option({
+      'resizeDuration': 200,
+      'wrapAround': true
+    })
+</script>--></code></pre>
+        </div>
+
+        <table class="options-table">
+          <thead>
+            <tr>
+              <th>Option</th>
+              <th>Default</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>showImageNumberLabel</td>
+              <td data-label="Default:" class="default-row">true</td>
+              <td>If false, the text indicating the current image number and the total number of images in set (Ex. "image 2 of 4") will be hidden.</td>
+            </tr>
+            <tr>
+              <td>wrapAround</td>
+              <td data-label="Default:" class="default-row">false</td>
+              <td>If true, when a user reaches the last image in a set, the right navigation arrow will appear and they will be to continue moving forward which will take them back to the first image in the set.</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section id="usage" class="usage-section">
+        <h2>Usage</h2>
+
+        <h3>Getting hex values</h3>
+        <p>...</p>
+
+        <h3>Determining lightness/darkness</h3>
+        <p>1) Besides checking lightness to determine if the text should be light or dark.</p>
+        <p>2) Lightest or darkest color in palette</p>
+        <p>...</p>
+
+        <h3>Reading image files on your computer</h3>
+        <p>...</p>
+
+        <h3>Reading image files on another domain</h3>
+        <p>...</p>
+      </section>
+
+      <!-- LICENSE -->
+
+      <section id="license" class="license-section">
+        <h2>License</h2>
+        <p>Lightbox2 is licensed under <a href="https://raw.githubusercontent.com/lokesh/lightbox2/master/LICENSE">The MIT License</a>.</p>
+        <ul>
+          <li><strong>100% Free.</strong> Lightbox is free to use in both commercial and non-commercial work.</li>
+          <li><strong>Attribution is required.</strong>This means you must leave my name, my homepage link, and the license info intact. None of these items have to be user-facing and can remain within the code.</li>
+        </ul>
+      </section>
+
+      <section id="help" class="help-section">
+        <h2>Help</h2>
+
+        <p>Ask for help with build process.</p>
+
+
+        <h3>Have a question about how to use Lightbox?</h3>
+        <p>Follow the steps below to get help. Make sure you have read the documentation on this page and looked at the included example first.</p>
+        <ol>
+          <li>Search <a href="//stackoverflow.com/questions/tagged/lightbox2">Stackoverflow</a> to see if other people have run into the same issue you are having.</li>
+          <li>If your issue is unique, then <a href="//stackoverflow.com/questions/ask">post a new question on Stackoverflow</a>. Use the <code>lightbox2</code> tag.</li>
+        </ol>
+        <p>Do not use Github Issues to report personal support requests.</p>
+
+        <h3>Found a bug?</h3>
+        <p>If you find a bug, follow the instructions in the <a href="https://github.com/lokesh/lightbox2/blob/master/CONTRIBUTING.md#found-a-bug">Contribution Guildelines</a> to report the issue.</p>
+      </section>
+
+
+      <!-- FOOTER -->
+
+      <footer>
+        <p>
+          <div class="logo-credit">Created by Lokesh Dhakar</div>
+          <a href="https://twitter.com/lokesh" class="button">Twitter</a> <a href="https://lokeshdhakar.com" class="button">Website</a>
+        </p>
+      </footer>
+
+    </div><!-- .content -->
+    </div><!-- .content-column -->
+  </div><!-- .main -->
+
+
+
+
+
+  <!-- Mustache templates -->
+  <script id='image-section-template' type='text/x-mustache'>
+    {{#images}}
+    <div class="image-section {{class}}">
+      <div class="image-wrap">
+        <button class="run-functions-button">
+          <span class="no-touch-label">Click</span>
+          <span class="touch-label">Tap</span>
+        </button>
+        <img class="target-image" src="{{file}}" />
+      </div>
+      <div class="color-thief-output"></div>
+    </div>
+    {{/images}}
+  </script>
+
+  <script id="color-thief-output-template" type="text/x-mustache">
+    <div class="function get-color">
+      <h3 class="function-title">Dominant Color</h3>
+      <div class="swatches">
+        <div class="swatch" style="background-color: rgb({{color.0}}, {{color.1}}, {{color.2}})"></div>
+      </div>
+      <div class="function-code">
+        <code>colorThief.getColor(image):{{elapsedTimeForGetColor}}ms</code>
+      </div>
+    </div>
+    <div class="function get-palette">
+      <h3 class="function-title">Palette</h3>
+      <div class="function-output">
+        <div class="swatches">
+          {{#palette}}
+            <div class="swatch" style="background-color: rgb({{0}}, {{1}}, {{2}})"></div>
+          {{/palette}}
+        </div>
+      </div>
+      <div class="function-code">
+        <code>colorThief.getPalette(image):{{elapsedTimeForGetPalette}}ms</code>
+      </div>
+    </div>
+  </script>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.16.0/prism.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.16.0/plugins/unescaped-markup/prism-unescaped-markup.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/3.0.1/mustache.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/color-thief/2.3.0/color-thief.umd.js"></script>
+
+  <script src="js/demo.js"></script>
+
+
+
+  <script>
+    $(function() {
+      $('#nav').on('click', '.nav-link', function(event) {
+        event.preventDefault();
+        var hash = this.hash;
+
+        $('html, body').animate({
+         scrollTop: $(hash).offset().top
+        }, 600, function() {
+          window.location.hash = hash;
+        });
+      });
+    });
+  </script>
+
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-2196019-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+</body>
+</html>

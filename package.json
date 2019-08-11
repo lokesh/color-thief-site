@@ -1,33 +1,25 @@
 {
   "name": "color-thief-site",
-  "version": "1.2.0",
+  "version": "2.0.0",
   "author": "Lokesh Dhakar",
-  "description": "Demo site for Color Thief. Lives at lokeshdhakar.com/projects/color-thief/.",
+  "description": "Demo and docs for Color Thief JS library",
   "homepage": "http://lokeshdhakar.com/projects/color-thief/",
   "repository": {
     "type": "git",
     "url": "https://github.com/lokesh/color-thief-site.git"
   },
   "devDependencies": {
-    "grunt": "^1.0.1",
-    "grunt-autoprefixer": "^3.0.3",
-    "grunt-contrib-clean": "^1.0.0",
-    "grunt-contrib-connect": "^1.0.2",
-    "grunt-contrib-copy": "^1.0.0",
-    "grunt-contrib-watch": "^1.0.0",
-    "grunt-ftp-deploy": "^0.1.10",
-    "grunt-highlight": "0.0.1",
-    "grunt-html": "^8.0.2",
-    "grunt-sass": "^1.0.0"
-  },
-  "dependencies": {
-    "jquery": "^3.1.1",
-    "mustache": "^2.2.1"
+    "ftp-deploy": "^2.3.3",
+    "http-server": "^0.11.1"
   },
   "private": true,
   "licenses": [
     {
       "type": "UNLICENSED"
     }
-  ]
+  ],
+  "scripts": {
+    "dev": "http-server",
+    "deploy": "node ./build/deploy.js"
+  }
 }

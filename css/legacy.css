@@ -1,0 +1,181 @@
+
+/* -- Examples -- */
+.image-section {
+  margin-bottom: 80px;
+}
+.image-section .image-wrap {
+  position: relative;
+  line-height: 1em;
+}
+
+.examples-section .image-section .target-image {
+  border-radius: 8px;
+  transition: border-radius 0.2s 0.3s;
+}
+.examples-section .image-section.with-color-thief-output .target-image {
+  border-radius: 8px 8px 0 0;
+}
+
+.run-functions-button {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 8rem;
+  height: 8rem;
+  margin-top: -4rem;
+  margin-left: -4rem;
+  border: none;
+  border-radius: 50%;
+  color: #777;
+  background-color: #fdf485;
+  font-size: 2rem;
+  font-weight: bold;
+  cursor: pointer;
+  text-transform: uppercase;
+  outline: none;
+}
+.run-functions-button:hover {
+  transform: scale(1.1);
+  transition: transform 0.2s;
+}
+.run-functions-button:active {
+  transform: scale(0.9);
+}
+.run-functions-button.hide {
+  background-color: #fdf485;
+  color: #777;
+  transition: transform 0.6s, top 0.6s cubic-bezier(0.22, -0.37, 0.75, 0.75);
+  top: 105%;
+  transform: scale(0);
+}
+
+.touch .touch-label {
+  display: inline;
+}
+.touch .no-touch-label {
+  display: none;
+}
+
+.no-touch .touch-label {
+  display: none;
+}
+.no-touch .no-touch-label {
+  display: inline;
+}
+
+.target-image {
+  display: block;
+  width: 100%;
+  border-radius: 8px 8px 0 0;
+}
+
+.color-thief-output {
+  display: none;
+  padding: 1.5rem;
+  background-color: white;
+  border: 1px solid #e6e6e6;
+  border-top-width: 0;
+  border-radius: 0 0 8px 8px;
+}
+
+.function-title {
+  margin-top: 0;
+}
+
+.function {
+  margin-bottom: 1.5rem;
+}
+
+.swatch {
+  display: inline-block;
+  margin: 0;
+  background: #dddddd;
+}
+
+@media (min-width: 40rem) {
+  .swatch {
+    margin-right: -2px;
+  }
+}
+.get-color .swatch {
+  width: 6rem;
+  height: 3rem;
+}
+
+.get-palette .swatch {
+  width: 3rem;
+  height: 2rem;
+}
+
+@media (min-width: 40rem) {
+  .get-palette .swatch {
+    width: 4rem;
+    height: 2.7rem;
+  }
+}
+canvas {
+  display: none;
+}
+
+/* -- Credits -- */
+footer {
+  padding: 2rem 0;
+  background-color: #fff;
+  text-align: center;
+}
+footer p {
+  text-align: center;
+}
+footer .button {
+  margin-top: 0.5rem;
+}
+
+/* -- Drag and drop ------------------------------------------------------------------ */
+.drag-drop-section {
+  display: none;
+}
+
+.drop-zone {
+  height: 25rem;
+  margin-bottom: 4rem;
+  background-color: #222;
+  border-radius: 8px;
+}
+.drop-zone.dragging {
+  font-weight: 700;
+  box-shadow: inset 0 0 0 8px #4ae;
+}
+.drop-zone.dragging .drop-zone-label {
+  color: #4ae;
+}
+.drop-zone.dragging .default-label {
+  display: none;
+}
+.drop-zone.dragging .dragging-label {
+  display: block;
+}
+
+.drop-zone-label {
+  position: relative;
+  top: 11rem;
+  color: #fdf485;
+  font-size: 1.8rem;
+  text-align: center;
+  pointer-events: none;
+  text-transform: uppercase;
+  border-radius: 8px;
+}
+
+@media (min-width: 40rem) {
+  .drop-zone-label {
+    top: 10.5rem;
+    font-size: 2.4rem;
+  }
+}
+.dragging-label {
+  display: none;
+}
+
+.dropped-image .run-functions-button {
+  display: none;
+}
