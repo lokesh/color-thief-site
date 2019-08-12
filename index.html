@@ -28,7 +28,7 @@
         <a href="https://lokeshdhakar.com" class="logo-credit">by Lokesh Dhakar</a>
         <p class="lead">
           Grab the color palette from an image using just Javascript.
-          <br />Works in browser and in Node.
+          <br />Works in the browser and in Node.
         </p>
         <div class="primary-actions">
           <a href="https://github.com/lokesh/color-thief/archive/master.zip" class="button">
@@ -90,10 +90,10 @@
 
         <p class="before-list">The Color Thief package includes multiple distribution files to support different environments and build processes. Here is the list of all the files in the <code>/dist</code> folder and what formats they support:</p>
         <ul>
-          <li><code>color-thief.js</code> - CommonJS module for use in Node.</li>
-          <li><code>color-thief.mjs</code> - ES6 module. For modern browsers as well as Webpack and Rollup.</li>
-          <li><code>color-thief.umd.js</code> - UMD module. For simple script tag loading that exposes a global variable or for RequireJS AMD support.</li>
-          <li><code>color-thief.min.js</code> -  Duplicate of <em>color-thief.umd.js</em>. Kept around to maintain backwards compatibility.</li>
+          <li><strong>color-thief.js</strong> - CommonJS module for use in Node.</li>
+          <li><strong>color-thief.mjs</strong> - ES6 module. For modern browsers as well as Webpack and Rollup.</li>
+          <li><strong>color-thief.umd.js</strong> - UMD module. For simple script tag loading that exposes a global variable or for RequireJS AMD support.</li>
+          <li><strong>color-thief.min.js</strong> -  Duplicate of <em>color-thief.umd.js</em>. Kept around to maintain backwards compatibility.</li>
         </ul>
 
         <h3>Using in Node</h3>
@@ -149,8 +149,7 @@ ColorThief.getPalette(img, 5)
 <pre><code class="prism language-javascript"><!--import ColorThief from './node_modules/colorthief/dist/color-thief.mjs'
 
 const colorThief = new ColorThief();
-const result = colorThief.getColor(document.querySelector('img'));
---></code></pre>
+const result = colorThief.getColor(document.querySelector('img'));--></code></pre>
           </li>
           <li><strong>With RequireJS.</strong> The <code>/dist/color-thief.umd.js</code> file uses the UMD (Universal Module Definition) format. This includes RequireJS AMD support.</li>
         </ul>
@@ -188,7 +187,8 @@ const result = colorThief.getColor(document.querySelector('img'));
         <div class="method">
           <div class="method-name">getColor(image [, quality])</div>
           <div class="method-return">Returns: [Number, Number, Number]</div>
-          <div class="method-description">Gets the dominant color from the image. Color is returned as an array of three integers representing red, green, and blue values.</div>
+          <div class="method-description">Gets the dominant color from the image. Color is returned as an array of three integers representing red, green, and blue values.<br><br>
+            <em>Quality</em> is an optional argument that must be an Integer of value 1 or greater, and defaults to 10. The number determines how many pixels are skipped before the next one is sampled. We rarely need to sample every single pixel in the image to get good results. The bigger the number, the faster a value will be returned.</div>
         </div>
 
         <div class="method">

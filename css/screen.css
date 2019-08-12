@@ -125,7 +125,7 @@
   display: none;
   padding: 1.5rem;
   background-color: white;
-  border: 1px solid #e6e6e6;
+  border: 1px solid var(--border-color-light);
   border-top-width: 0;
   border-radius: 0 0 var(--border-radius-xl) var(--border-radius-xl);
 }
