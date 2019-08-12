@@ -9,54 +9,10 @@
   <meta name="author" content="Lokesh Dhakar">
   <meta name="viewport" content="width=device-width,initial-scale=1">
 
-  <link rel="stylesheet" href="css/legacy.css">
   <link rel="stylesheet" href="css/screen.css">
   <link rel="stylesheet" href="css/prism.css">
-
-
 </head>
 <body>
-
-  <header>
-    <div class="container">
-      <h1 class="logo">Color Thief</h1>
-      <p class="lead">
-        Grab the color palette from an image.<br /> Uses Javascript and the canvas tag to make it happen.
-      </p>
-
-      <a href="https://github.com/lokesh/color-thief/" class="button">
-        Download from Github</small>
-      </a>
-
-    </div>
-  </header>
-
-  <section id="examples" class="examples-section">
-    <div class="container">
-      <h2>Examples</h2>
-      <div id="example-images"></div>
-    </div>
-  </section>
-
-  <section id="drag-drop" class="drag-drop-section">
-    <div class="container">
-      <h2>Try it yourself</h2>
-      <div id="drop-zone" class="drop-zone">
-        <div class="drop-zone-label default-label">Drag an image here</div>
-        <div class="drop-zone-label dragging-label">Drop it!</div>
-      </div>
-      <div id="dragged-images" class="dragged-images"></div>
-    </div>
-  </section>
-
-  <footer>
-    <div class="container">
-      <p>
-        Created by Lokesh Dhakar<br />
-        <a href="https://twitter.com/lokesh" class="button button-minor">Follow me on Twitter</a>
-      </p>
-    </div>
-  </footer>
 
  <header class="header">
     <div class="column">
@@ -71,15 +27,14 @@
         </h1>
         <a href="https://lokeshdhakar.com" class="logo-credit">by Lokesh Dhakar</a>
         <p class="lead">
-          The original lightbox script.
-          <br />Eight years later &mdash; still going strong!
+          Grab the color palette from an image using just Javascript.
+          <br />Works in browser and in Node.
         </p>
-
         <div class="primary-actions">
-          <a href="https://github.com/lokesh/lightbox2/archive/master.zip" class="button">
+          <a href="https://github.com/lokesh/color-thief/archive/master.zip" class="button">
             Download
           </a>
-          <a href="https://github.com/lokesh/lightbox2/" class="button">
+          <a href="https://github.com/lokesh/color-thief/" class="button">
             View on Github
           </a>
         </div>
@@ -98,8 +53,8 @@
         <ul class="nav-list">
           <li class="nav-list-item"><a href="#examples" class="nav-link">Examples</a></li>
           <li class="nav-list-item"><a href="#getting-started" class="nav-link">Getting started</a></li>
+          <!-- <li class="nav-list-item"><a href="#usage" class="nav-link">Usage</a></li> -->
           <li class="nav-list-item"><a href="#api" class="nav-link">API</a></li>
-          <li class="nav-list-item"><a href="#usage" class="nav-link">Usage</a></li>
           <li class="nav-list-item"><a href="#license" class="nav-link">License</a></li>
           <li class="nav-list-item"><a href="#help" class="nav-link">Help</a></li>
         </ul>
@@ -112,22 +67,20 @@
 
       <section id="examples" class="examples-section">
         <h2>Examples</h2>
-        <h3>Two individual images</h3>
-        <div class="image-row">
-          <a class="example-image-link" href="images/image-1.jpg" data-lightbox="example-1"><img class="example-image" src="images/thumb-1.jpg" alt="Girl looking out people on beach" /></a>
-          <a class="example-image-link" href="images/image-2.jpg" data-lightbox="example-2" data-title="Optional caption."><img class="example-image" src="images/thumb-2.jpg" alt="Two men in bicycle jerseys sitting outside at table having coffee" /></a>
-        </div>
+        <div id="example-images"></div>
+      </section>
 
-        <h3 style="clear: both;">Four image set</h3>
-        <div class="image-row">
-          <div class="image-set">
-            <a class="example-image-link" href="images/image-3.jpg" data-lightbox="example-set" data-title="Click the right half of the image to move forward."><img class="example-image" src="images/thumb-3.jpg" alt="Golden Gate Bridge with San Francisco in distance" /></a>
-            <a class="example-image-link" href="images/image-4.jpg" data-lightbox="example-set" data-title="Or press the right arrow on your keyboard."><img class="example-image" src="images/thumb-4.jpg" alt="Forest with mountains behind" /></a>
-            <a class="example-image-link" href="images/image-5.jpg" data-lightbox="example-set" data-title="The next image in the set is preloaded as you're viewing."><img class="example-image" src="images/thumb-5.jpg" alt="Bicyclist looking out over hill at ocean" /></a>
-            <a class="example-image-link" href="images/image-6.jpg" data-lightbox="example-set" data-title="Click anywhere outside the image or the X to the right to close."><img class="example-image" src="images/thumb-6.jpg" alt="Small lighthouse at bottom with ocean behind" /></a>
+      <section id="drag-drop" class="drag-drop-section">
+        <div class="container">
+          <h2>Try it yourself</h2>
+          <div id="drop-zone" class="drop-zone">
+            <div class="drop-zone-label default-label">Drag an image here</div>
+            <div class="drop-zone-label dragging-label">Drop it!</div>
           </div>
+          <div id="dragged-images" class="dragged-images"></div>
         </div>
       </section>
+
 
 
       <!-- GETTING STARTED -->
@@ -135,18 +88,24 @@
       <section id="getting-started" class="getting-started-section">
         <h2>Getting started</h2>
 
+        <p class="before-list">The Color Thief package includes multiple distribution files to support different environments and build processes. Here is the list of all the files in the <code>/dist</code> folder and what formats they support:</p>
+        <ul>
+          <li><code>color-thief.js</code> - CommonJS module for use in Node.</li>
+          <li><code>color-thief.mjs</code> - ES6 module. For modern browsers as well as Webpack and Rollup.</li>
+          <li><code>color-thief.umd.js</code> - UMD module. For simple script tag loading that exposes a global variable or for RequireJS AMD support.</li>
+          <li><code>color-thief.min.js</code> -  Duplicate of <em>color-thief.umd.js</em>. Kept around to maintain backwards compatibility.</li>
+        </ul>
+
         <h3>Using in Node</h3>
 
-        <ol>
+        <ol class="guide-steps">
           <li><strong>Install and import.</strong> The name of the package is <em>colorthief</em>, not <em>color-thief</em>.
-<pre><code class="prism language-javascript">npm i --save colorthief
-</code></pre>
+<pre><code class="prism language-javascript">npm i --save colorthief</code></pre>
 
-<pre><code class="prism language-javascript">const ColorThief = require('colorthief');
-</code></pre>
+<pre><code class="prism language-javascript"><!--const ColorThief = require('colorthief');--></code></pre>
           </li>
           <li><strong>Get colors.</strong> Both the <code>getColor()</code> and <code>getPalette()</code> methods return a Promise when used in Node.
-<pre><code class="prism language-javascript">const img = resolve(process.cwd(), 'rainbow.png');
+<pre><code class="prism language-javascript"><!--const img = resolve(process.cwd(), 'rainbow.png');
 
 ColorThief.getColor(img)
     .then(color => { console.log(color) })
@@ -154,66 +113,53 @@ ColorThief.getColor(img)
 
 ColorThief.getPalette(img, 5)
     .then(palette => { console.log(palette) })
-    .catch(err => { console.log(err) })
- </code></pre>
+    .catch(err => { console.log(err) })--></code></pre>
           </li>
         </ol>
 
          <h3>Using in the browser</h3>
 
         <h4>1. Install</h4>
-        <p>There are three ways to install Color Thief when using it in the browser:</p>
-        <ul>
+        <p class="before-list">There are multiples ways to install Color Thief when using it in the browser:</p>
+        <ul class="guide-steps">
           <li><strong>Install as dependency with npm</strong>. The name of the package is <em>colorthief</em>, not <em>color-thief</em>.
 <pre><code class="prism language-javascript">npm i --save colorthief</code></pre>
           </li>
-          <li><strong>Load from a CDN.</strong> Color Thief releases are hosted on <a href="https://cdnjs.com/libraries/color-thief">cdnjs</a> for quick access. There are multiple distrubution files listed, in most cases you'll want to load `color-thief.umd.js`. This file follows the Universal Module Definition and exports a global variable, `ColorThief` for convenience.
-<pre><code class="prism language-xml">&lt;script src="https://cdnjs.cloudflare.com/ajax/libs/color-thief/2.3.0/color-thief.umd.js">&lt;/script&gt;</code></pre>
+          <li><strong>Load from a CDN.</strong> The distribution files are hosted on <a href="https://cdnjs.com/libraries/color-thief">cdnjs</a> for quick access.
+<pre><code class="prism language-xml"><!--<script src="https://cdnjs.cloudflare.com/ajax/libs/color-thief/2.3.0/color-thief.umd.js"></script>--></code></pre>
           </li>
-          <li><strong>Download files.</strong> </li>
+          <li><strong>Download from Github.</strong> You can download a zip of the latest release (or any previous one) from the project's <a href="https://github.com/lokesh/color-thief/releases">Github Releases page</a>.</li>
+        </ul>
+
+
+        <h4>2. Import and use</h4>
+        <ul class="guide-steps">
+          <li><strong>As a global variable.</strong>
+<pre><code class="prism language-xml"><!--<script src="node_modules/colorthief/dist/color-thief.umd.js"></script>
+<script>
+    const colorThief = new ColorThief();
+    const color = colorThief.getColor(document.querySelector('img'));
+</script>--></code></pre>
+</li>
+          <li><strong>As an ES6 module.</strong>
+<div class="code-file">index.html</div>
+<pre><code class="prism language-xml"><!--<script type="module" src="app.js"></script>--></code></pre>
+
+<div class="code-file">app.js</div>
+<pre><code class="prism language-javascript"><!--import ColorThief from './node_modules/colorthief/dist/color-thief.mjs'
+
+const colorThief = new ColorThief();
+const result = colorThief.getColor(document.querySelector('img'));
+--></code></pre>
+          </li>
+          <li><strong>With RequireJS.</strong> The <code>/dist/color-thief.umd.js</code> file uses the UMD (Universal Module Definition) format. This includes RequireJS AMD support.</li>
         </ul>
 
       </section>
 
+      <!-- Usage -->
 
-      <!-- API -->
-
-      <section id="api" class="options-section">
-        <h2>API</h2>
-
-        <div class="options-code">
-<pre><code class="prism language-javascript"><!--<script>
-    lightbox.option({
-      'resizeDuration': 200,
-      'wrapAround': true
-    })
-</script>--></code></pre>
-        </div>
-
-        <table class="options-table">
-          <thead>
-            <tr>
-              <th>Option</th>
-              <th>Default</th>
-              <th>Description</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>showImageNumberLabel</td>
-              <td data-label="Default:" class="default-row">true</td>
-              <td>If false, the text indicating the current image number and the total number of images in set (Ex. "image 2 of 4") will be hidden.</td>
-            </tr>
-            <tr>
-              <td>wrapAround</td>
-              <td data-label="Default:" class="default-row">false</td>
-              <td>If true, when a user reaches the last image in a set, the right navigation arrow will appear and they will be to continue moving forward which will take them back to the first image in the set.</td>
-            </tr>
-          </tbody>
-        </table>
-      </section>
-
-      <section id="usage" class="usage-section">
+      <!-- <section id="usage" class="usage-section">
         <h2>Usage</h2>
 
         <h3>Getting hex values</h3>
@@ -229,6 +175,28 @@ ColorThief.getPalette(img, 5)
 
         <h3>Reading image files on another domain</h3>
         <p>...</p>
+      </section> -->
+
+      <!-- API -->
+
+      <section id="api" class="options-section">
+        <h2>API</h2>
+
+        <p><em>Note: Both `getColor` and `getPalette` return a `Promise` when used in Node.</em></p>
+
+
+        <div class="method">
+          <div class="method-name">getColor(image [, quality])</div>
+          <div class="method-return">Returns: [Number, Number, Number]</div>
+          <div class="method-description">Gets the dominant color from the image. Color is returned as an array of three integers representing red, green, and blue values.</div>
+        </div>
+
+        <div class="method">
+          <div class="method-name">getPalette(image [, colorCount, quality]</div>
+          <div class="method-return">Returns: [[Number, Number, Number], ...]</div>
+          <div class="method-description">Gets a palette from the image by clustering similar colors. The palette is returned as an array containing colors, each color itself an array of three integers.</div>
+        </div>
+
       </section>
 
       <!-- LICENSE -->
@@ -249,20 +217,19 @@ ColorThief.getPalette(img, 5)
         <p>Follow the steps below to get help. Make sure you have read the documentation on this page first.</p>
         <ol>
           <li><a href="//stackoverflow.com/questions/tagged/color-thief">Search Stackoverflow</a> to see if other people have run into the same issue you are having.</li>
-          <li>If your issue is unique, then <a href="//stackoverflow.com/questions/ask">post a new question on Stackoverflow</a>. Use the <code>color-thief</code> tag.</li>
+          <li>If your issue is unique, then <a href="//stackoverflow.com/questions/ask">post a new question on Stackoverflow</a>. Use the <code>color-thief</code> tag to make it easier to find.</li>
         </ol>
-        <p>Do not use Github Issues to ask questions about using the script. Github Issues is reserved for feature requests and bug reports.</p>
 
         <h3>Have a feature request?</h3>
         <ol>
           <li><a href="https://github.com/lokesh/color-thief/issues">Search through existing Github Issues and PRs</a> to see if the feature has been discussed or already created.</li>
-          <li>If your feature request is unique, then <a href="https://github.com/lokesh/color-thief/issues/new">post a new issue in Github</a>.</li>
+          <li>If your feature request is unique, then <a href="https://github.com/lokesh/color-thief/issues/new">post a new issue in Github</a> detailing your request.</li>
         </ol>
 
         <h3>Found a bug?</h3>
         <ol>
-          <li><a href="https://github.com/lokesh/lightbox2/issues">Search through existing Github Issues</a> that have been reported to avoid creating a duplicate issue.</li>
-          <li>If your bug has not been reported, <a href="<a href="https://github.com/lokesh/color-thief/issues/new">create a new issue</a>.</li>
+          <li><a href="https://github.com/lokesh/color-thief/issues">Search through existing Github Issues</a> that have been reported to avoid creating a duplicate issue.</li>
+          <li>If your bug has not been reported, <a href="<a href="https://github.com/lokesh/color-thief/issues/new">create a new issue</a>. In your bug report, please includes the version of the library you are using, your browser and operating system, and steps to recreate.</li>
         </ol>
       </section>
 
@@ -301,26 +268,28 @@ ColorThief.getPalette(img, 5)
   </script>
 
   <script id="color-thief-output-template" type="text/x-mustache">
-    <div class="function get-color">
-      <h3 class="function-title">Dominant Color</h3>
-      <div class="swatches">
-        <div class="swatch" style="background-color: rgb({{color.0}}, {{color.1}}, {{color.2}})"></div>
-      </div>
-      <div class="function-code">
-        <code>colorThief.getColor(image):{{elapsedTimeForGetColor}}ms</code>
-      </div>
-    </div>
-    <div class="function get-palette">
-      <h3 class="function-title">Palette</h3>
-      <div class="function-output">
+    <div class="output-layout">
+      <div class="function get-color">
+        <h3 class="function-title">Dominant Color</h3>
         <div class="swatches">
-          {{#palette}}
-            <div class="swatch" style="background-color: rgb({{0}}, {{1}}, {{2}})"></div>
-          {{/palette}}
+          <div class="swatch" style="background-color: rgb({{color.0}}, {{color.1}}, {{color.2}})"></div>
+        </div>
+        <div class="function-code">
+          <code>colorThief.getColor(image):{{elapsedTimeForGetColor}}ms</code>
         </div>
       </div>
-      <div class="function-code">
-        <code>colorThief.getPalette(image):{{elapsedTimeForGetPalette}}ms</code>
+      <div class="function get-palette">
+        <h3 class="function-title">Palette</h3>
+        <div class="function-output">
+          <div class="swatches">
+            {{#palette}}
+              <div class="swatch" style="background-color: rgb({{0}}, {{1}}, {{2}})"></div>
+            {{/palette}}
+          </div>
+        </div>
+        <div class="function-code">
+          <code>colorThief.getPalette(image):{{elapsedTimeForGetPalette}}ms</code>
+        </div>
       </div>
     </div>
   </script>

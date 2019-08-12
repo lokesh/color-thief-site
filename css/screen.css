@@ -25,9 +25,9 @@
   --border-color: #000;
   --border-color-light: #ccc; /* Used for inline content  */
 
-  --border-radius: 8px;
-  --border-radius-large: 12px;
-  --border-radius-xl: 16px;
+  --border-radius: 6px;
+  --border-radius-large: 8px;
+  --border-radius-xl: 12px;
 
   /* Layout */
   --page-width: 56rem;
@@ -35,6 +35,179 @@
   /* Breakpoints */
   --sm-screen: 720px;
 }
+
+
+
+
+
+
+
+/* -- Examples -- */
+.image-section {
+  margin-bottom: 80px;
+}
+.image-section .image-wrap {
+  position: relative;
+  line-height: 1em;
+}
+
+.examples-section .image-section .target-image {
+  border-radius: var(--border-radius-xl);
+  transition: border-radius 0.2s 0.3s;
+}
+.examples-section .image-section.with-color-thief-output .target-image {
+  border-radius: var(--border-radius-xl) var(--border-radius-xl) 0 0;
+}
+
+.output-layout {
+  display: flex;
+}
+
+.function.get-color {
+  flex: 0 1 16rem;
+  margin-right: 2rem;
+}
+
+.run-functions-button {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 8rem;
+  height: 8rem;
+  margin-top: -4rem;
+  margin-left: -4rem;
+  border: none;
+  border-radius: 50%;
+  color: var(--primary-color);
+  background-color: white;
+  border: 4px solid var(--primary-color);
+  font-size: 2rem;
+  font-weight: var(--bold);
+  cursor: pointer;
+  text-transform: uppercase;
+  outline: none;
+}
+
+.run-functions-button:hover {
+  color: white;
+  background-color: var(--primary-color);
+}
+.run-functions-button:active {
+  transform: scale(0.9);
+}
+.run-functions-button.hide {
+  transition: transform 0.6s, top 0.6s cubic-bezier(0.22, -0.37, 0.75, 0.75);
+  top: 105%;
+  transform: scale(0);
+}
+
+.touch .touch-label {
+  display: inline;
+}
+.touch .no-touch-label {
+  display: none;
+}
+
+.no-touch .touch-label {
+  display: none;
+}
+.no-touch .no-touch-label {
+  display: inline;
+}
+
+.target-image {
+  display: block;
+  width: 100%;
+  border-radius: var(--border-radius-xl) var(--border-radius-xl) 0 0;
+}
+
+.color-thief-output {
+  display: none;
+  padding: 1.5rem;
+  background-color: white;
+  border: 1px solid #e6e6e6;
+  border-top-width: 0;
+  border-radius: 0 0 var(--border-radius-xl) var(--border-radius-xl);
+}
+
+.function-title {
+  text-align: left;
+  margin-top: 0;
+}
+
+.function-code {
+  display: none;
+}
+
+.swatch {
+  display: inline-block;
+  background: #dddddd;
+  border-radius: 50%;
+}
+
+.get-color .swatch {
+  width: 4rem;
+  height: 4rem;
+}
+
+.get-palette .swatch {
+  width: 3rem;
+  height: 3rem;
+}
+
+
+/* -- Drag and drop ------------------------------------------------------------------ */
+.drag-drop-section {
+  display: none;
+}
+
+.drop-zone {
+  height: 25rem;
+  margin-bottom: 4rem;
+  background-color: white;
+  border: 4px solid var(--primary-color);
+  border-radius: var(--border-radius-xl);
+  font-weight: var(--bold);
+}
+.drop-zone.dragging {
+  background-color: var(--primary-color);
+}
+
+.drop-zone.dragging .default-label {
+  display: none;
+  color: var(--primary-color);
+}
+
+.drop-zone.dragging .dragging-label {
+  color: white;
+  display: block;
+}
+
+.drop-zone-label {
+  position: relative;
+  top: 11rem;
+  color: var(--primary-color);
+  font-size: 1.8rem;
+  text-align: center;
+  pointer-events: none;
+  text-transform: uppercase;
+  border-radius: var(--border-radius-xl);
+}
+
+.dragging-label {
+  display: none;
+}
+
+.dropped-image .run-functions-button {
+  display: none;
+}
+
+
+
+
+
+
+
 
 /* Base
  * *----------------------------------------------- */
@@ -60,17 +233,17 @@ html {
 
 @media (min-width: 800px) {
   html {
-    font-size: 18px;
+    font-size: 16px;
   }
 }
 @media (min-width: 1200px) {
   html {
-    font-size: 20px;
+    font-size: 18px;
   }
 }
 @media (min-width: 1600px) {
   html {
-    font-size: 22px;
+    font-size: 18px;
   }
 }
 body,
@@ -99,7 +272,8 @@ h3 {
 
 h1 {
   font-size: 60px;
-  margin: 0;
+  line-height: 1em;
+  margin: 0 0 12px 0;
 }
 
 @media (min-width: 720px) {
@@ -137,9 +311,19 @@ p {
   hyphenate-limit-zone: 8%;
 }
 
+p.before-list {
+  margin-bottom: 1rem;
+}
+
 .lead {
   margin-bottom: 1.1rem;
   font-size: 1.25rem;
+}
+
+@media (min-width: 720px) {
+  .lead{
+    font-size: 1.25em;
+  }
 }
 
 ol {
@@ -171,10 +355,11 @@ ol {
 
 @media (min-width: 720px) {
   ul,
-ol {
-    padding-left: 40px;
-  }
+  ol {
+      padding-left: 40px;
+    }
 }
+
 li {
   margin-bottom: 0.5rem;
 }
@@ -197,7 +382,7 @@ a:hover {
 
 code {
   background-color: var(--code-bg-color);
-  border-radius: var(--border-radius);
+  border-radius: var(--border-radius-large);
   font-family: var(--code-font);
   font-size: var(--code-font-size);
   padding: 0.1rem 0.3rem;
@@ -206,7 +391,7 @@ code {
 
 pre {
   background-color: var(--code-bg-color);
-  border-radius: var(--border-radius);
+  border-radius: var(--border-radius-large);
   border: 1px solid var(--border-color-light);
 }
 pre code {
@@ -224,14 +409,13 @@ li > code {
   line-height: 12px;
 }
 
-/* Lists
- * * ========================================================================== */
-ul {
-  margin: 0;
-  text-align: left;
+.code-file {
+  position: relative;
+  top: 0.2rem;
+  color: var(--muted-color);
+  font-family: var(--code-font);
+  font-size: var(--code-font-size);
 }
-
-
 
 /* Tables
  * * ========================================================================== */
@@ -255,7 +439,7 @@ th {
   color: var(--link-color);
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  border-radius: var(--border-radius);
+  border-radius: var(--border-radius-large);
   vertical-align: middle;
   white-space: nowrap;
   font-weight: var(--bold);
@@ -305,7 +489,6 @@ hr {
 /* Header */
 .header {
   color: var(--color);
-  background-color: var(--primary-color);
 }
 
 .header {
@@ -327,13 +510,13 @@ hr {
 }
 
 .primary-actions .button {
-  color: var(--color);
+/*  color: var(--color);
   border-color: transparent;
-}
+*/}
 
 .primary-actions .button:hover {
-  background-color: var(--muted-color);
-  border-color: transparent;
+/*  background-color: var(--muted-color);
+  border-color: transparent;*/
 }
 
 @media (min-width: 720px) {
@@ -385,7 +568,7 @@ hr {
   line-height: 1.25em;
   color: var(--muted-color);
   font-weight: var(--bold);
-  border-radius: var(--border-radius);
+  border-radius: var(--border-radius-xl);
 }
 
 .nav-link:hover {
@@ -437,7 +620,7 @@ section:last-of-type {
   margin: 0 0.5rem 1rem 0.5rem;
   background-color: var(--bg-color);
   line-height: 0;
-  border-radius: var(--border-radius-large);
+  border-radius: var(--border-radius-xl);
 }
 .example-image-link:hover {
   background-color: var(--link-color);
@@ -445,83 +628,48 @@ section:last-of-type {
 
 .example-image {
   width: 7rem;
-  border-radius: var(--border-radius);
+  border-radius: var(--border-radius-xl);
 }
 
 /* -- Getting started -- */
-.getting-started-section li {
+
+.guide-steps li {
   margin-bottom: 2rem;
 }
-.getting-started-section li li {
-  margin-bottom: 0.5rem;
-}
 
-.getting-started-list p {
+/*.guide-steps li li {
+  margin-bottom: 0.5rem;
+}*/
+
+/*.getting-started-list p {
   margin-bottom: 1rem;
-}
+}*/
 
 /* -- Options -- */
-.options-section th,
-.options-section td {
-  padding: 8px 16px 8px 1px;
-  border-bottom: 1px solid var(--border-color-light);
-}
-.options-section th:last-child,
-.options-section td:last-child {
-  padding-right: 0;
-}
 
-.options-code {
-  margin-bottom: 2rem;
-}
-
-.options-table .default-row {
-  min-width: 12em;
-  color: var(--muted-color);
-  font-weight: var(--bold);
-}
-.options-table th {
-  text-transform: uppercase;
-  font-size: 0.875rem;
-}
-.options-table td {
-  font-size: 0.875rem;
-  font-family: var(--code-font);
-}
-.options-table td:first-child {
-  font-weight: var(--bold);
-}
-.options-table td:last-child {
-  font-family: var(--font);
-}
-.options-table tr:last-child td {
-  border-bottom: none;
-}
-
-@media (max-width: 720px) {
-  .options-table thead {
-    display: none;
-  }
-  .options-table tr {
-    display: block;
+.method {
     padding-bottom: 1rem;
     margin-bottom: 1rem;
     border-bottom: 1px solid var(--border-color-light);
-  }
-  .options-table tr:last-child {
-    border-bottom: none;
-  }
-  .options-table td {
-    display: block;
-    padding: 0;
-    border-bottom: none;
-  }
-  .options-table .default-row:before {
-    content: attr(data-label);
-    float: left;
-    padding-right: 8px;
-  }
+    font-size: 0.875rem;
 }
+
+.method:last-of-type {
+  border-bottom: 0;
+}
+
+.method-name {
+  font-family: var(--code-font);
+  font-weight: var(--bold);
+}
+
+.method-return {
+  font-family: var(--code-font);
+  font-weight: var(--bold);
+  color: var(--muted-color);
+}
+
+
 /* -- Credits -- */
 footer {
   padding: 2rem 0;
@@ -544,3 +692,4 @@ footer .button {
   top: 16px;
   right: 16px;
 }
+
