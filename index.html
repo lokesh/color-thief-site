@@ -161,53 +161,18 @@ ColorThief.getPalette(img, 5)
 
          <h3>Using in the browser</h3>
 
-        <ol class="getting-started-list">
-          <li>
-            <p><a href="https://github.com/lokesh/lightbox2/archive/master.zip">Download the latest version as a zip file</a><br />
-            Or use a package manager...<br />
-            NPM: <code>npm install lightbox2 --save</code></p>
-            Bower: <code>bower install lightbox --save</code><br />
+        <h4>1. Install</h4>
+        <p>There are three ways to install Color Thief when using it in the browser:</p>
+        <ul>
+          <li><strong>Install as dependency with npm</strong>. The name of the package is <em>colorthief</em>, not <em>color-thief</em>.
+<pre><code class="prism language-javascript">npm i --save colorthief</code></pre>
           </li>
-          <li>
-            <p>Open up the zip file and take a peek at the barebones, working example that is included in the <code>/examples</code> folder.</p>
+          <li><strong>Load from a CDN.</strong> Color Thief releases are hosted on <a href="https://cdnjs.com/libraries/color-thief">cdnjs</a> for quick access. There are multiple distrubution files listed, in most cases you'll want to load `color-thief.umd.js`. This file follows the Universal Module Definition and exports a global variable, `ColorThief` for convenience.
+<pre><code class="prism language-xml">&lt;script src="https://cdnjs.cloudflare.com/ajax/libs/color-thief/2.3.0/color-thief.umd.js">&lt;/script&gt;</code></pre>
           </li>
-          <li>
-            <p>Ready to set Lightbox up on your page? Start by including the Lightbox CSS and Javascript. You can grab both these files from the <code>/dist</code> folder.</p>
-            <ul>
-              <li>Include the CSS at the top of your page in your <code>&lt;head&gt;</code> tag:
-<pre><code class="prism language-xml"><!--<link href="path/to/lightbox.css" rel="stylesheet" />--></code></pre>
-</li>
-<li>Include the Javascript at the bottom of your page before the closing <code>&lt;/body&gt;</code> tag:
-<pre><code class="prism language-xml"><!--<script src="path/to/lightbox.js"></script>--></code></pre>
-</li>
-</ul>
-            </li>
-            <li>
-              <p>Make sure jQuery, which is required by Lightbox, is also loaded.</p>
-              <ul>
-                <li>If you already use jQuery on your page, make sure it is loaded before <code>lightbox.js</code>. jQuery 1.7 or greater is required.</li>
-                <li>If you are not currently using jQuery, I've created a packaged file that includes both Lightbox and jQuery. Include <code>dist/js/lightbox-plus-jquery.js</code> instead of <code>lightbox.js</code>.</li>
-              </ul>
-            </li>
-            <li>Confirm that the four images loaded by <code>lightbox.css</code> are in the correct location. You can grab the images from the <code>/dist/images</code> folder.
-          </ol>
-
-          <h3>Initialize with HTML</h3>
-          <ul>
-            <li><strong>Single images.</strong> Add a <code>data-lightbox</code> attribute to any image link to enable Lightbox. For the value of the attribute, use a unique name for each image. For example:
-<pre><code class="prism language-xml"><!--<a href="images/image-1.jpg" data-lightbox="image-1" data-title="My caption">Image #1</a>--></code></pre>
-              <em>Optional:</em>
-              <ul>
-                <li>Add a <code>data-title</code> attribute if you want to show a caption.</li>
-                <li>Add a <code>data-alt</code> attribute if you want to set the alt attribute of the linked image.</li>
-              </ul>
-            </li>
-            <li><strong>Image sets.</strong> If you have a group of related images that you would like to combine into a set, use the same <code>data-lightbox</code> attribute value for all of the images. For example:
-<pre><code class="prism language-xml"><!--<a href="images/image-2.jpg" data-lightbox="roadtrip">Image #2</a>
-<a href="images/image-3.jpg" data-lightbox="roadtrip">Image #3</a>
-<a href="images/image-4.jpg" data-lightbox="roadtrip">Image #4</a>--></code></pre>
-          </li>
+          <li><strong>Download files.</strong> </li>
         </ul>
+
       </section>
 
 
@@ -270,29 +235,35 @@ ColorThief.getPalette(img, 5)
 
       <section id="license" class="license-section">
         <h2>License</h2>
-        <p>Lightbox2 is licensed under <a href="https://raw.githubusercontent.com/lokesh/lightbox2/master/LICENSE">The MIT License</a>.</p>
-        <ul>
-          <li><strong>100% Free.</strong> Lightbox is free to use in both commercial and non-commercial work.</li>
-          <li><strong>Attribution is required.</strong>This means you must leave my name, my homepage link, and the license info intact. None of these items have to be user-facing and can remain within the code.</li>
-        </ul>
+        <p>Color Thief is licensed under the <a href="https://github.com/lokesh/color-thief/blob/master/LICENSE">MIT License</a>.</p>
+
+        <p>Github provides a nice summary of the license:<br>
+        <em>"A short and simple permissive license with conditions only requiring preservation of copyright and license notices. Licensed works, modifications, and larger works may be distributed under different terms and without source code."</em></p>
+
       </section>
 
       <section id="help" class="help-section">
         <h2>Help</h2>
 
-        <p>Ask for help with build process.</p>
-
-
-        <h3>Have a question about how to use Lightbox?</h3>
-        <p>Follow the steps below to get help. Make sure you have read the documentation on this page and looked at the included example first.</p>
+        <h3>Trouble using Color Thief?</h3>
+        <p>Follow the steps below to get help. Make sure you have read the documentation on this page first.</p>
         <ol>
-          <li>Search <a href="//stackoverflow.com/questions/tagged/lightbox2">Stackoverflow</a> to see if other people have run into the same issue you are having.</li>
-          <li>If your issue is unique, then <a href="//stackoverflow.com/questions/ask">post a new question on Stackoverflow</a>. Use the <code>lightbox2</code> tag.</li>
+          <li><a href="//stackoverflow.com/questions/tagged/color-thief">Search Stackoverflow</a> to see if other people have run into the same issue you are having.</li>
+          <li>If your issue is unique, then <a href="//stackoverflow.com/questions/ask">post a new question on Stackoverflow</a>. Use the <code>color-thief</code> tag.</li>
         </ol>
-        <p>Do not use Github Issues to report personal support requests.</p>
+        <p>Do not use Github Issues to ask questions about using the script. Github Issues is reserved for feature requests and bug reports.</p>
+
+        <h3>Have a feature request?</h3>
+        <ol>
+          <li><a href="https://github.com/lokesh/color-thief/issues">Search through existing Github Issues and PRs</a> to see if the feature has been discussed or already created.</li>
+          <li>If your feature request is unique, then <a href="https://github.com/lokesh/color-thief/issues/new">post a new issue in Github</a>.</li>
+        </ol>
 
         <h3>Found a bug?</h3>
-        <p>If you find a bug, follow the instructions in the <a href="https://github.com/lokesh/lightbox2/blob/master/CONTRIBUTING.md#found-a-bug">Contribution Guildelines</a> to report the issue.</p>
+        <ol>
+          <li><a href="https://github.com/lokesh/lightbox2/issues">Search through existing Github Issues</a> that have been reported to avoid creating a duplicate issue.</li>
+          <li>If your bug has not been reported, <a href="<a href="https://github.com/lokesh/color-thief/issues/new">create a new issue</a>.</li>
+        </ol>
       </section>
 
 
