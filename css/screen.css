@@ -503,22 +503,6 @@ hr {
   font-weight: var(--bold);
 }
 
-.primary-actions {
-  padding-bottom: 6rem;
-  max-width: 360px;
-  margin: 0 auto;
-}
-
-.primary-actions .button {
-/*  color: var(--color);
-  border-color: transparent;
-*/}
-
-.primary-actions .button:hover {
-/*  background-color: var(--muted-color);
-  border-color: transparent;*/
-}
-
 @media (min-width: 720px) {
   .header {
     text-align: left;
@@ -527,10 +511,6 @@ hr {
   .logo-credit {
     position: relative;
     top: -6px;
-  }
-
-  .primary-actions {
-    max-width: none;
   }
 }
 
@@ -671,6 +651,7 @@ section:last-of-type {
 
 
 /* -- Credits -- */
+
 footer {
   padding: 2rem 0;
   border-top: 2px solid var(--border-color-light);
@@ -685,11 +666,40 @@ footer .button {
     text-align: left;
   }
 }
-/* -- Sharing -- */
-.sharing-section {
-  position: fixed;
-  z-index: 10;
-  top: 16px;
-  right: 16px;
+
+/* -- Github -- */
+.gh {
+  display: inline-flex;
+  align-items: center;
+  color: var(--color);
+  font-weight: var(--bold);
+  background: linear-gradient(#fff, #f3f3f3);
+  border: 2px solid var(--border-color-light);
+  border-radius: var(--border-radius-large);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
 }
 
+.gh:hover {
+  text-decoration: none;
+  background: var(--hover-bg-color);
+}
+
+.gh-label {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  border-right: 2px solid var(--border-color-light);
+}
+
+.gh-count {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem 1rem;
+}
+
+.gh-logo,
+.gh-star {
+  width: 20px;
+  margin-right: 0.5rem;
+}
