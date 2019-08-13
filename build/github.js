@@ -1,7 +1,7 @@
 const fs = require('fs');
 const fetch = require("node-fetch");
 
-fetch(`https://api.github.com/repos/lokesh/color-thief`)
+fetch('https://api.github.com/repos/lokesh/color-thief')
     .then(function(response) {
       return response.json();
     })

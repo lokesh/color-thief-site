@@ -312,12 +312,24 @@ const result = colorThief.getColor(document.querySelector('img'));--></code></pr
   <script src="js/demo.js"></script>
 
   <script type="module">
+    import { getStarCount } from './js/github.js';
+
+    getStarCount()
+      .then( data => {
+        document.querySelector('.gh-count-number').innerText = data;
+      })
+      .catch(err => {
+        document.querySelector('.gh-count').style.display = 'none';
+      })
+  </script>
+
+<!--   <script>
     fetch('./js/github.json')
       .then(res => res.json())
       .then(data => {
         document.querySelector('.gh-count-number').innerText = data.stargazers_count;
       });
-  </script>
+  </script> -->
 
   <script>
     $(function() {
