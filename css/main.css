@@ -3,8 +3,7 @@
   --color: #000;
   --bg-color: #f9f9f9;
   --hover-bg-color: #e9e9e9;
-  --primary-color: #fc4c02;
-  --secondary-color: #f68727;
+  --primary-color: #e66622;
   --muted-color: #999;
   --link-color: #17f;
   --code-color: var(--primary-color);
@@ -35,178 +34,6 @@
   /* Breakpoints */
   --sm-screen: 720px;
 }
-
-
-
-
-
-
-
-/* -- Examples -- */
-.image-section {
-  margin-bottom: 80px;
-}
-.image-section .image-wrap {
-  position: relative;
-  line-height: 1em;
-}
-
-.examples-section .image-section .target-image {
-  border-radius: var(--border-radius-xl);
-  transition: border-radius 0.2s 0.3s;
-}
-.examples-section .image-section.with-color-thief-output .target-image {
-  border-radius: var(--border-radius-xl) var(--border-radius-xl) 0 0;
-}
-
-.output-layout {
-  display: flex;
-}
-
-.function.get-color {
-  flex: 0 1 16rem;
-  margin-right: 2rem;
-}
-
-.run-functions-button {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 8rem;
-  height: 8rem;
-  margin-top: -4rem;
-  margin-left: -4rem;
-  border: none;
-  border-radius: 50%;
-  color: var(--primary-color);
-  background-color: white;
-  border: 4px solid var(--primary-color);
-  font-size: 2rem;
-  font-weight: var(--bold);
-  cursor: pointer;
-  text-transform: uppercase;
-  outline: none;
-}
-
-.run-functions-button:hover {
-  color: white;
-  background-color: var(--primary-color);
-}
-.run-functions-button:active {
-  transform: scale(0.9);
-}
-.run-functions-button.hide {
-  transition: transform 0.6s, top 0.6s cubic-bezier(0.22, -0.37, 0.75, 0.75);
-  top: 105%;
-  transform: scale(0);
-}
-
-.touch .touch-label {
-  display: inline;
-}
-.touch .no-touch-label {
-  display: none;
-}
-
-.no-touch .touch-label {
-  display: none;
-}
-.no-touch .no-touch-label {
-  display: inline;
-}
-
-.target-image {
-  display: block;
-  width: 100%;
-  border-radius: var(--border-radius-xl) var(--border-radius-xl) 0 0;
-}
-
-.color-thief-output {
-  display: none;
-  padding: 1.5rem;
-  background-color: white;
-  border: 1px solid var(--border-color-light);
-  border-top-width: 0;
-  border-radius: 0 0 var(--border-radius-xl) var(--border-radius-xl);
-}
-
-.function-title {
-  text-align: left;
-  margin-top: 0;
-}
-
-.function-code {
-  display: none;
-}
-
-.swatch {
-  display: inline-block;
-  background: #dddddd;
-  border-radius: 50%;
-}
-
-.get-color .swatch {
-  width: 4rem;
-  height: 4rem;
-}
-
-.get-palette .swatch {
-  width: 3rem;
-  height: 3rem;
-}
-
-
-/* -- Drag and drop ------------------------------------------------------------------ */
-.drag-drop-section {
-  display: none;
-}
-
-.drop-zone {
-  height: 25rem;
-  margin-bottom: 4rem;
-  background-color: white;
-  border: 4px solid var(--primary-color);
-  border-radius: var(--border-radius-xl);
-  font-weight: var(--bold);
-}
-.drop-zone.dragging {
-  background-color: var(--primary-color);
-}
-
-.drop-zone.dragging .default-label {
-  display: none;
-  color: var(--primary-color);
-}
-
-.drop-zone.dragging .dragging-label {
-  color: white;
-  display: block;
-}
-
-.drop-zone-label {
-  position: relative;
-  top: 11rem;
-  color: var(--primary-color);
-  font-size: 1.8rem;
-  text-align: center;
-  pointer-events: none;
-  text-transform: uppercase;
-  border-radius: var(--border-radius-xl);
-}
-
-.dragging-label {
-  display: none;
-}
-
-.dropped-image .run-functions-button {
-  display: none;
-}
-
-
-
-
-
-
 
 
 /* Base
@@ -703,3 +530,173 @@ footer .button {
   width: 20px;
   margin-right: 0.5rem;
 }
+
+
+
+
+
+
+
+/* -- Examples -------------------------------------------------------------- */
+
+.image-section {
+  margin-bottom: 80px;
+}
+.image-section .image-wrap {
+  position: relative;
+  line-height: 1em;
+}
+
+.examples-section .image-section .target-image {
+  border-radius: var(--border-radius-xl);
+  transition: border-radius 0.2s 0.3s;
+}
+.examples-section .image-section.with-color-thief-output .target-image {
+  border-radius: var(--border-radius-xl) var(--border-radius-xl) 0 0;
+}
+
+.output-layout {
+  display: flex;
+}
+
+.function.get-color {
+  flex: 0 1 16rem;
+  margin-right: 2rem;
+}
+
+.run-functions-button {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 8rem;
+  height: 8rem;
+  margin-top: -4rem;
+  margin-left: -4rem;
+  border: none;
+  border-radius: 50%;
+  color: var(--link-color);
+  background-color: white;
+  border: 4px solid var(--link-color);
+  font-size: 2rem;
+  font-weight: var(--bold);
+  cursor: pointer;
+  text-transform: uppercase;
+  outline: none;
+}
+
+.run-functions-button:hover {
+  color: white;
+  background-color: var(--link-color);
+}
+.run-functions-button:active {
+  transform: scale(0.9);
+}
+.run-functions-button.hide {
+  transition: transform 0.6s, top 0.6s cubic-bezier(0.22, -0.37, 0.75, 0.75);
+  top: 105%;
+  transform: scale(0);
+}
+
+.touch .touch-label {
+  display: inline;
+}
+.touch .no-touch-label {
+  display: none;
+}
+
+.no-touch .touch-label {
+  display: none;
+}
+.no-touch .no-touch-label {
+  display: inline;
+}
+
+.target-image {
+  display: block;
+  width: 100%;
+  border-radius: var(--border-radius-xl) var(--border-radius-xl) 0 0;
+}
+
+.color-thief-output {
+  display: none;
+  padding: 1.5rem;
+  background-color: white;
+  border: 1px solid var(--border-color-light);
+  border-top-width: 0;
+  border-radius: 0 0 var(--border-radius-xl) var(--border-radius-xl);
+}
+
+.function-title {
+  text-align: left;
+  margin-top: 0;
+}
+
+.function-code {
+  display: none;
+}
+
+.swatch {
+  display: inline-block;
+  background: #dddddd;
+  border-radius: 50%;
+}
+
+.get-color .swatch {
+  width: 4rem;
+  height: 4rem;
+}
+
+.get-palette .swatch {
+  width: 3rem;
+  height: 3rem;
+}
+
+
+/* -- Drag and drop --------------------------------------------------------- */
+
+.drag-drop-section {
+  display: none;
+}
+
+.drop-zone {
+  height: 25rem;
+  margin-bottom: 4rem;
+  background-color: white;
+  border: 4px solid var(--link-color);
+  border-radius: var(--border-radius-xl);
+  font-weight: var(--bold);
+}
+.drop-zone.dragging {
+  background-color: var(--link-color);
+}
+
+.drop-zone.dragging .default-label {
+  display: none;
+  color: var(--link-color);
+}
+
+.drop-zone.dragging .dragging-label {
+  color: white;
+  display: block;
+}
+
+.drop-zone-label {
+  position: relative;
+  top: 11rem;
+  color: var(--link-color);
+  font-size: 1.8rem;
+  text-align: center;
+  pointer-events: none;
+  text-transform: uppercase;
+  border-radius: var(--border-radius-xl);
+}
+
+.dragging-label {
+  display: none;
+}
+
+.dropped-image .run-functions-button {
+  display: none;
+}
+
+

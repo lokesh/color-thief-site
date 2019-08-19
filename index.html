@@ -9,7 +9,7 @@
   <meta name="author" content="Lokesh Dhakar">
   <meta name="viewport" content="width=device-width,initial-scale=1">
 
-  <link rel="stylesheet" href="css/screen.css">
+  <link rel="stylesheet" href="css/main.css">
   <link rel="stylesheet" href="css/prism.css">
 </head>
 <body>
@@ -61,17 +61,19 @@
         <ul class="nav-list">
           <li class="nav-list-item"><a href="#examples" class="nav-link">Examples</a></li>
           <li class="nav-list-item"><a href="#getting-started" class="nav-link">Getting started</a></li>
-          <!-- <li class="nav-list-item"><a href="#usage" class="nav-link">Usage</a></li> -->
           <li class="nav-list-item"><a href="#api" class="nav-link">API</a></li>
+          <li class="nav-list-item"><a href="#faq" class="nav-link">FAQ</a></li>
+          <li class="nav-list-item"><a href="#support" class="nav-link">Support</a></li>
           <li class="nav-list-item"><a href="#license" class="nav-link">License</a></li>
-          <li class="nav-list-item"><a href="#help" class="nav-link">Help</a></li>
         </ul>
       </nav>
     </div>
 
     <div class="content">
 
+
       <!-- EXAMPLES -->
+
 
       <section id="examples" class="examples-section">
         <h2>Examples</h2>
@@ -90,8 +92,8 @@
       </section>
 
 
-
       <!-- GETTING STARTED -->
+
 
       <section id="getting-started" class="getting-started-section">
         <h2>Getting started</h2>
@@ -161,30 +163,11 @@ const result = colorThief.getColor(document.querySelector('img'));--></code></pr
           </li>
           <li><strong>With RequireJS.</strong> The <code>/dist/color-thief.umd.js</code> file uses the UMD (Universal Module Definition) format. This includes RequireJS AMD support.</li>
         </ul>
-
       </section>
 
-      <!-- Usage -->
-
-      <!-- <section id="usage" class="usage-section">
-        <h2>Usage</h2>
-
-        <h3>Getting hex values</h3>
-        <p>...</p>
-
-        <h3>Determining lightness/darkness</h3>
-        <p>1) Besides checking lightness to determine if the text should be light or dark.</p>
-        <p>2) Lightest or darkest color in palette</p>
-        <p>...</p>
-
-        <h3>Reading image files on your computer</h3>
-        <p>...</p>
-
-        <h3>Reading image files on another domain</h3>
-        <p>...</p>
-      </section> -->
 
       <!-- API -->
+
 
       <section id="api" class="options-section">
         <h2>API</h2>
@@ -207,18 +190,38 @@ const result = colorThief.getColor(document.querySelector('img'));--></code></pr
 
       </section>
 
-      <!-- LICENSE -->
 
-      <section id="license" class="license-section">
-        <h2>License</h2>
-        <p>Color Thief is licensed under the <a href="https://github.com/lokesh/color-thief/blob/master/LICENSE">MIT License</a>.</p>
+      <!-- FAQ -->
 
-        <p>Github provides a nice summary of the license:<br>
-        <em>"A short and simple permissive license with conditions only requiring preservation of copyright and license notices. Licensed works, modifications, and larger works may be distributed under different terms and without source code."</em></p>
 
+      <section id="faq">
+        <h2>FAQ</h2>
+
+        <h3>How do I get hex values?</h3>
+        <p>The ColorThief methods return colors as an array of three integers representing red, green, and blue values.</p>
+        <pre><code class="prism language-javascript"><!--[40, 20, 60]--></code></pre>
+
+        <script>
+          console.log(ColorThief);
+        </script>
+
+        <h3>Determining lightness/darkness</h3>
+        <p>1) Besides checking lightness to determine if the text should be light or dark.</p>
+        <p>2) Lightest or darkest color in palette</p>
+        <p>...</p>
+
+        <h3>Reading image files on your computer</h3>
+        <p>...</p>
+
+        <h3>Reading image files on another domain</h3>
+        <p>...</p>
       </section>
 
-      <section id="help" class="help-section">
+
+      <!-- SUPPORT -->
+
+
+      <section id="support">
         <h2>Help</h2>
 
         <h3>Trouble using Color Thief?</h3>
@@ -239,6 +242,19 @@ const result = colorThief.getColor(document.querySelector('img'));--></code></pr
           <li><a href="https://github.com/lokesh/color-thief/issues">Search through existing Github Issues</a> that have been reported to avoid creating a duplicate issue.</li>
           <li>If your bug has not been reported, <a href="<a href="https://github.com/lokesh/color-thief/issues/new">create a new issue</a>. In your bug report, please includes the version of the library you are using, your browser and operating system, and steps to recreate.</li>
         </ol>
+      </section>
+
+
+      <!-- LICENSE -->
+
+
+      <section id="license" class="license-section">
+        <h2>License</h2>
+        <p>Color Thief is licensed under the <a href="https://github.com/lokesh/color-thief/blob/master/LICENSE">MIT License</a>.</p>
+
+        <p>Github provides a nice summary of the license:<br>
+        <em>"A short and simple permissive license with conditions only requiring preservation of copyright and license notices. Licensed works, modifications, and larger works may be distributed under different terms and without source code."</em></p>
+
       </section>
 
 
@@ -305,7 +321,7 @@ const result = colorThief.getColor(document.querySelector('img'));--></code></pr
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.16.0/prism.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.16.0/plugins/unescaped-markup/prism-unescaped-markup.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/3.0.1/mustache.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/color-thief/2.3.0/color-thief.umd.js"></script>
 
