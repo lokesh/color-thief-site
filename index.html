@@ -178,8 +178,12 @@ const result = colorThief.getColor(document.querySelector('img'));--></code></pr
         <div class="method">
           <div class="method-name">getColor(image [, quality])</div>
           <div class="method-return">Returns: [Number, Number, Number]</div>
-          <div class="method-description">Gets the dominant color from the image. Color is returned as an array of three integers representing red, green, and blue values.<br><br>
-            <em>Quality</em> is an optional argument that must be an Integer of value 1 or greater, and defaults to 10. The number determines how many pixels are skipped before the next one is sampled. We rarely need to sample every single pixel in the image to get good results. The bigger the number, the faster a value will be returned.</div>
+          <div class="method-description">
+            <p>Gets the dominant color from the image. Color is returned as an array of three integers representing red, green, and blue values.</p>
+            <p><span class="method-argument">image</span> - When called in the browser, this argument expects an image element, not a URL. When run in Node, this argument expects a path to the image.</p>
+
+            <p><span class="method-argument">quality</span> is an optional argument that must be an Integer of value 1 or greater, and defaults to 10. The number determines how many pixels are skipped before the next one is sampled. We rarely need to sample every single pixel in the image to get good results. The bigger the number, the faster a value will be returned.</p>
+          </div>
         </div>
 
         <div class="method">
@@ -197,13 +201,24 @@ const result = colorThief.getColor(document.querySelector('img'));--></code></pr
       <section id="faq">
         <h2>FAQ</h2>
 
-        <h3>How do I get hex values?</h3>
-        <p>The ColorThief methods return colors as an array of three integers representing red, green, and blue values.</p>
-        <pre><code class="prism language-javascript"><!--[40, 20, 60]--></code></pre>
+        <h3>Do I have to wait for the images to be loaded?</h3>
 
-        <script>
-          console.log(ColorThief);
-        </script>
+        <p>Yes. When using ColorThief in the browser, you must wait for the image to be loaded before.</p>
+
+
+
+        <h3>How do I get hex values?</h3>
+        <p>The ColorThief methods return colors as an array of three integers representing <span style="font-family: var(--code-font); color: #ff4f30; font-weight: var(--bold)">red</span>, <span style="font-family: var(--code-font); color: #00a91c; font-weight: var(--bold)">green</span>, and <span style="font-family: var(--code-font); color: #00a2ff; font-weight: var(--bold)">blue</span> values. If you are looking to use the output in CSS, you can do that without converting to hex: <code>color: rgb(102, 51, 153)</code>. If you do need to convert, you can use the following function:</p>
+
+        <pre><code class="prism language-javascript"><!--
+const rgbToHex = (r, g, b) => '#' + [r, g, b].map(x => {
+  const hex = x.toString(16)
+  return hex.length === 1 ? '0' + hex : hex
+}).join('')
+
+rgbToHex(102, 51, 153); // #663399
+        --></code></pre>
+
 
         <h3>Determining lightness/darkness</h3>
         <p>1) Besides checking lightness to determine if the text should be light or dark.</p>

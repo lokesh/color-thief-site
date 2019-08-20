@@ -468,14 +468,16 @@ section:last-of-type {
 .method-name {
   font-family: var(--code-font);
   font-weight: var(--bold);
+  /*font-size: 1.125rem;*/
 }
 
-.method-return {
+
+.method-return,
+.method-argument {
   font-family: var(--code-font);
   font-weight: var(--bold);
-  color: var(--muted-color);
+  color: var(--primary-color);
 }
-
 
 /* -- Credits -- */
 
