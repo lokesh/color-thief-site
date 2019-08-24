@@ -360,10 +360,15 @@ rgbToHex(102, 51, 153); // #663399--></code></pre>
     import { getStarCount } from './js/github.js';
 
     getStarCount()
-      .then( data => {
-        document.querySelector('.gh-count-number').innerText = data;
+      .then(data => {
+        if (data) {
+          document.querySelector('.gh-count-number').innerText = data;
+        } else {
+          document.querySelector('.gh-count').style.display = 'none';
+        }
       })
       .catch(err => {
+        console.log(err);
         document.querySelector('.gh-count').style.display = 'none';
       })
   </script>
