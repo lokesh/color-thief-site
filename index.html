@@ -115,7 +115,7 @@
 <pre><code class="prism language-javascript"><!--const ColorThief = require('colorthief');--></code></pre>
           </li>
           <li><strong>Get colors.</strong> Both the <code>getColor()</code> and <code>getPalette()</code> methods return a Promise when used in Node.
-<pre><code class="prism language-javascript"><!--const img = resolve(process.cwd(), 'rainbow.png');
+<pre><code class="prism language-javascript line-numbers"><!--const img = resolve(process.cwd(), 'rainbow.png');
 
 ColorThief.getColor(img)
     .then(color => { console.log(color) })
@@ -145,7 +145,7 @@ ColorThief.getPalette(img, 5)
         <h4>2. Import and use</h4>
         <ul class="guide-steps">
           <li><strong>As a global variable.</strong>
-<pre><code class="prism language-xml"><!--<script src="node_modules/colorthief/dist/color-thief.umd.js"></script>
+<pre><code class="prism language-xml line-numbers"><!--<script src="node_modules/colorthief/dist/color-thief.umd.js"></script>
 <script>
     const colorThief = new ColorThief();
     const color = colorThief.getColor(document.querySelector('img'));
@@ -156,10 +156,10 @@ ColorThief.getPalette(img, 5)
 <pre><code class="prism language-xml"><!--<script type="module" src="app.js"></script>--></code></pre>
 
 <div class="code-file">app.js</div>
-<pre><code class="prism language-javascript"><!--import ColorThief from './node_modules/colorthief/dist/color-thief.mjs'
+<pre><code class="prism language-javascript line-numbers"><!--import ColorThief from './node_modules/colorthief/dist/color-thief.mjs'
 
 const colorThief = new ColorThief();
-const result = colorThief.getColor(document.querySelector('img'));--></code></pre>
+const color = colorThief.getColor(document.querySelector('img'));--></code></pre>
           </li>
           <li><strong>With RequireJS.</strong> The <code>/dist/color-thief.umd.js</code> file uses the UMD (Universal Module Definition) format. This includes RequireJS AMD support.</li>
         </ul>
@@ -180,7 +180,7 @@ const result = colorThief.getColor(document.querySelector('img'));--></code></pr
           <div class="method-return">Returns: [Number, Number, Number]</div>
           <div class="method-description">
             <p>Gets the dominant color from the image. Color is returned as an array of three integers representing red, green, and blue values.</p>
-            <p><span class="method-argument">image</span> - When called in the browser, this argument expects an image element, not a URL. When run in Node, this argument expects a path to the image.</p>
+            <p><span class="method-argument">image</span> - When called in the browser, this argument expects an HTML image element, not a URL. When run in Node, this argument expects a path to the image.</p>
 
             <p><span class="method-argument">quality</span> is an optional argument that must be an Integer of value 1 or greater, and defaults to 10. The number determines how many pixels are skipped before the next one is sampled. We rarely need to sample every single pixel in the image to get good results. The bigger the number, the faster a value will be returned.</p>
           </div>
@@ -189,7 +189,9 @@ const result = colorThief.getColor(document.querySelector('img'));--></code></pr
         <div class="method">
           <div class="method-name">getPalette(image [, colorCount, quality]</div>
           <div class="method-return">Returns: [[Number, Number, Number], ...]</div>
-          <div class="method-description">Gets a palette from the image by clustering similar colors. The palette is returned as an array containing colors, each color itself an array of three integers.</div>
+          <div class="method-description">
+            <p>Gets a palette from the image by clustering similar colors. The palette is returned as an array containing colors, each color itself an array of three integers.</p>
+          </div>
         </div>
 
       </section>
@@ -201,23 +203,35 @@ const result = colorThief.getColor(document.querySelector('img'));--></code></pr
       <section id="faq">
         <h2>FAQ</h2>
 
-        <h3>Do I have to wait for the images to be loaded?</h3>
+        <h3>Do I have to wait for the image to be loaded?</h3>
 
-        <p>Yes. When using ColorThief in the browser, you must wait for the image to be loaded before.</p>
+        <p>Yes. If you see an error that reads: <code>Cannot read property '0' of null</code>, it is likely that the image had not finished loading. When using ColorThief in the browser, you need to wait for the image to be loaded before calling <code>getColor()</code> or <code>getPalette()</code>. To do this, run the ColorThief methods in the image's <em>load</em> event listener.</p>
 
+<pre><code class="prism language-javascript line-numbers"><!--// RISKY 🙀
+const colorThief = new ColorThief();
+let img = document.querySelector('img');
 
+colorThief.getColor(img);--></code></pre>
+
+<br>
+
+<pre><code class="prism language-javascript line-numbers"><!--// MUCH BETTER 😎
+const colorThief = new ColorThief();
+let img = document.querySelector('img');
+
+img.addEventListener('load', (event) => {
+  colorThief.getColor(img);
+})--></code></pre>
 
         <h3>How do I get hex values?</h3>
-        <p>The ColorThief methods return colors as an array of three integers representing <span style="font-family: var(--code-font); color: #ff4f30; font-weight: var(--bold)">red</span>, <span style="font-family: var(--code-font); color: #00a91c; font-weight: var(--bold)">green</span>, and <span style="font-family: var(--code-font); color: #00a2ff; font-weight: var(--bold)">blue</span> values. If you are looking to use the output in CSS, you can do that without converting to hex: <code>color: rgb(102, 51, 153)</code>. If you do need to convert, you can use the following function:</p>
+        <p>The ColorThief methods return colors as an array of three integers representing <span style="font-family: var(--code-font); color: #ff4f30; font-weight: var(--bold)">red</span>, <span style="font-family: var(--code-font); color: #00a91c; font-weight: var(--bold)">green</span>, and <span style="font-family: var(--code-font); color: #00a2ff; font-weight: var(--bold)">blue</span> values. If you are looking to use the output in CSS, you can do that using the rgb format: <code>color: rgb(102, 51, 153)</code>. If you do need to convert to hex, you can use the following function:</p>
 
-        <pre><code class="prism language-javascript"><!--
-const rgbToHex = (r, g, b) => '#' + [r, g, b].map(x => {
+        <pre><code class="prism language-javascript line-numbers"><!--const rgbToHex = (r, g, b) => '#' + [r, g, b].map(x => {
   const hex = x.toString(16)
   return hex.length === 1 ? '0' + hex : hex
 }).join('')
 
-rgbToHex(102, 51, 153); // #663399
-        --></code></pre>
+rgbToHex(102, 51, 153); // #663399--></code></pre>
 
 
         <h3>Determining lightness/darkness</h3>
@@ -334,13 +348,13 @@ rgbToHex(102, 51, 153); // #663399
   </script>
 
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.16.0/prism.min.js"></script>
+  <script src="./js/prism.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.16.0/plugins/unescaped-markup/prism-unescaped-markup.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/3.0.1/mustache.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/color-thief/2.3.0/color-thief.umd.js"></script>
 
-  <script src="js/demo.js"></script>
+  <script src="./js/demo.js"></script>
 
   <script type="module">
     import { getStarCount } from './js/github.js';
@@ -353,14 +367,6 @@ rgbToHex(102, 51, 153); // #663399
         document.querySelector('.gh-count').style.display = 'none';
       })
   </script>
-
-<!--   <script>
-    fetch('./js/github.json')
-      .then(res => res.json())
-      .then(data => {
-        document.querySelector('.gh-count-number').innerText = data.stargazers_count;
-      });
-  </script> -->
 
   <script>
     $(function() {
