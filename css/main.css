@@ -47,7 +47,7 @@ body {
   background: var(--bg-color);
 }
 
-@media (min-width: 800px) {
+@media (min-width: 720px) {
   body {
     padding: 0;
   }
@@ -58,7 +58,7 @@ html {
   font-size: 16px;
 }
 
-@media (min-width: 800px) {
+@media (min-width: 720px) {
   html {
     font-size: 16px;
   }
@@ -84,53 +84,52 @@ textarea {
   -webkit-font-smoothing: antialiased;
 }
 
-h1, h2, h3, h4, h5 {
-  line-height: var(--line-height-heading);
-}
-
 h1,
 h2,
 h3 {
-  font-weight: var(--x-bold);
+  font-weight: var(--bold);
   letter-spacing: -0.01em;
   word-spacing: 0.01em;
-  text-transform: var(--text-transform-heading);
 }
 
 h1 {
-  font-size: 60px;
+  font-size: 4rem;
   line-height: 1em;
   margin: 0 0 12px 0;
+  text-transform: uppercase;
+  font-weight: var(--x-bold);
 }
+
+
+h2 {
+  margin-top: 24px;
+  font-size: 1.75rem;
+  text-align: center;
+}
+
+h3 {
+  font-size: 1.25rem;
+  text-align: center;
+  line-height: var(--line-height-heading);
+}
+
 
 @media (min-width: 720px) {
   h1 {
-    font-size: 80px;
+    font-size: 5rem;
   }
-}
-h2 {
-  margin-top: 24px;
-  font-size: 1.4rem;
-  text-align: center;
-}
-
-@media (min-width: 720px) {
-  h2 {
-    text-align: left;
-  }
-}
-h3 {
-  font-size: 1.06rem;
-  text-align: center;
-}
-
-@media (min-width: 720px) {
+  h2,
   h3 {
     text-align: left;
   }
+    h3 {
+    text-align: left;
+  }
 }
+
+
 p {
-  margin: 0 auto 2rem auto;
+  margin: 1em auto 1.5em auto;
   hyphens: auto;
   hyphenate-limit-chars: 6 3 3;
   hyphenate-limit-lines: 2;
@@ -144,7 +143,7 @@ p.before-list {
 
 .lead {
   margin-bottom: 1.1rem;
-  font-size: 1.25rem;
+  font-size: 1.1rem;
 }
 
 @media (min-width: 720px) {
@@ -212,7 +211,7 @@ code {
   border-radius: var(--border-radius-large);
   font-family: var(--code-font);
   font-size: var(--code-font-size);
-  padding: 0.1rem 0.3rem;
+  padding: 0.1em 0.3em;
   position: relative;
 }
 
@@ -221,6 +220,17 @@ pre {
   border-radius: var(--border-radius-large);
   border: 1px solid var(--border-color-light);
 }
+
+/*p + pre[class*="language-"] {
+  margin-top: -1em;
+
+}
+*/
+
+/*pre + p {
+  margin-top: 2em;
+}*/
+
 pre code {
   color: inherit;
   padding: 0;
@@ -444,21 +454,12 @@ section:last-of-type {
   margin-bottom: 2rem;
 }
 
-/*.guide-steps li li {
-  margin-bottom: 0.5rem;
-}*/
-
-/*.getting-started-list p {
-  margin-bottom: 1rem;
-}*/
-
 /* -- Options -- */
 
 .method {
     padding-bottom: 1rem;
     margin-bottom: 1rem;
     border-bottom: 1px solid var(--border-color-light);
-    font-size: 0.875rem;
 }
 
 .method:last-of-type {
@@ -468,15 +469,24 @@ section:last-of-type {
 .method-name {
   font-family: var(--code-font);
   font-weight: var(--bold);
-  /*font-size: 1.125rem;*/
+  font-size: 0.875rem;
 }
 
 
 .method-return,
 .method-argument {
+  font-size: 0.875rem;
   font-family: var(--code-font);
   font-weight: var(--bold);
   color: var(--primary-color);
+}
+
+@media (min-width: 720px) {
+  .method-name,
+  .method-return,
+  .method-argument {
+    font-size: 1rem;
+  }
 }
 
 /* -- Credits -- */
