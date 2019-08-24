@@ -1,5 +1,5 @@
-export function getStarCount() {
-  return fetch('https://api.github.com/repos/lokesh/color-thief')
+export function getStarCount(user, repo) {
+  return fetch(`https://api.github.com/repos/${user}/${repo}`)
     .then(res => {
       if (res.ok) {
         return res.json()

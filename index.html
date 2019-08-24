@@ -233,7 +233,7 @@ img.addEventListener('load', (event) => {
 
 rgbToHex(102, 51, 153); // #663399--></code></pre>
 
-
+<!--
         <h3>Determining lightness/darkness</h3>
         <p>1) Besides checking lightness to determine if the text should be light or dark.</p>
         <p>2) Lightest or darkest color in palette</p>
@@ -243,7 +243,7 @@ rgbToHex(102, 51, 153); // #663399--></code></pre>
         <p>...</p>
 
         <h3>Reading image files on another domain</h3>
-        <p>...</p>
+        <p>...</p> -->
       </section>
 
 
@@ -359,17 +359,21 @@ rgbToHex(102, 51, 153); // #663399--></code></pre>
   <script type="module">
     import { getStarCount } from './js/github.js';
 
-    getStarCount()
+    getStarCount('lokesh', 'color-thief')
       .then(data => {
-        if (data) {
-          document.querySelector('.gh-count-number').innerText = data;
-        } else {
-          document.querySelector('.gh-count').style.display = 'none';
-        }
+        toggleStars(data);
       })
       .catch(err => {
-        document.querySelector('.gh-count').style.display = 'none';
+        toggleStars(false);
       })
+
+    function toggleStars(count) {
+      if (count) {
+        document.querySelector('.gh-count-number').innerText = count;
+      } else {
+        document.querySelector('.gh-count').style.display = 'none';
+      }
+    }
   </script>
 
   <script>
