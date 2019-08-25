@@ -148,7 +148,16 @@ ColorThief.getPalette(img, 5)
 <pre><code class="prism language-xml line-numbers"><!--<script src="node_modules/colorthief/dist/color-thief.umd.js"></script>
 <script>
     const colorThief = new ColorThief();
-    const color = colorThief.getColor(document.querySelector('img'));
+    const img = colorThief.getColor(document.querySelector('img'));
+
+    // Make sure image is finished loading
+    if (img.complete) {
+      colorThief.getColor(img);
+    } else {
+      image.addEventListener('load', function() {
+        colorThief.getColor(img);
+      });
+    }
 </script>--></code></pre>
 </li>
           <li><strong>As an ES6 module.</strong>
@@ -159,7 +168,16 @@ ColorThief.getPalette(img, 5)
 <pre><code class="prism language-javascript line-numbers"><!--import ColorThief from './node_modules/colorthief/dist/color-thief.mjs'
 
 const colorThief = new ColorThief();
-const color = colorThief.getColor(document.querySelector('img'));--></code></pre>
+const img = colorThief.getColor(document.querySelector('img'));
+
+if (img.complete) {
+  colorThief.getColor(img);
+} else {
+  image.addEventListener('load', function() {
+    colorThief.getColor(img);
+  });
+}
+--></code></pre>
           </li>
           <li><strong>With RequireJS.</strong> The <code>/dist/color-thief.umd.js</code> file uses the UMD (Universal Module Definition) format. This includes RequireJS AMD support.</li>
         </ul>
@@ -215,7 +233,7 @@ colorThief.getColor(img);--></code></pre>
 
 <br>
 
-<pre><code class="prism language-javascript line-numbers"><!--// GOOD 👍
+<pre><code class="prism language-javascript line-numbers"><!--// BETTER 👍
 const colorThief = new ColorThief();
 let img = document.querySelector('img');
 
@@ -229,16 +247,39 @@ if (img.complete) {
 
         <h3>Does it work if the image is hosted on another domain?</h3>
 
-        <p>Yes. If you are seeing an error that reads: <code>Failed to execute 'getImageData' on 'CanvasRenderingContext2D': The canvas has been tainted by cross-origin data.</code>, then you are running into a <em>cross-origin resouce sharing (CORS)</em> issue. Two things to check:</p>
+        <p>Yes. If you are seeing an error that reads: <code>The canvas has been tainted by cross-origin data.</code>, then you are running into a <em>cross-origin resouce sharing (CORS)</em> issue. Check the following two items:</p>
 
         <ol class="guide-steps">
-          <li><strong>CORS policy on the server.</strong> Is the server hosting the image properly configured? Make sure your requesting domain is whitelisted in the <code>Access-Control-Allow-Origin</code> header.</li>
+          <li><strong>CORS policy on the server.</strong> Is the server hosting the image properly configured? Make sure the requesting domain is whitelisted in the <code>Access-Control-Allow-Origin</code> header.
+
+            <p>Example of a open CORS configuration for an AWS S3 bucket:</p>
+<pre><code class="prism language-xml line-numbers"><!--<CORSConfiguration>
+    <CORSRule>
+        <AllowedOrigin>*</AllowedOrigin>
+        <AllowedMethod>GET</AllowedMethod>
+        <AllowedMethod>HEAD</AllowedMethod>
+        <MaxAgeSeconds>3000</MaxAgeSeconds>
+        <AllowedHeader>Authorization</AllowedHeader>
+    </CORSRule>
+</CORSConfiguration>--></code></pre>
+          </li>
           <li><strong>crossorigin attr</strong>. The HTML image element must be given a <em>crossorigin</em> attribute.
-<pre><code class="prism language-xml"><!--<img src="https://aws.com/s3/image.jpeg" crossorigin="anonymous" />--></code></pre>
+<pre><code class="prism language-xml"><!--<img src="https://aws.com/s3/image.jpg" crossorigin="anonymous" />--></code></pre>
+
+<p>If you're dynamically adding the image element, you can do the following:</p>
+<pre><code class="prism language-javascript line-numbers"><!--const colorThief = new ColorThief();
+var img = new Image();
+
+img.addEventListener('load', function() {
+  colorThief.getColor(img);
+};
+
+img.crossOrigin = 'Anonymous';
+img.src = 'https://aws.com/s3/image.jpeg'--></code></pre>
           </li>
         </ol>
 
-        <p>If you're still a little confused, I'd recommend spending some time on the <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS">MDN page covering CORS</a>. CORS is a complex topic</p>
+        <p>If you're still confused, I'd recommend spending some time on the <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS">MDN page</a> covering the topic.</p>
 
         <h3>How do I get hex values?</h3>
         <p>The ColorThief methods return colors as an array of three integers representing <span style="font-family: var(--code-font); color: #ff4f30; font-weight: var(--bold)">red</span>, <span style="font-family: var(--code-font); color: #00a91c; font-weight: var(--bold)">green</span>, and <span style="font-family: var(--code-font); color: #00a2ff; font-weight: var(--bold)">blue</span> values. If you are looking to use the output in CSS, you can do that using the rgb format: <code>color: rgb(102, 51, 153)</code>. If you do need to convert to hex, you can use the following function:</p>
