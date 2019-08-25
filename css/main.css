@@ -65,7 +65,7 @@ html {
 }
 @media (min-width: 1200px) {
   html {
-    font-size: 18px;
+    font-size: 17px;
   }
 }
 @media (min-width: 1600px) {
@@ -454,7 +454,7 @@ section:last-of-type {
   margin-bottom: 2rem;
 }
 
-/* -- Options -- */
+/* -- API -- */
 
 .method {
     padding-bottom: 1rem;
@@ -485,8 +485,14 @@ section:last-of-type {
   .method-name,
   .method-return,
   .method-argument {
-    font-size: 1rem;
+    font-size: 0.9375rem;
   }
+}
+
+/* -- FAQ -- */
+
+.faq-section h3:not(:first-of-type) {
+  margin-top: 3em;
 }
 
 /* -- Credits -- */
@@ -542,8 +548,6 @@ footer .button {
   width: 20px;
   margin-right: 0.5rem;
 }
-
-
 
 
 
