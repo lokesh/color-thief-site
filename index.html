@@ -110,7 +110,7 @@
 
         <ol class="guide-steps">
           <li><strong>Install and import.</strong> The name of the package is <em>colorthief</em>, not <em>color-thief</em>.
-<pre><code class="prism language-javascript">npm i --save colorthief</code></pre>
+<pre><code class="prism language-javascript">$ npm i --save colorthief</code></pre>
 
 <pre><code class="prism language-javascript"><!--const ColorThief = require('colorthief');--></code></pre>
           </li>
@@ -133,7 +133,7 @@ ColorThief.getPalette(img, 5)
         <p class="before-list">There are multiples ways to install Color Thief when using it in the browser:</p>
         <ul class="guide-steps">
           <li><strong>Install as dependency with npm</strong>. The name of the package is <em>colorthief</em>, not <em>color-thief</em>.
-<pre><code class="prism language-javascript">npm i --save colorthief</code></pre>
+<pre><code class="prism language-javascript">$ npm i --save colorthief</code></pre>
           </li>
           <li><strong>Load from a CDN.</strong> The distribution files are hosted on <a href="https://cdnjs.com/libraries/color-thief">cdnjs</a> for quick access.
 <pre><code class="prism language-xml"><!--<script src="https://cdnjs.cloudflare.com/ajax/libs/color-thief/2.3.0/color-thief.umd.js"></script>--></code></pre>
@@ -218,7 +218,7 @@ if (img.complete) {
       <!-- FAQ -->
 
 
-      <section id="faq">
+      <section id="faq" class="faq-section">
         <h2>FAQ</h2>
 
         <h3>Do I have to wait for the image to load?</h3>
@@ -244,6 +244,15 @@ if (img.complete) {
     colorThief.getColor(img);
   });
 }--></code></pre>
+
+        <h3>How do I test the script locally?</h3>
+
+        <p>If you are testing the script locally in a web browser, you might see the following error: <code>Access to script at 'file://...' from origin 'null' has been blocked by CORS policy</code>. This is because the browser restricts direct access to the filesystem.</p>
+
+        <p>To get around this, you can set up a minimal server to host the files. One option is <a href="https://github.com/http-party/http-server">http-server</a>. To run this on demand without installing it as a proejct dependency, you can use the <code>npx</code> command:</p>
+<pre><code class="prism language-xml line-numbers"><!--$ npx http-server--></code></pre>
+
+        <p>Now you can visit <em>http://localhost:8080</em> to view your server.</p>
 
         <h3>Does it work if the image is hosted on another domain?</h3>
 
