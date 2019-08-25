@@ -53,12 +53,14 @@ $(document).ready(function () {
 
     setTimeout(function(){
       $imageSection.find('.color-thief-output').append(colorThiefOuputHTML).slideDown();
+
       // If the color-thief-output div is not in the viewport or cut off, scroll down.
       var windowHeight          = $(window).height();
-      var currentScrollPosition = $('body').scrollTop()
+      var currentScrollPosition = $('html').scrollTop()
       var outputOffsetTop       = $imageSection.find('.color-thief-output').offset().top
+
       if ((currentScrollPosition < outputOffsetTop) && (currentScrollPosition + windowHeight - 250 < outputOffsetTop)) {
-         $('body').animate({scrollTop: outputOffsetTop - windowHeight + 200 + "px"});
+         $('html, body').animate({scrollTop: outputOffsetTop - windowHeight + 200 + "px"});
       }
     }, 300);
   };
