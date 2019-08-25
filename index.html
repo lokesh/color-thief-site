@@ -148,7 +148,7 @@ ColorThief.getPalette(img, 5)
 <pre><code class="prism language-xml line-numbers"><!--<script src="node_modules/colorthief/dist/color-thief.umd.js"></script>
 <script>
     const colorThief = new ColorThief();
-    const img = colorThief.getColor(document.querySelector('img'));
+    const img = document.querySelector('img');
 
     // Make sure image is finished loading
     if (img.complete) {
@@ -168,7 +168,7 @@ ColorThief.getPalette(img, 5)
 <pre><code class="prism language-javascript line-numbers"><!--import ColorThief from './node_modules/colorthief/dist/color-thief.mjs'
 
 const colorThief = new ColorThief();
-const img = colorThief.getColor(document.querySelector('img'));
+const img = document.querySelector('img');
 
 if (img.complete) {
   colorThief.getColor(img);
@@ -227,7 +227,7 @@ if (img.complete) {
 
 <pre><code class="prism language-javascript line-numbers"><!--// RISKY 🙀
 const colorThief = new ColorThief();
-let img = document.querySelector('img');
+const img = document.querySelector('img');
 
 colorThief.getColor(img);--></code></pre>
 
@@ -235,7 +235,7 @@ colorThief.getColor(img);--></code></pre>
 
 <pre><code class="prism language-javascript line-numbers"><!--// BETTER 👍
 const colorThief = new ColorThief();
-let img = document.querySelector('img');
+const img = document.querySelector('img');
 
 if (img.complete) {
   colorThief.getColor(img);
@@ -277,7 +277,7 @@ if (img.complete) {
 
 <p>If you're dynamically adding the image element, you can do the following:</p>
 <pre><code class="prism language-javascript line-numbers"><!--const colorThief = new ColorThief();
-var img = new Image();
+const img = new Image();
 
 img.addEventListener('load', function() {
   colorThief.getColor(img);
