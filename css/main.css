@@ -561,6 +561,9 @@ footer .button {
 .image-section .image-wrap {
   position: relative;
   line-height: 1em;
+  min-height: 240px;
+  background-color: var(--hover-bg-color);
+  border-radius: var(--border-radius-xl);
 }
 
 .examples-section .image-section .target-image {
