@@ -220,6 +220,7 @@ if (img.complete) {
 
       <section id="faq" class="faq-section">
         <h2>FAQ</h2>
+        <p>All questions are about the usage of Color Thief in the browser, not Node.</p>
 
         <h3>Do I have to wait for the image to load?</h3>
 
@@ -254,23 +255,14 @@ if (img.complete) {
 
         <p>Now you can visit <em>http://localhost:8080</em> to view your server.</p>
 
+
         <h3>Does it work if the image is hosted on another domain?</h3>
 
+        <h4>A) If you manage the server hosting the image...</h4>
         <p>Yes. If you are seeing an error that reads: <code>The canvas has been tainted by cross-origin data.</code>, then you are running into a <em>cross-origin resouce sharing (CORS)</em> issue. Check the following two items:</p>
 
         <ol class="guide-steps">
-          <li><strong>CORS policy on the server.</strong> Is the server hosting the image properly configured? Make sure the requesting domain is whitelisted in the <code>Access-Control-Allow-Origin</code> header.
-
-            <p>Example of a open CORS configuration for an AWS S3 bucket:</p>
-<pre><code class="prism language-xml line-numbers"><!--<CORSConfiguration>
-    <CORSRule>
-        <AllowedOrigin>*</AllowedOrigin>
-        <AllowedMethod>GET</AllowedMethod>
-        <AllowedMethod>HEAD</AllowedMethod>
-        <MaxAgeSeconds>3000</MaxAgeSeconds>
-        <AllowedHeader>Authorization</AllowedHeader>
-    </CORSRule>
-</CORSConfiguration>--></code></pre>
+          <li><strong>CORS policy on the server.</strong> Is the server hosting the image properly configured? Make sure the requesting domain is whitelisted in the <em>access-control-allow-origin</em> header, or the server hosting the image has an open policy: <code>access-control-allow-origin: *</code>.
           </li>
           <li><strong>crossorigin attr</strong>. The HTML image element must be given a <em>crossorigin</em> attribute.
 <pre><code class="prism language-xml"><!--<img src="https://aws.com/s3/image.jpg" crossorigin="anonymous" />--></code></pre>
@@ -288,7 +280,22 @@ img.src = 'https://aws.com/s3/image.jpeg'--></code></pre>
           </li>
         </ol>
 
-        <p>If you're still confused, I'd recommend spending some time on the <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS">MDN page</a> covering the topic.</p>
+        <h4>B) If you don't have access to the server hosting the image...</h4>
+
+        <p>You can use a proxy server that pulls down the image and returns it with a more liberal CORS policy. Below you can see an example of this with an image that is proxied through a public Google server. If you don't own the proxy server, just know, that you are at their mercy. But this is handy in a pinch for testing.</p>
+
+<pre><code class="prism language-javascript line-numbers"><!--const colorThief = new ColorThief();
+const img = new Image();
+
+img.addEventListener('load', function() {
+  colorThief.getColor(img);
+};
+
+let imageURL = 'https://i.pinimg.com/564x/3b/b4/9b/3bb49bd2a7f86e29b5670da1fe03fee4.jpg';
+let googleProxyURL = 'https://images1-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&refresh=2592000&url=';
+
+img.crossOrigin = 'Anonymous';
+img.src = googleProxyURL + encodeURIComponent(imageURL);--></code></pre>
 
         <h3>How do I get hex values?</h3>
         <p>The ColorThief methods return colors as an array of three integers representing <span style="font-family: var(--code-font); color: #ff4f30; font-weight: var(--bold)">red</span>, <span style="font-family: var(--code-font); color: #00a91c; font-weight: var(--bold)">green</span>, and <span style="font-family: var(--code-font); color: #00a2ff; font-weight: var(--bold)">blue</span> values. If you are looking to use the output in CSS, you can do that using the rgb format: <code>color: rgb(102, 51, 153)</code>. If you do need to convert to hex, you can use the following function:</p>
