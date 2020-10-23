@@ -7,3 +7,5 @@ node_modules
 .ftp*
 
 dist
+
+.cache

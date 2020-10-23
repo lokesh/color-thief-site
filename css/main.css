@@ -616,18 +616,22 @@ footer .button {
   transform: scale(0);
 }
 
-.touch .touch-label {
+.touch-label {
   display: inline;
 }
-.touch .no-touch-label {
+
+.no-touch-label {
   display: none;
 }
 
-.no-touch .touch-label {
-  display: none;
-}
-.no-touch .no-touch-label {
-  display: inline;
+@media (min-width: 640px) {
+  .touch-label {
+    display: none;
+  }
+
+  .no-touch-label {
+    display: inline;
+  }
 }
 
 .target-image {

@@ -424,58 +424,7 @@ rgbToHex(102, 51, 153); // #663399--></code></pre>
 
   <script src="./js/prism.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.16.0/plugins/unescaped-markup/prism-unescaped-markup.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/3.0.1/mustache.min.js"></script>
-  <script src="/node_modules/colorthief/dist/color-thief.umd.js"></script>
 
-  <script src="./js/demo.js"></script>
-
-  <script type="module">
-    import { getStarCount } from './js/github.js';
-
-    getStarCount('lokesh', 'color-thief')
-      .then(data => {
-        toggleStars(data);
-      })
-      .catch(err => {
-        toggleStars(false);
-      })
-
-    function toggleStars(count) {
-      if (count) {
-        document.querySelector('.gh-count-number').innerText = count;
-      } else {
-        document.querySelector('.gh-count').style.display = 'none';
-      }
-    }
-  </script>
-
-  <script>
-    $(function() {
-      $('#nav').on('click', '.nav-link', function(event) {
-        event.preventDefault();
-        var hash = this.hash;
-
-        $('html, body').animate({
-         scrollTop: $(hash).offset().top
-        }, 600, function() {
-          window.location.hash = hash;
-        });
-      });
-    });
-  </script>
-
-  <script type="text/javascript">
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-2196019-1']);
-    _gaq.push(['_trackPageview']);
-
-    (function() {
-      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-    })();
-  </script>
-
+  <script src="./js/index.js"></script>
 </body>
 </html>
