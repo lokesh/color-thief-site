@@ -1,9 +1,8 @@
-// import ColorThief from 'colorthief';
-// import images from "../images/*.jpg";
 import initDemos from './demo.js';
 import initScrollLinks from './links.js';
 import { getStarCount } from './github.js';
 import { trackPageView } from './google-analytics.js';
+import prism from './prism.min.js';
 
 function toggleStars(count) {
   if (count) {

@@ -1,13 +1,13 @@
-export function getStarCount(user, repo) {
-  return fetch(`https://api.github.com/repos/${user}/${repo}`)
-    .then(res => {
+export async function getStarCount(user, repo) {
+  try {
+    const res = await fetch(`https://api.github.com/repos/${user}/${repo}`);
       if (res.ok) {
-        return res.json()
+        let data = await res.json()
+        return data.stargazers_count;
       } else {
-        throw new Error(res.statusText);
+        return false;
       }
-    })
-    .then(data => {
-      return data.stargazers_count;
-    })
+    } catch(err) {
+      return false;
+    }
 }

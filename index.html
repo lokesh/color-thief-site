@@ -112,10 +112,10 @@
           <li><strong>Install and import.</strong> The name of the package is <em>colorthief</em>, not <em>color-thief</em>.
 <pre><code class="prism language-javascript">$ npm i --save colorthief</code></pre>
 
-<pre><code class="prism language-javascript"><!--const ColorThief = require('colorthief');--></code></pre>
+<pre><code class="prism language-javascript">const ColorThief = require('colorthief');</code></pre>
           </li>
           <li><strong>Get colors.</strong> Both the <code>getColor()</code> and <code>getPalette()</code> methods return a Promise when used in Node.
-<pre><code class="prism language-javascript line-numbers"><!--const img = resolve(process.cwd(), 'rainbow.png');
+<pre><code class="prism language-javascript line-numbers">const img = resolve(process.cwd(), 'rainbow.png');
 
 ColorThief.getColor(img)
     .then(color => { console.log(color) })
@@ -123,7 +123,7 @@ ColorThief.getColor(img)
 
 ColorThief.getPalette(img, 5)
     .then(palette => { console.log(palette) })
-    .catch(err => { console.log(err) })--></code></pre>
+    .catch(err => { console.log(err) })</code></pre>
           </li>
         </ol>
 
@@ -136,7 +136,7 @@ ColorThief.getPalette(img, 5)
 <pre><code class="prism language-javascript">$ npm i --save colorthief</code></pre>
           </li>
           <li><strong>Load from a CDN.</strong> The distribution files are hosted on <a href="https://cdnjs.com/libraries/color-thief">cdnjs</a> for quick access.
-<pre><code class="prism language-xml"><!--<script src="https://cdnjs.cloudflare.com/ajax/libs/color-thief/2.3.0/color-thief.umd.js"></script>--></code></pre>
+<pre><code class="prism language-xml">&lt;script src="https://cdnjs.cloudflare.com/ajax/libs/color-thief/2.3.0/color-thief.umd.js">&lt;/script></code></pre>
           </li>
           <li><strong>Download from Github.</strong> You can download a zip of the latest release (or any previous one) from the project's <a href="https://github.com/lokesh/color-thief/releases">Github Releases page</a>.</li>
         </ul>
@@ -145,8 +145,8 @@ ColorThief.getPalette(img, 5)
         <h4>2. Import and use</h4>
         <ul class="guide-steps">
           <li><strong>As a global variable.</strong>
-<pre><code class="prism language-xml line-numbers"><!--<script src="node_modules/colorthief/dist/color-thief.umd.js"></script>
-<script>
+<pre><code class="prism language-xml line-numbers">&lt;script src="node_modules/colorthief/dist/color-thief.umd.js">&lt;/script>
+&lt;script>
     const colorThief = new ColorThief();
     const img = document.querySelector('img');
 
@@ -158,14 +158,14 @@ ColorThief.getPalette(img, 5)
         colorThief.getColor(img);
       });
     }
-</script>--></code></pre>
+&lt;/script></code></pre>
 </li>
           <li><strong>As an ES6 module.</strong>
 <div class="code-file">index.html</div>
-<pre><code class="prism language-xml"><!--<script type="module" src="app.js"></script>--></code></pre>
+<pre><code class="prism language-xml">&lt;script type="module" src="app.js">&lt;/script></code></pre>
 
 <div class="code-file">app.js</div>
-<pre><code class="prism language-javascript line-numbers"><!--import ColorThief from './node_modules/colorthief/dist/color-thief.mjs'
+<pre><code class="prism language-javascript line-numbers">import ColorThief from './node_modules/colorthief/dist/color-thief.mjs'
 
 const colorThief = new ColorThief();
 const img = document.querySelector('img');
@@ -177,7 +177,7 @@ if (img.complete) {
     colorThief.getColor(img);
   });
 }
---></code></pre>
+</code></pre>
           </li>
           <li><strong>With RequireJS.</strong> The <code>/dist/color-thief.umd.js</code> file uses the UMD (Universal Module Definition) format. This includes RequireJS AMD support.</li>
         </ul>
@@ -226,15 +226,15 @@ if (img.complete) {
 
         <p>Yes. If you see an error that reads: <code>Cannot read property '0' of null</code>, it is likely that the image had not finished loading when you passed it to <code>getColor()</code> or <code>getPalette()</code>.</p>
 
-<pre><code class="prism language-javascript line-numbers"><!--// RISKY 🙀
+<pre><code class="prism language-javascript line-numbers">// RISKY 🙀
 const colorThief = new ColorThief();
 const img = document.querySelector('img');
 
-colorThief.getColor(img);--></code></pre>
+colorThief.getColor(img);</code></pre>
 
 <br>
 
-<pre><code class="prism language-javascript line-numbers"><!--// BETTER 👍
+<pre><code class="prism language-javascript line-numbers"><// BETTER 👍
 const colorThief = new ColorThief();
 const img = document.querySelector('img');
 
@@ -244,14 +244,14 @@ if (img.complete) {
   image.addEventListener('load', function() {
     colorThief.getColor(img);
   });
-}--></code></pre>
+}</code></pre>
 
         <h3>How do I test the script locally?</h3>
 
         <p>If you are testing the script locally in a web browser, you might see the following error: <code>Access to script at 'file://...' from origin 'null' has been blocked by CORS policy</code>. This is because the browser restricts direct access to the filesystem.</p>
 
         <p>To get around this, you can set up a minimal server to host the files. One option is <a href="https://github.com/http-party/http-server">http-server</a>. To run this on demand without installing it as a proejct dependency, you can use the <code>npx</code> command:</p>
-<pre><code class="prism language-xml line-numbers"><!--$ npx http-server--></code></pre>
+<pre><code class="prism language-xml line-numbers">$ npx http-server</code></pre>
 
         <p>Now you can visit <em>http://localhost:8080</em> to view your server.</p>
 
@@ -265,10 +265,10 @@ if (img.complete) {
           <li><strong>CORS policy on the server.</strong> Is the server hosting the image properly configured? Make sure the requesting domain is whitelisted in the <em>access-control-allow-origin</em> header, or the server hosting the image has an open policy: <code>access-control-allow-origin: *</code>.
           </li>
           <li><strong>crossorigin attr</strong>. The HTML image element must be given a <em>crossorigin</em> attribute.
-<pre><code class="prism language-xml"><!--<img src="https://aws.com/s3/image.jpg" crossorigin="anonymous" />--></code></pre>
+<pre><code class="prism language-xml">&lt;img src="https://aws.com/s3/image.jpg" crossorigin="anonymous" /></code></pre>
 
 <p>If you're dynamically adding the image element, you can do the following:</p>
-<pre><code class="prism language-javascript line-numbers"><!--const colorThief = new ColorThief();
+<pre><code class="prism language-javascript line-numbers">const colorThief = new ColorThief();
 const img = new Image();
 
 img.addEventListener('load', function() {
@@ -276,7 +276,7 @@ img.addEventListener('load', function() {
 };
 
 img.crossOrigin = 'Anonymous';
-img.src = 'https://aws.com/s3/image.jpeg'--></code></pre>
+img.src = 'https://aws.com/s3/image.jpeg'</code></pre>
           </li>
         </ol>
 
@@ -284,7 +284,7 @@ img.src = 'https://aws.com/s3/image.jpeg'--></code></pre>
 
         <p>You can use a proxy server that pulls down the image and returns it with a more liberal CORS policy. Below you can see an example of this with an image that is proxied through a public Google server. If you don't own the proxy server, just know, that you are at their mercy. But this is handy in a pinch for testing.</p>
 
-<pre><code class="prism language-javascript line-numbers"><!--const colorThief = new ColorThief();
+<pre><code class="prism language-javascript line-numbers">const colorThief = new ColorThief();
 const img = new Image();
 
 img.addEventListener('load', function() {
@@ -295,17 +295,17 @@ let imageURL = 'https://i.pinimg.com/564x/3b/b4/9b/3bb49bd2a7f86e29b5670da1fe03f
 let googleProxyURL = 'https://images1-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&refresh=2592000&url=';
 
 img.crossOrigin = 'Anonymous';
-img.src = googleProxyURL + encodeURIComponent(imageURL);--></code></pre>
+img.src = googleProxyURL + encodeURIComponent(imageURL);</code></pre>
 
         <h3>How do I get hex values?</h3>
         <p>The ColorThief methods return colors as an array of three integers representing <span style="font-family: var(--code-font); color: #ff4f30; font-weight: var(--bold)">red</span>, <span style="font-family: var(--code-font); color: #00a91c; font-weight: var(--bold)">green</span>, and <span style="font-family: var(--code-font); color: #00a2ff; font-weight: var(--bold)">blue</span> values. If you are looking to use the output in CSS, you can do that using the rgb format: <code>color: rgb(102, 51, 153)</code>. If you do need to convert to hex, you can use the following function:</p>
 
-        <pre><code class="prism language-javascript line-numbers"><!--const rgbToHex = (r, g, b) => '#' + [r, g, b].map(x => {
+        <pre><code class="prism language-javascript line-numbers">const rgbToHex = (r, g, b) => '#' + [r, g, b].map(x => {
   const hex = x.toString(16)
   return hex.length === 1 ? '0' + hex : hex
 }).join('')
 
-rgbToHex(102, 51, 153); // #663399--></code></pre>
+rgbToHex(102, 51, 153); // #663399</code></pre>
 
 <!--
         <h3>Determining lightness/darkness</h3>
@@ -420,10 +420,6 @@ rgbToHex(102, 51, 153); // #663399--></code></pre>
       </div>
     </div>
   </script>
-
-
-  <script src="./js/prism.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.16.0/plugins/unescaped-markup/prism-unescaped-markup.min.js"></script>
 
   <script src="./js/index.js"></script>
 </body>
