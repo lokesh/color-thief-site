@@ -8,11 +8,6 @@
     "type": "git",
     "url": "https://github.com/lokesh/color-thief-site.git"
   },
-  "devDependencies": {
-    "ftp-deploy": "^2.3.3",
-    "http-server": "^0.12.3",
-    "node-fetch": "^2.6.0"
-  },
   "private": true,
   "licenses": [
     {
@@ -21,13 +16,15 @@
   ],
   "scripts": {
     "build": "parcel build index.html",
-    "dev": "http-server",
-    "deploy": "node ./build/deploy.js"
+    "dev": "parcel index.html"
   },
   "dependencies": {
     "colorthief": "^2.3.2",
     "jquery": "^3.5.1",
     "mustache": "^4.0.1",
     "parcel-bundler": "^1.12.4"
-  }
+  },
+  "browserslist": [
+    "last 1 Chrome version"
+  ]
 }
