@@ -11,7 +11,7 @@
   "devDependencies": {
     "ftp-deploy": "^2.3.3",
     "http-server": "^0.12.3",
-    "node-fetch": "^2.6.0"
+    "node-fetch": "^2.6.1"
   },
   "private": true,
   "licenses": [
