@@ -20,12 +20,14 @@
     }
   ],
   "scripts": {
+    "build": "parcel build index.html",
     "dev": "http-server",
     "deploy": "node ./build/deploy.js"
   },
   "dependencies": {
     "colorthief": "^2.3.2",
     "jquery": "^3.5.1",
-    "mustache": "^4.0.1"
+    "mustache": "^4.0.1",
+    "parcel-bundler": "^1.12.4"
   }
 }
