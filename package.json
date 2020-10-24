@@ -15,8 +15,8 @@
     }
   ],
   "scripts": {
-    "build": "parcel build index.html --public-url ./ --out-dir dist/projects/color-thief",
-    "dev": "parcel index.html --out-dir dist/projects/color-thief"
+    "build": "parcel build index.html --public-url ./",
+    "dev": "parcel index.html"
   },
   "dependencies": {
     "colorthief": "^2.3.2",
