@@ -15,16 +15,21 @@
     }
   ],
   "scripts": {
+    "prebuild": "rm -rf dist",
     "build": "parcel build index.html --public-url ./",
-    "dev": "parcel index.html"
+    "dev": "parcel index.html",
+    "deploy": "npm run build && node ./deploy.js"
   },
   "dependencies": {
     "colorthief": "^2.3.2",
     "jquery": "^3.5.1",
-    "mustache": "^4.0.1",
-    "parcel-bundler": "^1.12.4"
+    "mustache": "^4.0.1"
   },
   "browserslist": [
     "last 1 Chrome version"
-  ]
+  ],
+  "devDependencies": {
+    "ftp-deploy": "^2.3.8",
+    "parcel-bundler": "^1.12.4"
+  }
 }
