@@ -1,35 +1,38 @@
 const path = require("path");
-const host = require("./.host.json");
-const SFTPUpload = require('sftp-upload');
+const SftpClient = require('ssh2-sftp-client');
 
-const distDir = path.normalize(__dirname + "/dist/");
+require('dotenv').config()
 
 const config = {
-    host: host.host,
-    username: host.username,
-    password: host.password,
-    port: host.port,
-    path: distDir,
-    remoteDir: host.directory,
-
-    // include: ['*', '**/*'],      // this would upload everything except dot files
-    // include: ["**/*"],
-
-    // e.g. exclude sourcemaps, and ALL files in node_modules (including dot files)
-    // exclude: [".*", "package*", "*.md", "dist/**/*.map", "node_modules/**", "build/**"],
-
-    // delete ALL existing files at destination before uploading, if true
-    // deleteRemote: true,
+  host: process.env.HOST,
+  username: process.env.USERNAME,
+  password: process.env.PASSWORD,
+  port: process.env.PORT || 22,
 };
 
-sftp = new SFTPUpload(config);
-    sftp.on('error', function(err) {
-        throw err;
-    })
-    .on('uploading', function(progress) {
-        console.log(`${progress.percent}% ${progress.file}`);
-    })
-    .on('completed', function() {
-        console.log('Upload Completed');
-    })
-    .upload();
+async function main() {
+  const client = new SftpClient();
+
+  const localPath = path.join(__dirname, 'dist');
+  const remotePath = process.env.REMOTE_PATH;
+
+  try {
+    client.on('upload', info => {
+      console.log(`Uploaded ${info.source}`);
+    });
+
+    await client.connect(config);
+    await client.rmdir(remotePath, true);
+    await client.uploadDir(localPath, remotePath);
+  } finally {
+    return client.end();
+  }
+}
+
+main()
+  .then(msg => {
+    console.log(msg);
+  })
+  .catch(err => {
+    console.log(`main error: ${err.message}`);
+  });
