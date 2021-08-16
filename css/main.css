@@ -663,6 +663,9 @@ footer .button {
   background: #dddddd;
   border-radius: 50%;
 }
+.swatch:hover {
+  cursor: pointer;
+}
 
 .get-color .swatch {
   width: 4rem;

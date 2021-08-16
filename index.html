@@ -399,7 +399,9 @@ rgbToHex(102, 51, 153); // #663399</code></pre>
       <div class="function get-color">
         <h3 class="function-title">Dominant Color</h3>
         <div class="swatches">
-          <div class="swatch" style="background-color: rgb({{color.0}}, {{color.1}}, {{color.2}})"></div>
+          <div class="swatch" style="background-color: rgb({{color.0}}, {{color.1}}, {{color.2}})" 
+            onclick='navigator.clipboard.writeText("rgb({{color.0}}, {{color.1}}, {{color.2}})")'>
+          </div>
         </div>
         <div class="function-code">
           <code>colorThief.getColor(image):{{elapsedTimeForGetColor}}ms</code>
@@ -410,7 +412,8 @@ rgbToHex(102, 51, 153); // #663399</code></pre>
         <div class="function-output">
           <div class="swatches">
             {{#palette}}
-              <div class="swatch" style="background-color: rgb({{0}}, {{1}}, {{2}})"></div>
+              <div class="swatch" style="background-color: rgb({{0}}, {{1}}, {{2}})" 
+                onclick='navigator.clipboard.writeText("rgb({{0}}, {{1}}, {{2}})")'></div>
             {{/palette}}
           </div>
         </div>
