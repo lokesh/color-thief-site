@@ -21,7 +21,7 @@
     "deploy": "npm run build && node ./deploy.js"
   },
   "dependencies": {
-    "colorthief": "^2.3.2",
+    "colorthief": "^2.4.0",
     "jquery": "^3.5.1",
     "mustache": "^4.0.1"
   },
@@ -29,8 +29,8 @@
     "last 1 Chrome version"
   ],
   "devDependencies": {
-    "dotenv": "^8.2.0",
+    "dotenv": "^16.0.3",
     "parcel-bundler": "^1.12.4",
-    "ssh2-sftp-client": "^5.3.1"
+    "ssh2-sftp-client": "^9.0.4"
   }
 }
