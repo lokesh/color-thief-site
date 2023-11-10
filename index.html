@@ -155,7 +155,7 @@ ColorThief.getPalette(img, 5)
     if (img.complete) {
       colorThief.getColor(img);
     } else {
-      image.addEventListener('load', function() {
+      img.addEventListener('load', function() {
         colorThief.getColor(img);
       });
     }
