@@ -103,8 +103,11 @@
         <ul>
           <li><strong>color-thief.js</strong> - CommonJS module for use in Node.</li>
           <li><strong>color-thief.mjs</strong> - ES6 module. For modern browsers as well as Webpack and Rollup.</li>
+          <li><strong>color-thief.modern.mjs</strong> - ES6 module with modern syntax (no transpilation). Smaller bundle size for apps targeting modern browsers.</li>
           <li><strong>color-thief.umd.js</strong> - UMD module. For simple script tag loading that exposes a global variable or for RequireJS AMD support.</li>
           <li><strong>color-thief.min.js</strong> -  Duplicate of <em>color-thief.umd.js</em>. Kept around to maintain backwards compatibility.</li>
+          <li><strong>color-thief.d.ts</strong> - TypeScript type definitions for the browser version.</li>
+          <li><strong>color-thief-node.d.ts</strong> - TypeScript type definitions for the Node version.</li>
         </ul>
 
         <h3>Using in Node</h3>
@@ -137,7 +140,7 @@ ColorThief.getPalette(img, 5)
 <pre><code class="prism language-javascript">$ npm i --save colorthief</code></pre>
           </li>
           <li><strong>Load from a CDN.</strong> The distribution files are hosted on <a href="https://cdnjs.com/libraries/color-thief">cdnjs</a> for quick access.
-<pre><code class="prism language-xml">&lt;script src="https://cdnjs.cloudflare.com/ajax/libs/color-thief/2.3.0/color-thief.umd.js">&lt;/script></code></pre>
+<pre><code class="prism language-xml">&lt;script src="https://cdnjs.cloudflare.com/ajax/libs/color-thief/2.7.0/color-thief.umd.js">&lt;/script></code></pre>
           </li>
           <li><strong>Download from Github.</strong> You can download a zip of the latest release (or any previous one) from the project's <a href="https://github.com/lokesh/color-thief/releases">Github Releases page</a>.</li>
         </ul>
@@ -191,27 +194,98 @@ if (img.complete) {
       <section id="api" class="options-section">
         <h2>API</h2>
 
-        <p><em>Note: Both `getColor` and `getPalette` return a `Promise` when used in Node.</em></p>
+        <p><em>Note: Both <code>getColor</code> and <code>getPalette</code> return a <code>Promise</code> when used in Node.</em></p>
 
 
         <div class="method">
           <div class="method-name">getColor(image [, quality])</div>
-          <div class="method-return">Returns: [Number, Number, Number]</div>
+          <div class="method-name">getColor(image [, options])</div>
+          <div class="method-return">Returns: [Number, Number, Number] | null</div>
           <div class="method-description">
             <p>Gets the dominant color from the image. Color is returned as an array of three integers representing red, green, and blue values.</p>
-            <p><span class="method-argument">image</span> - When called in the browser, this argument expects an HTML image element, not a URL. When run in Node, this argument expects a path to the image.</p>
+            <p><span class="method-argument">image</span> - When called in the browser, this argument accepts an <code>HTMLImageElement</code>, <code>HTMLCanvasElement</code>, <code>ImageData</code>, or <code>ImageBitmap</code>. When run in Node, this argument expects a path to the image.</p>
 
             <p><span class="method-argument">quality</span> is an optional argument that must be an Integer of value 1 or greater, and defaults to 10. The number determines how many pixels are skipped before the next one is sampled. We rarely need to sample every single pixel in the image to get good results. The bigger the number, the faster a value will be returned.</p>
+
+            <p>Alternatively, you can pass an <span class="method-argument">options</span> object. See <a href="#options">Options</a> below.</p>
           </div>
         </div>
 
         <div class="method">
-          <div class="method-name">getPalette(image [, colorCount, quality]</div>
-          <div class="method-return">Returns: [[Number, Number, Number], ...]</div>
+          <div class="method-name">getPalette(image [, colorCount, quality])</div>
+          <div class="method-name">getPalette(image [, options])</div>
+          <div class="method-return">Returns: [[Number, Number, Number], ...] | null</div>
           <div class="method-description">
             <p>Gets a palette from the image by clustering similar colors. The palette is returned as an array containing colors, each color itself an array of three integers.</p>
+            <p>Alternatively, you can pass an <span class="method-argument">options</span> object. See <a href="#options">Options</a> below.</p>
           </div>
         </div>
+
+        <h3 id="options">Options</h3>
+        <p>Both <code>getColor</code> and <code>getPalette</code> accept an options object as the second argument instead of positional arguments:</p>
+
+<pre><code class="prism language-javascript line-numbers">colorThief.getColor(image, {
+    quality: 10,
+    ignoreWhite: true,
+    whiteThreshold: 250,
+    alphaThreshold: 125,
+    minSaturation: 0
+});
+
+colorThief.getPalette(image, {
+    colorCount: 5,
+    quality: 10,
+    ignoreWhite: true
+});</code></pre>
+
+        <table class="options-table">
+          <thead>
+            <tr>
+              <th>Option</th>
+              <th>Type</th>
+              <th>Default</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>colorCount</code></td>
+              <td>Integer</td>
+              <td><code>10</code></td>
+              <td>Number of colors in the palette. Must be between 2 and 20. (<code>getPalette</code> only)</td>
+            </tr>
+            <tr>
+              <td><code>quality</code></td>
+              <td>Integer</td>
+              <td><code>10</code></td>
+              <td>Quality setting. 1 is highest quality. Higher values are faster but less accurate.</td>
+            </tr>
+            <tr>
+              <td><code>ignoreWhite</code></td>
+              <td>Boolean</td>
+              <td><code>true</code></td>
+              <td>Whether to ignore white pixels during color sampling.</td>
+            </tr>
+            <tr>
+              <td><code>whiteThreshold</code></td>
+              <td>Integer</td>
+              <td><code>250</code></td>
+              <td>RGB channel threshold (0&ndash;255) above which a pixel is considered white. All three channels must exceed this value.</td>
+            </tr>
+            <tr>
+              <td><code>alphaThreshold</code></td>
+              <td>Integer</td>
+              <td><code>125</code></td>
+              <td>Alpha channel threshold (0&ndash;255) below which a pixel is considered transparent and skipped.</td>
+            </tr>
+            <tr>
+              <td><code>minSaturation</code></td>
+              <td>Number</td>
+              <td><code>0</code></td>
+              <td>Minimum HSV saturation (0&ndash;1). Pixels with saturation below this value are skipped. Useful for ignoring gray/desaturated pixels.</td>
+            </tr>
+          </tbody>
+        </table>
 
       </section>
 
@@ -225,7 +299,7 @@ if (img.complete) {
 
         <h3>Do I have to wait for the image to load?</h3>
 
-        <p>Yes. If you see an error that reads: <code>Cannot read property '0' of null</code>, it is likely that the image had not finished loading when you passed it to <code>getColor()</code> or <code>getPalette()</code>.</p>
+        <p>Yes. As of v2.7.0, Color Thief will throw a descriptive error if the image hasn't loaded: <code>Image has not finished loading</code>. In older versions, you might see <code>Cannot read property '0' of null</code>.</p>
 
 <pre><code class="prism language-javascript line-numbers">// RISKY 🙀
 const colorThief = new ColorThief();

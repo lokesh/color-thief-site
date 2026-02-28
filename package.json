@@ -21,7 +21,7 @@
     "deploy": "npm run build && node ./deploy.js"
   },
   "dependencies": {
-    "colorthief": "^2.4.0",
+    "colorthief": "^2.7.0",
     "jquery": "^3.5.1",
     "mustache": "^4.0.1"
   },
