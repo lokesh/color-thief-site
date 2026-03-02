@@ -405,11 +405,17 @@ palette.forEach(c => console.log(c.hex()));</code></div>
 
         <h3>Important notes</h3>
         <ul class="list">
-          <li><strong>Wait for images to load.</strong> In the browser, make sure the image is fully loaded before extracting colors. Use the <code>load</code> event or check <code>img.complete</code>.</li>
+          <li><strong>Images must be loaded first.</strong> Color Thief will throw an error if the image hasn't finished loading. If you're unsure, check <code>img.complete</code> or use the <code>load</code> event.</li>
           <li><strong>Cross-origin images.</strong> If the image is on another domain, set <code>crossorigin="anonymous"</code> on the image element and ensure the server sends the appropriate CORS headers.</li>
         </ul>
       </section>
 
+      <!-- LICENSE (v3) -->
+
+      <section class="license-section">
+        <h2>License</h2>
+        <p>Color Thief is licensed under the <a href="https://github.com/lokesh/color-thief/blob/master/LICENSE">MIT License</a>.</p>
+      </section>
 
       <!-- FOOTER (v3) -->
 

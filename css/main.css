@@ -492,7 +492,7 @@ a.nav-item:focus {
   font-size: 0.8rem;
   font-weight: var(--weight-regular);
   padding: 2px 8px;
-  color: var(--color-text-muted);
+  color: var(--color-text-secondary);
 }
 
 .nav-link-sub:hover {
