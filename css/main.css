@@ -1664,7 +1664,7 @@ footer .button {
 }
 
 .dropped-result .demo-img {
-  margin-bottom: 12px;
+  display: none;
 }
 
 .dropped-section-label {
@@ -1675,6 +1675,60 @@ footer .button {
   letter-spacing: 0.05em;
   color: var(--muted-color);
   margin: 20px 0 8px;
+}
+
+/* Image desaturation transition */
+.dropped-result .dropped-img {
+  transition: filter 0.6s ease-out;
+}
+.dropped-result .dropped-img.desaturated {
+  filter: grayscale(1);
+}
+
+/* Swatch spring-in keyframes */
+@keyframes swatch-spring-in {
+  0%   { opacity: 0; transform: scale(0.5); }
+  60%  { opacity: 1; transform: scale(1.05); }
+  80%  { transform: scale(0.98); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+.dropped-result .swatch,
+.dropped-result .swatch-card {
+  opacity: 0;
+  transform: scale(0.5);
+}
+
+.dropped-result .swatch.cascade-in,
+.dropped-result .swatch-card.cascade-in {
+  animation: swatch-spring-in 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+/* Section label fade-in */
+.dropped-result .dropped-section-label {
+  opacity: 0;
+  transform: translateY(4px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+.dropped-result .dropped-section-label.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Reduced motion override */
+@media (prefers-reduced-motion: reduce) {
+  .dropped-result .swatch,
+  .dropped-result .swatch-card {
+    opacity: 1; transform: none;
+  }
+  .dropped-result .swatch.cascade-in,
+  .dropped-result .swatch-card.cascade-in {
+    animation: none;
+  }
+  .dropped-result .dropped-img { transition: none; }
+  .dropped-result .dropped-section-label {
+    opacity: 1; transform: none; transition: none;
+  }
 }
 
 

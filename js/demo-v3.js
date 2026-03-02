@@ -346,6 +346,38 @@ function renderDroppedResult(image, result) {
   }).join('');
 }
 
+function animateDroppedResult(image, result) {
+  // Resaturate image: double rAF ensures at least one grayscale frame
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      image.classList.remove('desaturated');
+    });
+  });
+
+  // Fade in section labels and cascade swatches
+  const labels = result.querySelectorAll('.dropped-section-label');
+  const swatches = result.querySelectorAll('.swatch, .swatch-card');
+
+  let delay = 0;
+  let swatchIndex = 0;
+
+  labels.forEach((label) => {
+    // Show label slightly before its swatch group
+    setTimeout(() => label.classList.add('visible'), delay);
+
+    // Find next sibling container and its swatches
+    const container = label.nextElementSibling;
+    if (!container) return;
+    const groupSwatches = container.querySelectorAll('.swatch, .swatch-card');
+
+    groupSwatches.forEach((swatch) => {
+      setTimeout(() => swatch.classList.add('cascade-in'), delay);
+      delay += 80;
+      swatchIndex++;
+    });
+  });
+}
+
 function insertDroppedScaffold(container) {
   const html = `
     <div class="dropped-result">
@@ -381,8 +413,12 @@ function initDragAndDrop() {
       img.addEventListener('click', () => {
         const result = insertDroppedScaffold(container);
         const image = result.querySelector('.dropped-img');
+        image.classList.add('desaturated');
         image.src = url;
-        waitForImage(image).then(() => renderDroppedResult(image, result));
+        waitForImage(image).then(() => {
+          renderDroppedResult(image, result);
+          animateDroppedResult(image, result);
+        });
       });
       samplesEl.appendChild(img);
     });
@@ -414,8 +450,12 @@ function initDragAndDrop() {
       reader.onload = (event) => {
         const result = insertDroppedScaffold(container);
         const image = result.querySelector('.dropped-img');
+        image.classList.add('desaturated');
         image.src = event.target.result;
-        image.addEventListener('load', () => renderDroppedResult(image, result), { once: true });
+        image.addEventListener('load', () => {
+          renderDroppedResult(image, result);
+          animateDroppedResult(image, result);
+        }, { once: true });
       };
       reader.readAsDataURL(file);
     }
