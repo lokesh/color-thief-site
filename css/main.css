@@ -964,9 +964,19 @@ footer .button {
   display: flex;
   flex-wrap: nowrap;
   gap: 12px;
-  margin-bottom: 2rem;
+  margin: 0 -16px 2rem;
+  padding: 0 16px;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
+}
+
+@media (min-width: 720px) {
+  .sample-images {
+    margin-left: 0;
+    margin-right: 0;
+    padding-left: 0;
+    padding-right: 0;
+  }
 }
 
 .sample-images-label {
