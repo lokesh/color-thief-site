@@ -8,7 +8,5 @@ node_modules
 
 dist
 
-.cache
-.parcel-cache
 .env
 CLAUDE.md

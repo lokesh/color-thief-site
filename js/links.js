@@ -1,14 +1,17 @@
-import $ from "jquery";
-
 export default function initScrollLinks() {
-  $('#nav').on('click', '.nav-link', function(event) {
-    event.preventDefault();
-    var hash = this.hash;
+  document.addEventListener('click', (event) => {
+    const link = event.target.closest('.nav-link');
+    if (!link) return;
 
-    $('html, body').animate({
-     scrollTop: $(hash).offset().top
-    }, 600, function() {
-      window.location.hash = hash;
-    });
+    event.preventDefault();
+    const hash = link.hash;
+    const target = document.querySelector(hash);
+    if (!target) return;
+
+    target.scrollIntoView({ behavior: 'smooth' });
+
+    setTimeout(() => {
+      history.replaceState(null, '', hash);
+    }, 600);
   });
 }

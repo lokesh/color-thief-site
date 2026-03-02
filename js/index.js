@@ -1,8 +1,8 @@
-import initDemos from './demo.js';
+import initVersionToggle from './version-toggle.js';
+import initV3Demos from './demo-v3.js';
 import initScrollLinks from './links.js';
 import { getStarCount } from './github.js';
-import { trackPageView } from './google-analytics.js';
-import prism from './prism.min.js';
+import './prism.min.js';
 
 function toggleStars(count) {
   if (count) {
@@ -13,17 +13,11 @@ function toggleStars(count) {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  initDemos();
+  initVersionToggle();
+  initV3Demos();
   initScrollLinks();
 
   getStarCount('lokesh', 'color-thief')
-    .then(data => {
-      toggleStars(data);
-    })
-    .catch(err => {
-      toggleStars(false);
-    })
-
-    trackPageView();
+    .then(data => toggleStars(data))
+    .catch(() => toggleStars(false));
 });
-

@@ -15,22 +15,18 @@
     }
   ],
   "scripts": {
-    "prebuild": "rm -rf dist",
-    "build": "parcel build index.html --public-url ./",
-    "dev": "parcel index.html",
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
     "deploy": "npm run build && node ./deploy.js"
   },
   "dependencies": {
-    "colorthief": "^2.7.0",
-    "jquery": "^3.5.1",
-    "mustache": "^4.0.1"
+    "colorthief": "^3.0.0",
+    "colorthief-v2": "npm:colorthief@^2.7.0"
   },
-  "browserslist": [
-    "last 1 Chrome version"
-  ],
   "devDependencies": {
     "dotenv": "^16.0.3",
-    "parcel-bundler": "^1.12.4",
-    "ssh2-sftp-client": "^9.0.4"
+    "ssh2-sftp-client": "^9.0.4",
+    "vite": "^6.0.0"
   }
 }
