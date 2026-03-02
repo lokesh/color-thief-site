@@ -1670,6 +1670,10 @@ footer .button {
   display: none;
 }
 
+.dropped-result.user-upload .demo-img {
+  display: block;
+}
+
 .dropped-section-label {
   font-family: var(--code-font);
   font-size: 0.7rem;

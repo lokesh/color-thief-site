@@ -13,6 +13,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
+  <link rel="icon" type="image/png" href="images/favicon.png">
+
   <link rel="stylesheet" href="css/main.css">
   <link rel="stylesheet" href="css/prism.css">
 
@@ -78,11 +80,11 @@
             <ul class="nav-sub-list">
               <li class="nav-sub-item"><a href="#v3-dominant" class="nav-link nav-link-sub"><span class="nav-num">1.</span> Dominant color</a></li>
               <li class="nav-sub-item"><a href="#v3-palette" class="nav-link nav-link-sub"><span class="nav-num">2.</span> Palette</a></li>
-              <li class="nav-sub-item"><a href="#v3-color-object" class="nav-link nav-link-sub"><span class="nav-num">3.</span> Color object</a></li>
-              <li class="nav-sub-item"><a href="#v3-swatches" class="nav-link nav-link-sub"><span class="nav-num">4.</span> Swatches</a></li>
-              <li class="nav-sub-item"><a href="#v3-oklch" class="nav-link nav-link-sub"><span class="nav-num">5.</span> OKLCH vs RGB</a></li>
-              <li class="nav-sub-item"><a href="#v3-quality" class="nav-link nav-link-sub"><span class="nav-num">6.</span> Quality</a></li>
-              <li class="nav-sub-item"><a href="#v3-observe" class="nav-link nav-link-sub"><span class="nav-num">7.</span> Video</a></li>
+              <li class="nav-sub-item"><a href="#v3-observe" class="nav-link nav-link-sub"><span class="nav-num">3.</span> Video</a></li>
+              <li class="nav-sub-item"><a href="#v3-color-object" class="nav-link nav-link-sub"><span class="nav-num">4.</span> Color object</a></li>
+              <li class="nav-sub-item"><a href="#v3-swatches" class="nav-link nav-link-sub"><span class="nav-num">5.</span> Swatches</a></li>
+              <li class="nav-sub-item"><a href="#v3-oklch" class="nav-link nav-link-sub"><span class="nav-num">6.</span> OKLCH vs RGB</a></li>
+              <li class="nav-sub-item"><a href="#v3-quality" class="nav-link nav-link-sub"><span class="nav-num">7.</span> Quality</a></li>
               <li class="nav-sub-item"><a href="#v3-async" class="nav-link nav-link-sub"><span class="nav-num">8.</span> Async</a></li>
 
 
@@ -167,102 +169,10 @@ palette.forEach(c => console.log(c.hex()));</code></div>
       </section>
 
 
-      <!-- 03. Color Object -->
-
-      <section id="v3-color-object" class="v3-section">
-        <span class="example-num">3</span>
-        <h2>The color object</h2>
-        <p>Every extracted color is a rich object with format conversions, accessibility metadata, and contrast ratios.</p>
-
-        <div class="code-block"><code class="language-javascript">const color = getColorSync(img);
-
-color.rgb()        // { r, g, b }
-color.hex()        // '#rrggbb'
-color.hsl()        // { h, s, l }
-color.oklch()      // { l, c, h }
-color.css()        // 'rgb(255, 128, 0)' — also 'hsl' and 'oklch'
-color.textColor    // '#ffffff' or '#000000'
-color.isDark       // true/false
-color.contrast     // { white, black, foreground }</code></div>
-
-        <div class="v3-output" id="out-color-obj">
-          <img class="source-img" id="color-obj-source-img" src="" alt="Source image">
-          <div class="color-preview" id="color-preview"></div>
-          <table class="prop-table" id="prop-table"></table>
-        </div>
-      </section>
-
-
-      <!-- 04. getSwatches -->
-
-      <section id="v3-swatches" class="v3-section">
-        <span class="example-num">4</span>
-        <h2>Get semantic swatches</h2>
-        <p>Classify palette colors into six semantic roles. Each swatch includes text color recommendations.</p>
-
-        <div class="code-block"><code class="language-javascript">const swatches = getSwatchesSync(img);
-swatches.Vibrant?.color.hex();            // '#e84393'
-swatches.DarkMuted?.titleTextColor.hex(); // '#ffffff'</code></div>
-
-        <div class="v3-output" id="out-swatches">
-          <img class="source-img" id="swatches-source-img" src="" alt="Source image">
-          <div class="swatch-cards" id="swatch-cards"></div>
-        </div>
-      </section>
-
-
-      <!-- 05. OKLCH vs RGB -->
-
-      <section id="v3-oklch" class="v3-section">
-        <span class="example-num">5</span>
-        <h2>OKLCH vs RGB quantization</h2>
-        <p>OKLCH quantization produces more perceptually uniform palettes. Colors that "feel" evenly spaced to the human eye.</p>
-
-        <div class="code-block"><code class="language-javascript">// Default — quantize in sRGB
-const rgb = getPaletteSync(img, { colorCount: 8 });
-
-// Perceptual — quantize in OKLCH
-const oklch = getPaletteSync(img, { colorCount: 8, colorSpace: 'oklch' });</code></div>
-
-        <div class="v3-output" id="out-oklch">
-          <img class="source-img" id="oklch-source-img" src="" alt="Source image">
-          <p class="annotation">RGB clusters around similar greens. OKLCH spreads the greens apart and captures the full range of what you actually see in the photo.</p>
-          <div class="comparison">
-            <div class="comparison-col">
-              <h3>RGB (default)</h3>
-              <div class="swatch-row" id="oklch-rgb"></div>
-            </div>
-            <div class="comparison-col">
-              <h3>OKLCH</h3>
-              <div class="swatch-row" id="oklch-oklch"></div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-
-      <!-- 06. Quality -->
-
-      <section id="v3-quality" class="v3-section">
-        <span class="example-num">6</span>
-        <h2>Quality settings</h2>
-        <p>The <code>quality</code> option controls how many pixels are sampled. Lower values sample more pixels (slower, more accurate). Default is 10.</p>
-
-        <div class="code-block"><code class="language-javascript">getPaletteSync(img, { quality: 1 });   // Every pixel
-getPaletteSync(img, { quality: 10 });  // Every 10th pixel (default)
-getPaletteSync(img, { quality: 50 });  // Every 50th pixel</code></div>
-
-        <div class="v3-output" id="out-quality">
-          <img class="source-img" id="quality-source-img" src="" alt="Source image">
-          <div id="quality-rows"></div>
-        </div>
-      </section>
-
-
-      <!-- 07. observe -->
+      <!-- 03. Observe a video source -->
 
       <section id="v3-observe" class="v3-section">
-        <span class="example-num">7</span>
+        <span class="example-num">3</span>
         <h2>Observe a video source</h2>
         <p>Reactively watch a video source and get palette updates on every frame. Works with <code>&lt;video&gt;</code>, <code>&lt;canvas&gt;</code>, and <code>&lt;img&gt;</code> elements.</p>
 
@@ -292,6 +202,98 @@ controller.stop(); // clean up</code></div>
 
           <div class="observe-label">Palette</div>
           <div class="swatch-row" id="v3-video-palette"></div>
+        </div>
+      </section>
+
+
+      <!-- 04. Color Object -->
+
+      <section id="v3-color-object" class="v3-section">
+        <span class="example-num">4</span>
+        <h2>The color object</h2>
+        <p>Every extracted color is a rich object with format conversions, accessibility metadata, and contrast ratios.</p>
+
+        <div class="code-block"><code class="language-javascript">const color = getColorSync(img);
+
+color.rgb()        // { r, g, b }
+color.hex()        // '#rrggbb'
+color.hsl()        // { h, s, l }
+color.oklch()      // { l, c, h }
+color.css()        // 'rgb(255, 128, 0)' — also 'hsl' and 'oklch'
+color.textColor    // '#ffffff' or '#000000'
+color.isDark       // true/false
+color.contrast     // { white, black, foreground }</code></div>
+
+        <div class="v3-output" id="out-color-obj">
+          <img class="source-img" id="color-obj-source-img" src="" alt="Source image">
+          <div class="color-preview" id="color-preview"></div>
+          <table class="prop-table" id="prop-table"></table>
+        </div>
+      </section>
+
+
+      <!-- 05. getSwatches -->
+
+      <section id="v3-swatches" class="v3-section">
+        <span class="example-num">5</span>
+        <h2>Get semantic swatches</h2>
+        <p>Classify palette colors into six semantic roles. Each swatch includes text color recommendations.</p>
+
+        <div class="code-block"><code class="language-javascript">const swatches = getSwatchesSync(img);
+swatches.Vibrant?.color.hex();            // '#e84393'
+swatches.DarkMuted?.titleTextColor.hex(); // '#ffffff'</code></div>
+
+        <div class="v3-output" id="out-swatches">
+          <img class="source-img" id="swatches-source-img" src="" alt="Source image">
+          <div class="swatch-cards" id="swatch-cards"></div>
+        </div>
+      </section>
+
+
+      <!-- 06. OKLCH vs RGB -->
+
+      <section id="v3-oklch" class="v3-section">
+        <span class="example-num">6</span>
+        <h2>OKLCH vs RGB quantization</h2>
+        <p>OKLCH quantization produces more perceptually uniform palettes. Colors that "feel" evenly spaced to the human eye.</p>
+
+        <div class="code-block"><code class="language-javascript">// Default — quantize in sRGB
+const rgb = getPaletteSync(img, { colorCount: 8 });
+
+// Perceptual — quantize in OKLCH
+const oklch = getPaletteSync(img, { colorCount: 8, colorSpace: 'oklch' });</code></div>
+
+        <div class="v3-output" id="out-oklch">
+          <img class="source-img" id="oklch-source-img" src="" alt="Source image">
+          <p class="annotation">RGB clusters around similar greens. OKLCH spreads the greens apart and captures the full range of what you actually see in the photo.</p>
+          <div class="comparison">
+            <div class="comparison-col">
+              <h3>RGB (default)</h3>
+              <div class="swatch-row" id="oklch-rgb"></div>
+            </div>
+            <div class="comparison-col">
+              <h3>OKLCH</h3>
+              <div class="swatch-row" id="oklch-oklch"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- 07. Quality -->
+
+      <section id="v3-quality" class="v3-section">
+        <span class="example-num">7</span>
+        <h2>Quality settings</h2>
+        <p>The <code>quality</code> option controls how many pixels are sampled. Lower values sample more pixels (slower, more accurate). Default is 10.</p>
+
+        <div class="code-block"><code class="language-javascript">getPaletteSync(img, { quality: 1 });   // Every pixel
+getPaletteSync(img, { quality: 10 });  // Every 10th pixel (default)
+getPaletteSync(img, { quality: 50 });  // Every 50th pixel</code></div>
+
+        <div class="v3-output" id="out-quality">
+          <img class="source-img" id="quality-source-img" src="" alt="Source image">
+          <div id="quality-rows"></div>
         </div>
       </section>
 

@@ -448,12 +448,14 @@ function initDragAndDrop() {
       const reader = new FileReader();
       reader.onload = (event) => {
         const result = insertDroppedScaffold(container);
+        result.classList.add('user-upload');
         const image = result.querySelector('.dropped-img');
         image.classList.add('desaturated');
         image.src = event.target.result;
         image.addEventListener('load', () => {
           renderDroppedResult(image, result);
           animateDroppedResult(image, result);
+          result.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }, { once: true });
       };
       reader.readAsDataURL(file);
