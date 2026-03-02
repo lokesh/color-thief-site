@@ -11,8 +11,8 @@
   --weight-x-bold:   800;
 
   /* ── Font sizes ────────────────────────────────────────────────── */
-  --text-xs:   0.65rem;   /* badges, tiny labels */
-  --text-sm:   0.7rem;    /* sub-nav, code inline */
+  --text-xs:   0.7rem;   /* badges, tiny labels */
+  --text-sm:   0.75rem;    /* sub-nav, code inline */
   --text-base: 1rem;      /* body copy */
   --text-md:   0.8rem;    /* nav, buttons, small UI */
   --text-lg:   1rem;      /* h3, v3 section headings */
@@ -205,7 +205,8 @@ p.before-list {
 }
 
 .lead {
-  margin-bottom: 0.6rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0.25rem;
   font-size: 1rem;
 }
 
@@ -613,42 +614,15 @@ footer .button {
   }
 }
 
-/* -- Github -- */
-.gh {
-  display: inline-flex;
-  align-items: center;
-  color: var(--color);
-  font-weight: var(--bold);
-  font-size: 0.8rem;
-  background: linear-gradient(#fff, #f5f5f5);
-  border: 1px solid var(--border-color-light);
-  border-radius: var(--border-radius);
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-}
-
-.gh:hover {
+/* -- Credibility -- */
+.credibility-link {
+  color: inherit;
   text-decoration: none;
-  background: var(--hover-bg-color);
 }
 
-.gh-label {
-  display: flex;
-  align-items: center;
-  padding: 0.35rem 0.75rem;
-}
-
-.gh-count {
-  display: flex;
-  align-items: center;
-  padding: 0.35rem 0.75rem;
-  border-left: 1px solid var(--border-color-light);
-}
-
-.gh-logo,
-.gh-star {
-  width: 14px;
-  margin-right: 0.35rem;
+.credibility-link:hover {
+  color: var(--color-text);
+  text-decoration: underline;
 }
 
 
@@ -938,7 +912,7 @@ footer .button {
 
 @media (min-width: 720px) {
   .version-toggle {
-    margin: 1rem 0 0 0;
+    margin: 2rem 0 0 0;
   }
 }
 
@@ -977,11 +951,31 @@ footer .button {
   background: var(--hover-bg-color);
 }
 
+.version-details {
+  margin-top: 0.5rem;
+}
+
 .version-date {
   font-size: var(--text-sm);
   color: var(--color-text-muted);
+  font-weight: var(--weight-semibold);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.version-subtitle {
+  font-size: 0.85rem;
+  color: var(--color-text-secondary);
+  margin: 0.2rem 0 0.4rem;
+}
+
+
+.credibility {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
   font-weight: var(--weight-medium);
-  margin-top: 0.3rem;
+  letter-spacing: 0.02em;
+  margin: 0 0 0.75rem;
 }
 
 
