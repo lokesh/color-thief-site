@@ -129,12 +129,12 @@ h3 {
 
 
 p {
-  margin: 1em auto 1.5em auto;
-  hyphens: auto;
+  margin: 1em 0 1.5em 0;
+  /* hyphens: auto;
   hyphenate-limit-chars: 6 3 3;
   hyphenate-limit-lines: 2;
   hyphenate-limit-last: always;
-  hyphenate-limit-zone: 8%;
+  hyphenate-limit-zone: 8%; */
 }
 
 p.before-list {
@@ -758,7 +758,14 @@ footer .button {
 
 .version-toggle {
   display: flex;
-  margin: 1rem 0 0 0;
+  margin: 1rem auto 0;
+  width: fit-content;
+}
+
+@media (min-width: 720px) {
+  .version-toggle {
+    margin: 1rem 0 0 0;
+  }
 }
 
 .version-btn {
@@ -856,6 +863,16 @@ footer .button {
   background: none;
   padding: 0;
   border: none;
+}
+
+/* Override Prism defaults inside .code-block so layout stays consistent */
+.code-block code[class*="language-"] {
+  background: none;
+  padding: 0;
+  border: none;
+  font-size: inherit;
+  line-height: inherit;
+  white-space: pre;
 }
 
 

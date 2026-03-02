@@ -87,14 +87,14 @@
       <section id="v3-examples">
       <h2>Examples</h2>
 
-      <!-- 01. getColorSync -->
+      <!-- 01. getColor -->
 
       <section id="v3-dominant" class="v3-section">
         <span class="section-num">01</span>
-        <h2>getColorSync()</h2>
-        <p>Extract the single dominant color from an image, synchronously.</p>
+        <h2>Get the dominant color</h2>
+        <p>Extract the single dominant color from an image.</p>
 
-        <div class="code-block"><code>import { getColorSync } from 'colorthief';
+        <div class="code-block"><code class="language-javascript">import { getColorSync } from 'colorthief';
 
 const color = getColorSync(img);
 color.hex();       // '#e84393'
@@ -106,14 +106,14 @@ color.textColor;   // '#000000'</code></div>
       </section>
 
 
-      <!-- 02. getPaletteSync -->
+      <!-- 02. getPalette -->
 
       <section id="v3-palette" class="v3-section">
         <span class="section-num">02</span>
-        <h2>getPaletteSync()</h2>
+        <h2>Get a color palette</h2>
         <p>Extract a multi-color palette. Each color in the palette is a full Color object.</p>
 
-        <div class="code-block"><code>const palette = getPaletteSync(img, { colorCount: 8 });
+        <div class="code-block"><code class="language-javascript">const palette = getPaletteSync(img, { colorCount: 8 });
 palette.forEach(c => console.log(c.hex()));</code></div>
 
         <div class="v3-output" id="out-palette">
@@ -128,10 +128,10 @@ palette.forEach(c => console.log(c.hex()));</code></div>
 
       <section id="v3-color-object" class="v3-section">
         <span class="section-num">03</span>
-        <h2>Color Object</h2>
+        <h2>The color object</h2>
         <p>Every extracted color is a rich object with format conversions, accessibility metadata, and contrast ratios.</p>
 
-        <div class="code-block"><code>const color = getColorSync(img);
+        <div class="code-block"><code class="language-javascript">const color = getColorSync(img);
 
 color.rgb()        // { r, g, b }
 color.hex()        // '#rrggbb'
@@ -150,14 +150,14 @@ color.contrast     // { white, black, foreground }</code></div>
       </section>
 
 
-      <!-- 04. getSwatchesSync -->
+      <!-- 04. getSwatches -->
 
       <section id="v3-swatches" class="v3-section">
         <span class="section-num">04</span>
-        <h2>getSwatchesSync()</h2>
+        <h2>Get semantic swatches</h2>
         <p>Classify palette colors into six semantic roles. Each swatch includes text color recommendations.</p>
 
-        <div class="code-block"><code>const swatches = getSwatchesSync(img);
+        <div class="code-block"><code class="language-javascript">const swatches = getSwatchesSync(img);
 swatches.Vibrant?.color.hex();            // '#e84393'
 swatches.DarkMuted?.titleTextColor.hex(); // '#ffffff'</code></div>
 
@@ -172,10 +172,10 @@ swatches.DarkMuted?.titleTextColor.hex(); // '#ffffff'</code></div>
 
       <section id="v3-oklch" class="v3-section">
         <span class="section-num">05</span>
-        <h2>OKLCH vs RGB Quantization</h2>
+        <h2>OKLCH vs RGB quantization</h2>
         <p>OKLCH quantization produces more perceptually uniform palettes. Colors that "feel" evenly spaced to the human eye.</p>
 
-        <div class="code-block"><code>// Default — quantize in sRGB
+        <div class="code-block"><code class="language-javascript">// Default — quantize in sRGB
 const rgb = getPaletteSync(img, { colorCount: 8 });
 
 // Perceptual — quantize in OKLCH
@@ -201,10 +201,10 @@ const oklch = getPaletteSync(img, { colorCount: 8, colorSpace: 'oklch' });</code
 
       <section id="v3-quality" class="v3-section">
         <span class="section-num">06</span>
-        <h2>Quality Settings</h2>
+        <h2>Quality settings</h2>
         <p>The <code>quality</code> option controls how many pixels are sampled. Lower values sample more pixels (slower, more accurate). Default is 10.</p>
 
-        <div class="code-block"><code>getPaletteSync(img, { quality: 1 });   // Every pixel
+        <div class="code-block"><code class="language-javascript">getPaletteSync(img, { quality: 1 });   // Every pixel
 getPaletteSync(img, { quality: 10 });  // Every 10th pixel (default)
 getPaletteSync(img, { quality: 50 });  // Every 50th pixel</code></div>
 
@@ -219,10 +219,10 @@ getPaletteSync(img, { quality: 50 });  // Every 50th pixel</code></div>
 
       <section id="v3-observe" class="v3-section">
         <span class="section-num">07</span>
-        <h2>observe()</h2>
+        <h2>Observe a video source</h2>
         <p>Reactively watch a video source and get palette updates on every frame. Works with <code>&lt;video&gt;</code>, <code>&lt;canvas&gt;</code>, and <code>&lt;img&gt;</code> elements.</p>
 
-        <div class="code-block"><code>const controller = observe(videoElement, {
+        <div class="code-block"><code class="language-javascript">const controller = observe(videoElement, {
     throttle: 200,
     colorCount: 5,
     onChange(palette) {
@@ -252,14 +252,15 @@ controller.stop(); // clean up</code></div>
       </section>
 
 
-      <!-- 08. Async API & Web Workers -->
+      <!-- 08. Asynchronous Methods -->
 
       <section id="v3-async" class="v3-section">
         <span class="section-num">08</span>
-        <h2>Async API &amp; Web Workers</h2>
-        <p>The async API works on both browser and Node.js. With <code>worker: true</code>, quantization runs off the main thread.</p>
+        <h2>Asynchronous methods</h2>
+        <p>Use <code>await</code> to run extraction off the main thread. With <code>worker: true</code>, quantization runs in a Web Worker.</p>
 
-        <div class="code-block"><code>// Async (works in browser and Node.js)
+        <div class="code-block"><code class="language-javascript">const color = await getColor(img);
+
 const palette = await getPalette(img, { colorCount: 6 });
 
 // Offload to Web Worker (browser only)
@@ -276,10 +277,10 @@ const palette = await getPalette(img, { colorCount: 6, worker: true });</code></
 
       <section id="v3-progressive" class="v3-section">
         <span class="section-num">09</span>
-        <h2>getPaletteProgressive()</h2>
+        <h2>Progressive extraction</h2>
         <p>Progressively extract a palette in 3 passes. Show a rough result instantly, then refine it. Useful for large images where full extraction takes time.</p>
 
-        <div class="code-block"><code>for await (const { palette, progress, done } of getPaletteProgressive(img)) {
+        <div class="code-block"><code class="language-javascript">for await (const { palette, progress, done } of getPaletteProgressive(img)) {
     updateUI(palette, progress);
     // progress: 0.06 → 0.25 → 1.0
 }</code></div>
@@ -298,10 +299,10 @@ const palette = await getPalette(img, { colorCount: 6, worker: true });</code></
 
       <section id="v3-abort" class="v3-section">
         <span class="section-num">10</span>
-        <h2>AbortController</h2>
+        <h2>Cancel an extraction</h2>
         <p>Cancel in-flight extractions with a standard AbortSignal. Useful when the user navigates away before extraction completes.</p>
 
-        <div class="code-block"><code>const controller = new AbortController();
+        <div class="code-block"><code class="language-javascript">const controller = new AbortController();
 controller.abort(); // cancel immediately
 
 try {
@@ -384,7 +385,6 @@ palette.forEach(c => console.log(c.hex()));</code></div>
         <ul>
           <li><strong>Wait for images to load.</strong> In the browser, make sure the image is fully loaded before extracting colors. Use the <code>load</code> event or check <code>img.complete</code>.</li>
           <li><strong>Cross-origin images.</strong> If the image is on another domain, set <code>crossorigin="anonymous"</code> on the image element and ensure the server sends the appropriate CORS headers.</li>
-          <li><strong>Sync vs Async.</strong> The <code>Sync</code> functions (<code>getColorSync</code>, <code>getPaletteSync</code>) run on the main thread and are great for quick extractions. The async versions (<code>getColor</code>, <code>getPalette</code>) use a Web Worker to avoid blocking the UI on large images.</li>
         </ul>
       </section>
 
