@@ -377,6 +377,7 @@ function initDragAndDrop() {
       const img = document.createElement('img');
       img.src = url;
       img.alt = 'Sample image';
+      if (url.includes('image-6')) img.classList.add('sample-hide-mobile');
       img.addEventListener('click', () => {
         const result = insertDroppedScaffold(container);
         const image = result.querySelector('.dropped-img');

@@ -697,6 +697,126 @@ footer .button {
 
 
 
+/* -- Why Color Thief ------------------------------------------------------- */
+
+.why-section > p {
+  max-width: 600px;
+}
+
+.why-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1px;
+  background: var(--color-border-subtle);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-lg);
+  margin: 1.25rem 0 2rem;
+  overflow: hidden;
+}
+
+@media (min-width: 720px) {
+  .why-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (min-width: 1200px) {
+  .why-grid {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+.why-card {
+  background: var(--color-bg-surface);
+  padding: 1.25rem;
+}
+
+.why-card-icon {
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0.6rem;
+  color: var(--color-text-secondary);
+}
+
+.why-card strong {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: var(--weight-semibold);
+  margin-bottom: 0.25rem;
+}
+
+.why-card p {
+  font-size: 0.85rem;
+  color: var(--color-text-secondary);
+  margin: 0;
+  line-height: var(--leading-normal);
+}
+
+.why-card code {
+  font-size: 0.75rem;
+  background: none;
+  border: none;
+  padding: 0;
+  color: inherit;
+}
+
+/* Comparison table */
+
+.comparison-table-wrap {
+  overflow-x: auto;
+  margin: 1rem 0 0;
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-lg);
+}
+
+.comparison-table {
+  width: 100%;
+  min-width: 600px;
+  border-collapse: collapse;
+  font-size: 0.8rem;
+}
+
+.comparison-table th,
+.comparison-table td {
+  padding: 0.5rem 0.75rem;
+  border-bottom: 1px solid var(--color-border-faint);
+  text-align: left;
+  vertical-align: middle;
+}
+
+.comparison-table thead th {
+  background: var(--color-bg);
+  font-weight: var(--weight-semibold);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--color-text-muted);
+  white-space: nowrap;
+  border-bottom: 1px solid var(--color-border-subtle);
+}
+
+.comparison-table tbody td:first-child {
+  font-weight: var(--weight-semibold);
+  color: var(--color-text-secondary);
+  white-space: nowrap;
+}
+
+.comparison-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.comparison-highlight {
+  background: rgba(230, 102, 34, 0.04);
+}
+
+.comparison-table thead th.comparison-highlight {
+  color: var(--color-primary);
+}
+
+
 /* -- Examples -------------------------------------------------------------- */
 
 .image-section {
@@ -848,6 +968,10 @@ footer .button {
   display: none;
 }
 
+.sample-hide-mobile {
+  display: none;
+}
+
 .sample-images img {
   height: 5rem;
   border-radius: var(--radius-md);
@@ -879,6 +1003,10 @@ footer .button {
     text-align: left;
     font-size: 0.85rem;
     color: var(--muted-color);
+  }
+
+  .sample-hide-mobile {
+    display: block;
   }
 
   .sample-images img {

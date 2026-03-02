@@ -63,6 +63,7 @@
       <div class="mobile-nav-scroll">
         <a href="#v3-drag-drop" class="mobile-nav-link">Try it</a>
         <a href="#v3-examples" class="mobile-nav-link">Examples</a>
+        <a href="#v3-why" class="mobile-nav-link">Why Color Thief</a>
         <a href="#v3-getting-started" class="mobile-nav-link">Getting started</a>
         <a href="#v3-api" class="mobile-nav-link">API</a>
       </div>
@@ -87,6 +88,7 @@
 
             </ul>
           </li>
+          <li class="nav-list-item"><a href="#v3-why" class="nav-link">Why Color Thief</a></li>
           <li class="nav-list-item"><a href="#v3-getting-started" class="nav-link">Getting started</a></li>
           <li class="nav-list-item"><a href="#v3-api" class="nav-link">API</a>
             <ul class="nav-sub-list">
@@ -318,6 +320,144 @@ const palette = await getPalette(img, { colorCount: 6, worker: true });</code></
 
 
       </section><!-- #v3-examples -->
+
+
+      <!-- WHY COLOR THIEF -->
+
+      <section id="v3-why" class="why-section">
+        <h2>Why Color Thief</h2>
+
+        <div class="why-grid">
+
+          <div class="why-card">
+            <div class="why-card-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26z"/></svg>
+            </div>
+            <strong>Battle-tested at scale</strong>
+            <p>13,000+ GitHub stars. 7M+ npm downloads per year. Used in production by teams at every scale, from solo devs to Fortune 500s.</p>
+          </div>
+
+          <div class="why-card">
+            <div class="why-card-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+            </div>
+            <strong>Works everywhere</strong>
+            <p>Browser, Node.js, Web Workers. Feed it an <code>&lt;img&gt;</code>, <code>&lt;video&gt;</code>, <code>&lt;canvas&gt;</code>, a file path, or a raw Buffer.</p>
+          </div>
+
+          <div class="why-card">
+            <div class="why-card-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+            </div>
+            <strong>Rich color objects</strong>
+            <p>Every color comes with <code>.hex()</code>, <code>.hsl()</code>, <code>.oklch()</code>, <code>.css()</code>, WCAG contrast ratios, <code>textColor</code>, and <code>isDark</code>/<code>isLight</code>.</p>
+          </div>
+
+          <div class="why-card">
+            <div class="why-card-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+            </div>
+            <strong>Perceptual accuracy</strong>
+            <p>OKLCH quantization produces palettes that are perceptually uniform, colors spaced the way your eyes actually see them, not the way math divides up RGB cubes.</p>
+          </div>
+
+          <div class="why-card">
+            <div class="why-card-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 6l-9.5 9.5-5-5L1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+            </div>
+            <strong>Real-time video</strong>
+            <p>Hook into video and canvas elements to to build reactive backgrounds, ambient lighting, and audio visualizers.</p>
+          </div>
+
+          <div class="why-card">
+            <div class="why-card-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+            </div>
+            <strong>Non-blocking async</strong>
+            <p>The async API yields to the browser between processing chunks so your UI never freezes. Opt into <code>worker: true</code> to offload quantization to a Web Worker entirely.</p>
+          </div>
+
+        </div>
+
+        <h3>How it stacks up</h3>
+        <p>A snapshot comparison with the most common alternatives.</p>
+
+        <div class="comparison-table-wrap">
+          <table class="comparison-table">
+            <thead>
+              <tr>
+                <th></th>
+                <th class="comparison-highlight">Color Thief v3</th>
+                <th>Vibrant.js</th>
+                <th>img-color-extractor</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>npm downloads / yr</td>
+                <td class="comparison-highlight"><strong>7M+</strong></td>
+                <td>~600K</td>
+                <td>~30K</td>
+              </tr>
+              <tr>
+                <td>Actively maintained</td>
+                <td class="comparison-highlight">Yes</td>
+                <td>No</td>
+                <td>Mostly</td>
+              </tr>
+              <tr>
+                <td>OKLCH quantization</td>
+                <td class="comparison-highlight">Yes</td>
+                <td>No</td>
+                <td>No</td>
+              </tr>
+              <tr>
+                <td>Semantic swatches</td>
+                <td class="comparison-highlight">Yes</td>
+                <td>Yes</td>
+                <td>No</td>
+              </tr>
+              <tr>
+                <td>Rich color objects</td>
+                <td class="comparison-highlight">hex, hsl, oklch, css, contrast</td>
+                <td>hex, rgb, hsl</td>
+                <td>hex only</td>
+              </tr>
+              <tr>
+                <td>WCAG contrast / textColor</td>
+                <td class="comparison-highlight">Built-in</td>
+                <td>Partial</td>
+                <td>No</td>
+              </tr>
+              <tr>
+                <td>Video observation</td>
+                <td class="comparison-highlight">observe()</td>
+                <td>No</td>
+                <td>No</td>
+              </tr>
+              <tr>
+                <td>Async / Web Workers</td>
+                <td class="comparison-highlight">Both</td>
+                <td>Promises only</td>
+                <td>Sync only</td>
+              </tr>
+              <tr>
+                <td>Node.js support</td>
+                <td class="comparison-highlight">Yes (via sharp)</td>
+                <td>Yes</td>
+                <td>Browser only</td>
+              </tr>
+              <tr>
+                <td>TypeScript</td>
+                <td class="comparison-highlight">Yes</td>
+                <td>DefinitelyTyped</td>
+                <td>No</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+      </section>
 
 
       <!-- GETTING STARTED -->
