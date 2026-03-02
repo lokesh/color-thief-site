@@ -545,7 +545,7 @@ section:last-of-type {
 }
 
 .example-image {
-  width: 7rem;
+  height: 7rem;
   border-radius: var(--border-radius-xl);
 }
 
@@ -647,8 +647,8 @@ footer .button {
 
 .gh-logo,
 .gh-star {
-  width: 20px;
-  margin-right: 0.5rem;
+  width: 14px;
+  margin-right: 0.35rem;
 }
 
 
@@ -807,8 +807,7 @@ footer .button {
 }
 
 .sample-images img {
-  width: 72px;
-  height: 72px;
+  height: 5rem;
   border-radius: var(--radius-md);
   object-fit: cover;
   cursor: pointer;
@@ -841,8 +840,7 @@ footer .button {
   }
 
   .sample-images img {
-    width: 48px;
-    height: 48px;
+    height: 4rem;
     border-radius: var(--radius-sm);
   }
 }
