@@ -353,11 +353,91 @@ function initAbort() {
 
 // ─── 11. Drag and Drop ──────────────────────────────────────────────
 
-function initDragAndDrop() {
-  if (!window.FileReader || isMobile()) return;
+function renderDroppedResult(image, result) {
+  const roles = ['Vibrant', 'Muted', 'DarkVibrant', 'DarkMuted', 'LightVibrant', 'LightMuted'];
 
+  // Dominant color
+  const color = getColorSync(image);
+  if (color) {
+    const { r, g, b } = color.rgb();
+    result.querySelector('.dominant-result').innerHTML =
+      swatchHTML(color, 'lg') +
+      `<div class="dominant-meta">
+        <span class="hex">${color.hex()}</span><br>
+        rgb(${r}, ${g}, ${b})
+      </div>`;
+  }
+
+  // RGB palette
+  const rgbPalette = getPaletteSync(image, { colorCount: 8 });
+  if (rgbPalette) {
+    result.querySelector('.dropped-rgb-swatches').innerHTML =
+      rgbPalette.map(c => swatchHTML(c, 'lg')).join('');
+  }
+
+  // OKLCH palette
+  const oklchPalette = getPaletteSync(image, { colorCount: 8, colorSpace: 'oklch' });
+  if (oklchPalette) {
+    result.querySelector('.dropped-oklch-swatches').innerHTML =
+      oklchPalette.map(c => swatchHTML(c, 'lg')).join('');
+  }
+
+  // Semantic swatches
+  const swatches = getSwatchesSync(image);
+  result.querySelector('.dropped-swatch-cards').innerHTML = roles.map(role => {
+    const s = swatches[role];
+    if (!s) {
+      return `<div class="swatch-card swatch-card-empty"><span class="role">${role}</span></div>`;
+    }
+    return `<div class="swatch-card" style="background:${s.color.hex()}">
+      <span class="role" style="color:${s.titleTextColor.hex()}">${role}</span>
+      <span class="hex-label" style="color:${s.bodyTextColor.hex()}">${s.color.hex()}</span>
+    </div>`;
+  }).join('');
+}
+
+function insertDroppedScaffold(container) {
+  const html = `
+    <div class="dropped-result">
+      <img class="demo-img dropped-img" />
+      <div class="dropped-section-label">Dominant color</div>
+      <div class="dominant-result"></div>
+      <div class="dropped-section-label">Palette — RGB</div>
+      <div class="swatch-row dropped-rgb-swatches"></div>
+      <div class="dropped-section-label">Palette — OKLCH</div>
+      <div class="swatch-row dropped-oklch-swatches"></div>
+      <div class="dropped-section-label">Semantic swatches</div>
+      <div class="swatch-cards dropped-swatch-cards"></div>
+    </div>
+  `;
+  container.innerHTML = html;
+  return container.querySelector('.dropped-result');
+}
+
+function initDragAndDrop() {
   const section = document.getElementById('v3-drag-drop');
+  const container = document.getElementById('v3-dragged-images');
+
   if (section) section.style.display = 'block';
+
+  // Populate sample thumbnails
+  const samplesEl = document.getElementById('v3-sample-images');
+  if (samplesEl) {
+    imageUrls.slice(0, 3).forEach(url => {
+      const img = document.createElement('img');
+      img.src = url;
+      img.alt = 'Sample image';
+      img.addEventListener('click', () => {
+        const result = insertDroppedScaffold(container);
+        const image = result.querySelector('.dropped-img');
+        image.src = url;
+        waitForImage(image).then(() => renderDroppedResult(image, result));
+      });
+      samplesEl.appendChild(img);
+    });
+  }
+
+  if (!window.FileReader || isMobile()) return;
 
   const dropZone = document.getElementById('v3-drop-zone');
   if (!dropZone) return;
@@ -372,7 +452,6 @@ function initDragAndDrop() {
   });
 
   function handleFiles(files) {
-    const container = document.getElementById('v3-dragged-images');
     for (let i = 0; i < files.length; i++) {
       const file = files[i];
       if (!file.type.match(/image.*/)) {
@@ -382,37 +461,10 @@ function initDragAndDrop() {
 
       const reader = new FileReader();
       reader.onload = (event) => {
-        const html = `
-          <div class="dropped-result">
-            <img class="demo-img dropped-img" src="${event.target.result}" />
-            <div class="dominant-result"></div>
-            <div class="swatch-row"></div>
-          </div>
-        `;
-        container.insertAdjacentHTML('afterbegin', html);
-
-        const result = container.querySelector('.dropped-result');
+        const result = insertDroppedScaffold(container);
         const image = result.querySelector('.dropped-img');
-
-        image.addEventListener('load', () => {
-          const color = getColorSync(image);
-          const palette = getPaletteSync(image, { colorCount: 8 });
-
-          if (color) {
-            const { r, g, b } = color.rgb();
-            result.querySelector('.dominant-result').innerHTML =
-              swatchHTML(color, 'lg') +
-              `<div class="dominant-meta">
-                <span class="hex">${color.hex()}</span><br>
-                rgb(${r}, ${g}, ${b})
-              </div>`;
-          }
-
-          if (palette) {
-            result.querySelector('.swatch-row').innerHTML =
-              palette.map(c => swatchHTML(c, 'lg')).join('');
-          }
-        }, { once: true });
+        image.src = event.target.result;
+        image.addEventListener('load', () => renderDroppedResult(image, result), { once: true });
       };
       reader.readAsDataURL(file);
     }

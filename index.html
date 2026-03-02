@@ -9,6 +9,10 @@
   <meta name="author" content="Lokesh Dhakar">
   <meta name="viewport" content="width=device-width,initial-scale=1">
 
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
   <link rel="stylesheet" href="css/main.css">
   <link rel="stylesheet" href="css/prism.css">
 
@@ -73,13 +77,45 @@
     <div class="sidebar">
       <nav id="nav-v3" class="nav">
         <ul class="nav-list">
-          <li class="nav-list-item"><a href="#v3-examples" class="nav-link">Examples</a></li>
+          <li class="nav-list-item"><a href="#v3-drag-drop" class="nav-link">Try it</a></li>
+          <li class="nav-list-item"><a href="#v3-examples" class="nav-link">Examples</a>
+            <ul class="nav-sub-list">
+              <li class="nav-sub-item"><a href="#v3-dominant" class="nav-link nav-link-sub">Dominant color</a></li>
+              <li class="nav-sub-item"><a href="#v3-palette" class="nav-link nav-link-sub">Palette</a></li>
+              <li class="nav-sub-item"><a href="#v3-color-object" class="nav-link nav-link-sub">Color object</a></li>
+              <li class="nav-sub-item"><a href="#v3-swatches" class="nav-link nav-link-sub">Swatches</a></li>
+              <li class="nav-sub-item"><a href="#v3-oklch" class="nav-link nav-link-sub">OKLCH vs RGB</a></li>
+              <li class="nav-sub-item"><a href="#v3-quality" class="nav-link nav-link-sub">Quality</a></li>
+              <li class="nav-sub-item"><a href="#v3-observe" class="nav-link nav-link-sub">Observe</a></li>
+              <li class="nav-sub-item"><a href="#v3-async" class="nav-link nav-link-sub">Async</a></li>
+              <li class="nav-sub-item"><a href="#v3-progressive" class="nav-link nav-link-sub">Progressive</a></li>
+              <li class="nav-sub-item"><a href="#v3-abort" class="nav-link nav-link-sub">Abort</a></li>
+            </ul>
+          </li>
           <li class="nav-list-item"><a href="#v3-getting-started" class="nav-link">Getting started</a></li>
         </ul>
       </nav>
     </div>
 
     <div class="content">
+
+
+      <!-- TRY IT -->
+
+      <section id="v3-drag-drop" class="drag-drop-section">
+        <h2>Try it yourself</h2>
+        <p class="drag-drop-desc-desktop">Drag an image from your computer onto the drop zone below.</p>
+        <p class="drag-drop-desc-mobile">Tap an example image to see Color Thief in action.</p>
+
+        <div id="v3-drop-zone" class="drop-zone">
+          <div class="drop-zone-label default-label">Drag an image here</div>
+          <div class="drop-zone-label dragging-label">Drop it!</div>
+        </div>
+        <div class="sample-images" id="v3-sample-images">
+          <span class="sample-images-label">or try it with these example images</span>
+        </div>
+        <div id="v3-dragged-images" class="dragged-images"></div>
+      </section>
 
 
       <!-- EXAMPLES -->
@@ -318,20 +354,6 @@ try {
       </section>
 
 
-      <!-- 11. Drag and Drop -->
-
-      <section id="v3-drag-drop" class="v3-section drag-drop-section">
-        <span class="section-num">11</span>
-        <h2>Try it yourself</h2>
-        <p>Drag an image from your computer onto the drop zone below.</p>
-
-        <div id="v3-drop-zone" class="drop-zone">
-          <div class="drop-zone-label default-label">Drag an image here</div>
-          <div class="drop-zone-label dragging-label">Drop it!</div>
-        </div>
-        <div id="v3-dragged-images" class="dragged-images"></div>
-      </section>
-
       </section><!-- #v3-examples -->
 
 
@@ -382,7 +404,7 @@ const palette = await getPalette('photo.jpg', { colorCount: 5 });
 palette.forEach(c => console.log(c.hex()));</code></div>
 
         <h3>Important notes</h3>
-        <ul>
+        <ul class="list">
           <li><strong>Wait for images to load.</strong> In the browser, make sure the image is fully loaded before extracting colors. Use the <code>load</code> event or check <code>img.complete</code>.</li>
           <li><strong>Cross-origin images.</strong> If the image is on another domain, set <code>crossorigin="anonymous"</code> on the image element and ensure the server sends the appropriate CORS headers.</li>
         </ul>
@@ -452,7 +474,7 @@ palette.forEach(c => console.log(c.hex()));</code></div>
         <h2>Getting started</h2>
 
         <p class="before-list">The Color Thief package includes multiple distribution files to support different environments and build processes. Here is the list of all the files in the <code>/dist</code> folder and what formats they support:</p>
-        <ul>
+        <ul class="list">
           <li><strong>color-thief.js</strong> - CommonJS module for use in Node.</li>
           <li><strong>color-thief.mjs</strong> - ES6 module. For modern browsers as well as Webpack and Rollup.</li>
           <li><strong>color-thief.umd.js</strong> - UMD module. For simple script tag loading that exposes a global variable or for RequireJS AMD support.</li>
