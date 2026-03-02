@@ -63,6 +63,7 @@
       <a href="#v3-drag-drop" class="mobile-nav-link">Try it</a>
       <a href="#v3-examples" class="mobile-nav-link">Examples</a>
       <a href="#v3-getting-started" class="mobile-nav-link">Getting started</a>
+      <a href="#v3-api" class="mobile-nav-link">API</a>
     </nav>
     <div class="column">
 
@@ -72,19 +73,29 @@
           <li class="nav-list-item"><a href="#v3-drag-drop" class="nav-link">Try it</a></li>
           <li class="nav-list-item"><a href="#v3-examples" class="nav-link">Examples</a>
             <ul class="nav-sub-list">
-              <li class="nav-sub-item"><a href="#v3-dominant" class="nav-link nav-link-sub">Dominant color</a></li>
-              <li class="nav-sub-item"><a href="#v3-palette" class="nav-link nav-link-sub">Palette</a></li>
-              <li class="nav-sub-item"><a href="#v3-color-object" class="nav-link nav-link-sub">Color object</a></li>
-              <li class="nav-sub-item"><a href="#v3-swatches" class="nav-link nav-link-sub">Swatches</a></li>
-              <li class="nav-sub-item"><a href="#v3-oklch" class="nav-link nav-link-sub">OKLCH vs RGB</a></li>
-              <li class="nav-sub-item"><a href="#v3-quality" class="nav-link nav-link-sub">Quality</a></li>
-              <li class="nav-sub-item"><a href="#v3-observe" class="nav-link nav-link-sub">Observe</a></li>
-              <li class="nav-sub-item"><a href="#v3-async" class="nav-link nav-link-sub">Async</a></li>
+              <li class="nav-sub-item"><a href="#v3-dominant" class="nav-link nav-link-sub"><span class="nav-num">1.</span> Dominant color</a></li>
+              <li class="nav-sub-item"><a href="#v3-palette" class="nav-link nav-link-sub"><span class="nav-num">2.</span> Palette</a></li>
+              <li class="nav-sub-item"><a href="#v3-color-object" class="nav-link nav-link-sub"><span class="nav-num">3.</span> Color object</a></li>
+              <li class="nav-sub-item"><a href="#v3-swatches" class="nav-link nav-link-sub"><span class="nav-num">4.</span> Swatches</a></li>
+              <li class="nav-sub-item"><a href="#v3-oklch" class="nav-link nav-link-sub"><span class="nav-num">5.</span> OKLCH vs RGB</a></li>
+              <li class="nav-sub-item"><a href="#v3-quality" class="nav-link nav-link-sub"><span class="nav-num">6.</span> Quality</a></li>
+              <li class="nav-sub-item"><a href="#v3-observe" class="nav-link nav-link-sub"><span class="nav-num">7.</span> Observe</a></li>
+              <li class="nav-sub-item"><a href="#v3-async" class="nav-link nav-link-sub"><span class="nav-num">8.</span> Async</a></li>
 
 
             </ul>
           </li>
           <li class="nav-list-item"><a href="#v3-getting-started" class="nav-link">Getting started</a></li>
+          <li class="nav-list-item"><a href="#v3-api" class="nav-link">API</a>
+            <ul class="nav-sub-list">
+              <li class="nav-sub-item"><a href="#v3-api-functions" class="nav-link nav-link-sub">Functions</a></li>
+              <li class="nav-sub-item"><a href="#v3-api-options" class="nav-link nav-link-sub">Options</a></li>
+              <li class="nav-sub-item"><a href="#v3-api-color" class="nav-link nav-link-sub">Color object</a></li>
+              <li class="nav-sub-item"><a href="#v3-api-swatches" class="nav-link nav-link-sub">Swatches</a></li>
+              <li class="nav-sub-item"><a href="#v3-api-observe" class="nav-link nav-link-sub">observe()</a></li>
+              <li class="nav-sub-item"><a href="#v3-api-sources" class="nav-link nav-link-sub">Source types</a></li>
+            </ul>
+          </li>
         </ul>
       </nav>
     </div>
@@ -118,7 +129,7 @@
       <!-- 01. getColor -->
 
       <section id="v3-dominant" class="v3-section">
-
+        <span class="example-num">1</span>
         <h2>Get the dominant color</h2>
         <p>Extract the single dominant color from an image.</p>
 
@@ -137,6 +148,7 @@ color.textColor;   // '#000000'</code></div>
       <!-- 02. getPalette -->
 
       <section id="v3-palette" class="v3-section">
+        <span class="example-num">2</span>
         <h2>Get a color palette</h2>
         <p>Extract a multi-color palette. Each color in the palette is a full Color object.</p>
 
@@ -154,6 +166,7 @@ palette.forEach(c => console.log(c.hex()));</code></div>
       <!-- 03. Color Object -->
 
       <section id="v3-color-object" class="v3-section">
+        <span class="example-num">3</span>
         <h2>The color object</h2>
         <p>Every extracted color is a rich object with format conversions, accessibility metadata, and contrast ratios.</p>
 
@@ -179,6 +192,7 @@ color.contrast     // { white, black, foreground }</code></div>
       <!-- 04. getSwatches -->
 
       <section id="v3-swatches" class="v3-section">
+        <span class="example-num">4</span>
         <h2>Get semantic swatches</h2>
         <p>Classify palette colors into six semantic roles. Each swatch includes text color recommendations.</p>
 
@@ -196,6 +210,7 @@ swatches.DarkMuted?.titleTextColor.hex(); // '#ffffff'</code></div>
       <!-- 05. OKLCH vs RGB -->
 
       <section id="v3-oklch" class="v3-section">
+        <span class="example-num">5</span>
         <h2>OKLCH vs RGB quantization</h2>
         <p>OKLCH quantization produces more perceptually uniform palettes. Colors that "feel" evenly spaced to the human eye.</p>
 
@@ -225,6 +240,7 @@ const oklch = getPaletteSync(img, { colorCount: 8, colorSpace: 'oklch' });</code
       <!-- 06. Quality -->
 
       <section id="v3-quality" class="v3-section">
+        <span class="example-num">6</span>
         <h2>Quality settings</h2>
         <p>The <code>quality</code> option controls how many pixels are sampled. Lower values sample more pixels (slower, more accurate). Default is 10.</p>
 
@@ -242,6 +258,7 @@ getPaletteSync(img, { quality: 50 });  // Every 50th pixel</code></div>
       <!-- 07. observe -->
 
       <section id="v3-observe" class="v3-section">
+        <span class="example-num">7</span>
         <h2>Observe a video source</h2>
         <p>Reactively watch a video source and get palette updates on every frame. Works with <code>&lt;video&gt;</code>, <code>&lt;canvas&gt;</code>, and <code>&lt;img&gt;</code> elements.</p>
 
@@ -278,6 +295,7 @@ controller.stop(); // clean up</code></div>
       <!-- 08. Asynchronous Methods -->
 
       <section id="v3-async" class="v3-section">
+        <span class="example-num">8</span>
         <h2>Asynchronous methods</h2>
         <p>The async API keeps your UI responsive during extraction. It breaks the work into chunks and pauses between them, giving the browser time to handle animations, scrolling, and clicks. Pass <code>worker: true</code> to offload quantization to a Web Worker thread entirely (browser-only). This is helpful when processing many images at once or working with very large images.</p>
 
@@ -352,6 +370,485 @@ palette.forEach(c => console.log(c.hex()));</code></div>
           <li><strong>Cross-origin images.</strong> If the image is on another domain, set <code>crossorigin="anonymous"</code> on the image element and ensure the server sends the appropriate CORS headers.</li>
         </ul>
       </section>
+
+
+      <!-- API (v3) -->
+
+      <section id="v3-api" class="api-section">
+        <h2>API</h2>
+
+        <p>Color Thief v3 exports standalone functions — no class instantiation needed. Every function comes in sync and async variants.</p>
+
+
+        <!-- Functions -->
+
+        <h3 id="v3-api-functions">Functions</h3>
+
+        <div class="method">
+          <div class="method-name">getColor(source, options?)</div>
+          <div class="method-return">Returns: Promise&lt;Color | null&gt;</div>
+          <div class="method-description">
+            <p>Extracts the single dominant color from an image. Returns a <a href="#v3-api-color">Color</a> object, or <code>null</code> if extraction fails.</p>
+          </div>
+        </div>
+
+        <div class="method">
+          <div class="method-name">getColorSync(source, options?)</div>
+          <div class="method-return">Returns: Color | null</div>
+          <div class="method-description">
+            <p>Synchronous version of <code>getColor()</code>. Browser sources only — does not support Node.js, Web Workers, or AbortSignal.</p>
+          </div>
+        </div>
+
+        <div class="method">
+          <div class="method-name">getPalette(source, options?)</div>
+          <div class="method-return">Returns: Promise&lt;Color[] | null&gt;</div>
+          <div class="method-description">
+            <p>Extracts a multi-color palette. Returns an array of <a href="#v3-api-color">Color</a> objects sorted by population (most dominant first), or <code>null</code> if extraction fails.</p>
+          </div>
+        </div>
+
+        <div class="method">
+          <div class="method-name">getPaletteSync(source, options?)</div>
+          <div class="method-return">Returns: Color[] | null</div>
+          <div class="method-description">
+            <p>Synchronous version of <code>getPalette()</code>. Browser sources only.</p>
+          </div>
+        </div>
+
+        <div class="method">
+          <div class="method-name">getSwatches(source, options?)</div>
+          <div class="method-return">Returns: Promise&lt;<a href="#v3-api-swatches">SwatchMap</a>&gt;</div>
+          <div class="method-description">
+            <p>Extracts semantic swatches classified into six roles: Vibrant, Muted, DarkVibrant, DarkMuted, LightVibrant, and LightMuted. Uses <code>colorCount: 16</code> internally for best classification results.</p>
+          </div>
+        </div>
+
+        <div class="method">
+          <div class="method-name">getSwatchesSync(source, options?)</div>
+          <div class="method-return">Returns: <a href="#v3-api-swatches">SwatchMap</a></div>
+          <div class="method-description">
+            <p>Synchronous version of <code>getSwatches()</code>. Browser sources only.</p>
+          </div>
+        </div>
+
+        <div class="method">
+          <div class="method-name">observe(source, options)</div>
+          <div class="method-return">Returns: <a href="#v3-api-observe">ObserveController</a></div>
+          <div class="method-description">
+            <p>Reactively watches a video, canvas, or image element and fires a callback with a fresh palette on every frame or change. See <a href="#v3-api-observe">observe()</a> for full details.</p>
+          </div>
+        </div>
+
+        <div class="method">
+          <div class="method-name">configure(options)</div>
+          <div class="method-return">Returns: void</div>
+          <div class="method-description">
+            <p>Globally override the pixel loader and/or quantizer used by all extraction functions.</p>
+            <ul class="list">
+              <li><span class="method-argument">options.loader</span> — Custom pixel decoder</li>
+              <li><span class="method-argument">options.quantizer</span> — Custom quantization algorithm (must call <code>init()</code> first)</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="method">
+          <div class="method-name">createColor(r, g, b, population, proportion?)</div>
+          <div class="method-return">Returns: Color</div>
+          <div class="method-description">
+            <p>Factory function to manually create a <a href="#v3-api-color">Color</a> object from RGB values. Useful for building Color objects from data you already have.</p>
+            <ul class="list">
+              <li><span class="method-argument">r, g, b</span> — RGB values (0–255)</li>
+              <li><span class="method-argument">population</span> — Pixel count for this color</li>
+              <li><span class="method-argument">proportion</span> — Fraction of total pixels (0–1). Default: <code>0</code></li>
+            </ul>
+          </div>
+        </div>
+
+
+        <!-- Options -->
+
+        <h3 id="v3-api-options">Options</h3>
+
+        <p>All extraction functions accept an options object. The async API supports every option; the sync API omits <code>signal</code>, <code>worker</code>, and <code>loader</code>.</p>
+
+        <table class="options-table">
+          <thead>
+            <tr>
+              <th>Option</th>
+              <th>Type</th>
+              <th>Default</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>colorCount</code></td>
+              <td>number</td>
+              <td><code>10</code></td>
+              <td>Number of colors in the palette (2–20). Used by <code>getPalette</code> and <code>getSwatches</code>.</td>
+            </tr>
+            <tr>
+              <td><code>quality</code></td>
+              <td>number</td>
+              <td><code>10</code></td>
+              <td>Pixel sampling rate. <code>1</code> samples every pixel (highest quality, slowest). <code>10</code> samples every 10th pixel.</td>
+            </tr>
+            <tr>
+              <td><code>colorSpace</code></td>
+              <td>string</td>
+              <td><code>'rgb'</code></td>
+              <td><code>'rgb'</code> or <code>'oklch'</code>. OKLCH produces more perceptually uniform palettes.</td>
+            </tr>
+            <tr>
+              <td><code>ignoreWhite</code></td>
+              <td>boolean</td>
+              <td><code>true</code></td>
+              <td>Skip pixels that appear white during sampling.</td>
+            </tr>
+            <tr>
+              <td><code>whiteThreshold</code></td>
+              <td>number</td>
+              <td><code>250</code></td>
+              <td>RGB channel value (0–255) above which a pixel is considered white.</td>
+            </tr>
+            <tr>
+              <td><code>alphaThreshold</code></td>
+              <td>number</td>
+              <td><code>125</code></td>
+              <td>Alpha value (0–255) below which a pixel is considered transparent and skipped.</td>
+            </tr>
+            <tr>
+              <td><code>minSaturation</code></td>
+              <td>number</td>
+              <td><code>0</code></td>
+              <td>Minimum HSV saturation (0–1). Pixels below this saturation are skipped.</td>
+            </tr>
+            <tr>
+              <td><code>signal</code></td>
+              <td>AbortSignal</td>
+              <td>—</td>
+              <td>Cancel a running extraction. Async API only.</td>
+            </tr>
+            <tr>
+              <td><code>worker</code></td>
+              <td>boolean</td>
+              <td><code>false</code></td>
+              <td>Offload quantization to a Web Worker thread. Browser async API only.</td>
+            </tr>
+          </tbody>
+        </table>
+
+
+        <!-- Color Object -->
+
+        <h3 id="v3-api-color">Color object</h3>
+
+        <p>Every extracted color is a rich object with format conversions, accessibility metadata, and WCAG contrast ratios.</p>
+
+        <h4>Methods</h4>
+
+        <table class="options-table">
+          <thead>
+            <tr>
+              <th>Method</th>
+              <th>Returns</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>rgb()</code></td>
+              <td><code>{ r, g, b }</code></td>
+              <td>RGB values, each 0–255.</td>
+            </tr>
+            <tr>
+              <td><code>hex()</code></td>
+              <td><code>string</code></td>
+              <td>Hex string, e.g. <code>'#e84393'</code>.</td>
+            </tr>
+            <tr>
+              <td><code>hsl()</code></td>
+              <td><code>{ h, s, l }</code></td>
+              <td>Hue 0–360, saturation 0–100, lightness 0–100.</td>
+            </tr>
+            <tr>
+              <td><code>oklch()</code></td>
+              <td><code>{ l, c, h }</code></td>
+              <td>Lightness 0–1, chroma 0–0.4, hue 0–360.</td>
+            </tr>
+            <tr>
+              <td><code>css(format?)</code></td>
+              <td><code>string</code></td>
+              <td>CSS color string. Format: <code>'rgb'</code> (default), <code>'hsl'</code>, or <code>'oklch'</code>.</td>
+            </tr>
+            <tr>
+              <td><code>array()</code></td>
+              <td><code>[r, g, b]</code></td>
+              <td>RGB tuple as a three-element array.</td>
+            </tr>
+            <tr>
+              <td><code>toString()</code></td>
+              <td><code>string</code></td>
+              <td>Hex string. Allows direct use in template literals.</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h4>Properties</h4>
+
+        <table class="options-table">
+          <thead>
+            <tr>
+              <th>Property</th>
+              <th>Type</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>textColor</code></td>
+              <td><code>string</code></td>
+              <td><code>'#ffffff'</code> or <code>'#000000'</code> — the recommended foreground text color for readability.</td>
+            </tr>
+            <tr>
+              <td><code>isDark</code></td>
+              <td><code>boolean</code></td>
+              <td><code>true</code> if the color is perceptually dark (relative luminance &le; 0.179).</td>
+            </tr>
+            <tr>
+              <td><code>isLight</code></td>
+              <td><code>boolean</code></td>
+              <td><code>true</code> if the color is perceptually light.</td>
+            </tr>
+            <tr>
+              <td><code>contrast</code></td>
+              <td><code>ContrastInfo</code></td>
+              <td>WCAG contrast ratios. Contains <code>white</code> (number), <code>black</code> (number), and <code>foreground</code> (Color) — a Color object for readable text.</td>
+            </tr>
+            <tr>
+              <td><code>population</code></td>
+              <td><code>number</code></td>
+              <td>Relative pixel count from the quantizer. Higher values mean more dominant.</td>
+            </tr>
+            <tr>
+              <td><code>proportion</code></td>
+              <td><code>number</code></td>
+              <td>Fraction of total sampled pixels (0–1).</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="code-block"><code class="language-javascript">const color = getColorSync(img);
+
+// Format conversions
+color.hex();             // '#e84393'
+color.rgb();             // { r: 232, g: 67, b: 147 }
+color.hsl();             // { h: 331, s: 77, l: 59 }
+color.oklch();           // { l: 0.64, c: 0.21, h: 353 }
+color.css();             // 'rgb(232, 67, 147)'
+color.css('oklch');      // 'oklch(0.64 0.21 353)'
+
+// Accessibility
+color.textColor;         // '#ffffff'
+color.isDark;            // true
+color.contrast.white;    // 3.42
+color.contrast.black;    // 6.14
+color.contrast.foreground.hex(); // '#ffffff'
+
+// Population
+color.population;        // 14832
+color.proportion;        // 0.23</code></div>
+
+
+        <!-- Swatches -->
+
+        <h3 id="v3-api-swatches">Swatches</h3>
+
+        <p><code>getSwatches()</code> and <code>getSwatchesSync()</code> return a <code>SwatchMap</code> — an object with six keys, one for each semantic role. Each value is either a <code>Swatch</code> or <code>null</code> if no color matched that role.</p>
+
+        <h4>SwatchMap</h4>
+
+        <div class="code-block"><code class="language-javascript">const swatches = getSwatchesSync(img);
+// {
+//   Vibrant:      Swatch | null,
+//   Muted:        Swatch | null,
+//   DarkVibrant:  Swatch | null,
+//   DarkMuted:    Swatch | null,
+//   LightVibrant: Swatch | null,
+//   LightMuted:   Swatch | null,
+// }</code></div>
+
+        <h4>Swatch object</h4>
+
+        <table class="options-table">
+          <thead>
+            <tr>
+              <th>Property</th>
+              <th>Type</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>color</code></td>
+              <td><code>Color</code></td>
+              <td>The extracted color for this role.</td>
+            </tr>
+            <tr>
+              <td><code>role</code></td>
+              <td><code>string</code></td>
+              <td>The semantic role: <code>'Vibrant'</code>, <code>'Muted'</code>, <code>'DarkVibrant'</code>, <code>'DarkMuted'</code>, <code>'LightVibrant'</code>, or <code>'LightMuted'</code>.</td>
+            </tr>
+            <tr>
+              <td><code>titleTextColor</code></td>
+              <td><code>Color</code></td>
+              <td>Recommended color for title text over this swatch.</td>
+            </tr>
+            <tr>
+              <td><code>bodyTextColor</code></td>
+              <td><code>Color</code></td>
+              <td>Recommended color for body text over this swatch.</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="code-block"><code class="language-javascript">const swatches = getSwatchesSync(img);
+
+if (swatches.Vibrant) {
+    document.body.style.background = swatches.Vibrant.color.css();
+    document.body.style.color = swatches.Vibrant.bodyTextColor.css();
+    title.style.color = swatches.Vibrant.titleTextColor.css();
+}
+
+if (swatches.DarkMuted) {
+    sidebar.style.background = swatches.DarkMuted.color.css();
+    sidebar.style.color = swatches.DarkMuted.bodyTextColor.css();
+}</code></div>
+
+        <h4>Swatch roles</h4>
+
+        <table class="options-table">
+          <thead>
+            <tr>
+              <th>Role</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>Vibrant</code></td>
+              <td>Bright, saturated colors. Good for primary accents.</td>
+            </tr>
+            <tr>
+              <td><code>Muted</code></td>
+              <td>Desaturated, medium brightness. Good for backgrounds.</td>
+            </tr>
+            <tr>
+              <td><code>DarkVibrant</code></td>
+              <td>Saturated and dark. Good for status bars, headers.</td>
+            </tr>
+            <tr>
+              <td><code>DarkMuted</code></td>
+              <td>Desaturated and dark. Good for text backgrounds.</td>
+            </tr>
+            <tr>
+              <td><code>LightVibrant</code></td>
+              <td>Saturated and light. Good for highlights, hover states.</td>
+            </tr>
+            <tr>
+              <td><code>LightMuted</code></td>
+              <td>Desaturated and light. Good for card backgrounds, borders.</td>
+            </tr>
+          </tbody>
+        </table>
+
+
+        <!-- observe() -->
+
+        <h3 id="v3-api-observe">observe()</h3>
+
+        <p>Reactively watches a live source and fires a callback with a fresh palette on every frame or change.</p>
+
+        <div class="method">
+          <div class="method-name">observe(source, options)</div>
+          <div class="method-return">Returns: ObserveController</div>
+          <div class="method-description">
+            <p><span class="method-argument">source</span> — An <code>HTMLVideoElement</code>, <code>HTMLCanvasElement</code>, or <code>HTMLImageElement</code>.</p>
+            <p><span class="method-argument">options.onChange</span> — <strong>Required.</strong> Callback fired with <code>(palette: Color[]) =&gt; void</code> on each update.</p>
+            <p><span class="method-argument">options.throttle</span> — Minimum milliseconds between updates. Default: <code>200</code>.</p>
+            <p><span class="method-argument">options.colorCount</span> — Number of colors (2–20). Default: <code>5</code>.</p>
+            <p><span class="method-argument">options.quality</span> — Pixel sampling rate. Default: <code>10</code>.</p>
+            <p><span class="method-argument">options.colorSpace</span> — <code>'rgb'</code> or <code>'oklch'</code>. Default: <code>'rgb'</code>.</p>
+            <p>Also accepts all <a href="#v3-api-options">filter options</a>: <code>ignoreWhite</code>, <code>whiteThreshold</code>, <code>alphaThreshold</code>, <code>minSaturation</code>.</p>
+          </div>
+        </div>
+
+        <h4>ObserveController</h4>
+
+        <table class="options-table">
+          <thead>
+            <tr>
+              <th>Method</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>stop()</code></td>
+              <td>Stops observing and cleans up all event listeners and animation frames. Always call this when done.</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h4>Behavior by source type</h4>
+        <ul class="list">
+          <li><strong>HTMLVideoElement</strong> — Extracts from the current frame on each <code>requestAnimationFrame</code> (throttled). Only runs while the video is playing. Also fires on <code>seeked</code>.</li>
+          <li><strong>HTMLCanvasElement</strong> — Polls on each <code>requestAnimationFrame</code> (throttled).</li>
+          <li><strong>HTMLImageElement</strong> — Extracts immediately if loaded, then watches for <code>src</code>/<code>srcset</code> attribute changes via MutationObserver. Also listens for the <code>load</code> event.</li>
+        </ul>
+
+        <div class="code-block"><code class="language-javascript">const controller = observe(videoElement, {
+    throttle: 200,
+    colorCount: 5,
+    onChange(palette) {
+        const [dominant] = palette;
+        document.body.style.background = dominant.css();
+        header.style.color = dominant.textColor;
+    },
+});
+
+// Later — clean up
+controller.stop();</code></div>
+
+
+        <!-- Source types -->
+
+        <h3 id="v3-api-sources">Source types</h3>
+
+        <p>The <code>source</code> parameter accepts different types depending on the environment.</p>
+
+        <h4>Browser</h4>
+        <ul class="list">
+          <li><code>HTMLImageElement</code></li>
+          <li><code>HTMLCanvasElement</code></li>
+          <li><code>HTMLVideoElement</code></li>
+          <li><code>ImageData</code></li>
+          <li><code>ImageBitmap</code></li>
+          <li><code>OffscreenCanvas</code></li>
+        </ul>
+
+        <h4>Node.js</h4>
+        <p>Requires the <a href="https://www.npmjs.com/package/sharp">sharp</a> library as a peer dependency.</p>
+        <ul class="list">
+          <li><code>string</code> — file path</li>
+          <li><code>Buffer</code></li>
+        </ul>
+
+        <p><strong>Note:</strong> The sync API (<code>getColorSync</code>, <code>getPaletteSync</code>, <code>getSwatchesSync</code>) only accepts browser sources. Use the async API for Node.js.</p>
+
+      </section>
+
 
       <!-- LICENSE (v3) -->
 

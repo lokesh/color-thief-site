@@ -12,29 +12,7 @@
   even the video demo), then offer the interactive "Try it yourself." This follows the pattern of
   progressive disclosure — show the best output, then let them play.
 
-  8. The mobile experience hides the best feature. On mobile, the drag-and-drop zone becomes sample
-   thumbnails with "Tap an example image to see Color Thief in action." But the drag-and-drop
-  section itself is display: none by default and only shown via JS. The drag-drop-desc-desktop /
-  drag-drop-desc-mobile swap is handled, but the whole section being hidden until JS runs means
-  there's a flash of absent content.
 
-  9. No clear API reference section in v3. v2 has a dedicated "API" section with a proper options
-  table and method signatures. v3 relies on the examples to teach the API implicitly. This works
-  for browsing, but when someone is building and needs to look up getPaletteSync options, there's
-  no quick-reference. The Getting Started section jumps straight to install/import patterns. The
-  GitHub README does have API tables — but the site doesn't.
-
-
-  Individual Examples
-
-
-  Visual Design
-
-  19. Code blocks don't use Prism syntax highlighting. The v3 code blocks use <div
-  class="code-block"><code class="language-javascript"> but Prism expects <pre><code
-  class="language-*">. The v2 code blocks use <pre><code class="prism language-javascript"> with
-  the prism class. The v3 blocks likely render as unstyled code. This is a significant visual
-  regression from v2.
 
   Competitive Gaps
 
@@ -98,22 +76,10 @@
   ---
   Top Recommendations (Priority Order)
 
-  1. Add Prism highlighting to v3 code blocks — this is likely a bug, not a design choice. The v3
-  blocks use a different markup pattern than v2 and probably aren't getting syntax colored.
   2. Reorder: move one or two visually striking examples above "Try it yourself" — let the library
   make a first impression before asking the visitor to interact.
   3. Add a compact feature/differentiator list near the top — 4-6 key points that say "this is why
   v3 exists." Something a developer skimming can absorb in 5 seconds.
-  4. Add an API quick-reference section — port the README's API tables into the site. This is table
-   stakes for a library docs page.
-  5. Show section numbers — remove display: none from .section-num. They add visual rhythm.
-  6. Use different images across examples — variety demonstrates versatility.
-  7. Annotate the OKLCH vs RGB comparison — help visitors see what makes OKLCH better.
-  8. Consider dropping or deprioritizing Abort (example 10) — it's the weakest visual demo. Move it
-   to a note in Getting Started.
   9. Add a bundle size badge — if the number is good, show it.
   10. Animate progressive extraction — make passes appear sequentially for visual impact.
 
-  ---
-  Let me know which of these you'd like to act on, or if you want me to dig deeper into any
-  specific area.
