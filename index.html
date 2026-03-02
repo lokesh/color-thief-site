@@ -80,8 +80,8 @@
               <li class="nav-sub-item"><a href="#v3-quality" class="nav-link nav-link-sub">Quality</a></li>
               <li class="nav-sub-item"><a href="#v3-observe" class="nav-link nav-link-sub">Observe</a></li>
               <li class="nav-sub-item"><a href="#v3-async" class="nav-link nav-link-sub">Async</a></li>
-              <li class="nav-sub-item"><a href="#v3-progressive" class="nav-link nav-link-sub">Progressive</a></li>
-              <li class="nav-sub-item"><a href="#v3-abort" class="nav-link nav-link-sub">Abort</a></li>
+
+
             </ul>
           </li>
           <li class="nav-list-item"><a href="#v3-getting-started" class="nav-link">Getting started</a></li>
@@ -118,7 +118,7 @@
       <!-- 01. getColor -->
 
       <section id="v3-dominant" class="v3-section">
-        <span class="section-num">01</span>
+
         <h2>Get the dominant color</h2>
         <p>Extract the single dominant color from an image.</p>
 
@@ -137,7 +137,6 @@ color.textColor;   // '#000000'</code></div>
       <!-- 02. getPalette -->
 
       <section id="v3-palette" class="v3-section">
-        <span class="section-num">02</span>
         <h2>Get a color palette</h2>
         <p>Extract a multi-color palette. Each color in the palette is a full Color object.</p>
 
@@ -155,7 +154,6 @@ palette.forEach(c => console.log(c.hex()));</code></div>
       <!-- 03. Color Object -->
 
       <section id="v3-color-object" class="v3-section">
-        <span class="section-num">03</span>
         <h2>The color object</h2>
         <p>Every extracted color is a rich object with format conversions, accessibility metadata, and contrast ratios.</p>
 
@@ -181,7 +179,6 @@ color.contrast     // { white, black, foreground }</code></div>
       <!-- 04. getSwatches -->
 
       <section id="v3-swatches" class="v3-section">
-        <span class="section-num">04</span>
         <h2>Get semantic swatches</h2>
         <p>Classify palette colors into six semantic roles. Each swatch includes text color recommendations.</p>
 
@@ -199,7 +196,6 @@ swatches.DarkMuted?.titleTextColor.hex(); // '#ffffff'</code></div>
       <!-- 05. OKLCH vs RGB -->
 
       <section id="v3-oklch" class="v3-section">
-        <span class="section-num">05</span>
         <h2>OKLCH vs RGB quantization</h2>
         <p>OKLCH quantization produces more perceptually uniform palettes. Colors that "feel" evenly spaced to the human eye.</p>
 
@@ -229,7 +225,6 @@ const oklch = getPaletteSync(img, { colorCount: 8, colorSpace: 'oklch' });</code
       <!-- 06. Quality -->
 
       <section id="v3-quality" class="v3-section">
-        <span class="section-num">06</span>
         <h2>Quality settings</h2>
         <p>The <code>quality</code> option controls how many pixels are sampled. Lower values sample more pixels (slower, more accurate). Default is 10.</p>
 
@@ -247,7 +242,6 @@ getPaletteSync(img, { quality: 50 });  // Every 50th pixel</code></div>
       <!-- 07. observe -->
 
       <section id="v3-observe" class="v3-section">
-        <span class="section-num">07</span>
         <h2>Observe a video source</h2>
         <p>Reactively watch a video source and get palette updates on every frame. Works with <code>&lt;video&gt;</code>, <code>&lt;canvas&gt;</code>, and <code>&lt;img&gt;</code> elements.</p>
 
@@ -284,7 +278,6 @@ controller.stop(); // clean up</code></div>
       <!-- 08. Asynchronous Methods -->
 
       <section id="v3-async" class="v3-section">
-        <span class="section-num">08</span>
         <h2>Asynchronous methods</h2>
         <p>The async API keeps your UI responsive during extraction. It breaks the work into chunks and pauses between them, giving the browser time to handle animations, scrolling, and clicks. Pass <code>worker: true</code> to offload quantization to a Web Worker thread entirely (browser-only). This is helpful when processing many images at once or working with very large images.</p>
 
@@ -302,49 +295,6 @@ const palette = await getPalette(img, { colorCount: 6, worker: true });</code></
       </section>
 
 
-      <!-- 09. getPaletteProgressive -->
-
-      <section id="v3-progressive" class="v3-section">
-        <span class="section-num">09</span>
-        <h2>Progressive extraction</h2>
-        <p>Progressively extract a palette in 3 passes. Show a rough result instantly, then refine it. Useful for large images where full extraction takes time.</p>
-
-        <div class="code-block"><code class="language-javascript">for await (const { palette, progress, done } of getPaletteProgressive(img)) {
-    updateUI(palette, progress);
-    // progress: 0.06 → 0.25 → 1.0
-}</code></div>
-
-        <div class="v3-output" id="out-progressive">
-          <img class="source-img" id="progressive-source-img" src="" alt="Source image">
-          <div class="progress-bar-wrap" id="progressive-bar-wrap">
-            <div class="progress-bar" id="progressive-bar"></div>
-          </div>
-          <div id="progressive-passes"></div>
-        </div>
-      </section>
-
-
-      <!-- 10. AbortController -->
-
-      <section id="v3-abort" class="v3-section">
-        <span class="section-num">10</span>
-        <h2>Cancel an extraction</h2>
-        <p>Cancel in-flight extractions with a standard AbortSignal. Useful when the user navigates away before extraction completes.</p>
-
-        <div class="code-block"><code class="language-javascript">const controller = new AbortController();
-controller.abort(); // cancel immediately
-
-try {
-    await getColor(img, { signal: controller.signal });
-} catch (e) {
-    console.log(e.name); // 'AbortError'
-}</code></div>
-
-        <div class="v3-output" id="out-abort">
-          <img class="source-img" id="abort-source-img" src="" alt="Source image">
-          <div class="abort-error" id="abort-error"></div>
-        </div>
-      </section>
 
 
       </section><!-- #v3-examples -->

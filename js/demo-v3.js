@@ -1,4 +1,4 @@
-import { getColor, getPalette, getColorSync, getPaletteSync, getSwatchesSync, getPaletteProgressive, observe } from 'colorthief';
+import { getColor, getPalette, getColorSync, getPaletteSync, getSwatchesSync, observe } from 'colorthief';
 
 const imageModules = import.meta.glob('../images/*.jpg', { eager: true, query: '?url', import: 'default' });
 const imageUrls = Object.values(imageModules);
@@ -27,8 +27,9 @@ async function timedAsync(fn) {
   return { result, ms: (performance.now() - t0).toFixed(1) };
 }
 
-function swatchHTML(color, size = 'md') {
-  return `<div class="swatch swatch-${size}" style="background:${color.hex()}" data-hex="${color.hex()}"></div>`;
+function swatchHTML(color, size = 'md', { showHex = false } = {}) {
+  const hexAttr = showHex ? ` data-hex="${color.hex()}"` : '';
+  return `<div class="swatch swatch-${size}" style="background:${color.hex()}"${hexAttr}></div>`;
 }
 
 function show(id) {
@@ -105,7 +106,7 @@ function initPalette() {
     const { result: palette, ms } = timed(() => getPaletteSync(sourceImg, { colorCount: 8 }));
     if (palette) {
       document.getElementById('palette-swatches').innerHTML =
-        palette.map(c => swatchHTML(c, 'lg')).join('');
+        palette.map(c => swatchHTML(c, 'lg', { showHex: true })).join('');
       document.getElementById('palette-timing').textContent = `${ms}ms`;
     }
     show('out-palette');
@@ -185,13 +186,17 @@ function initQuality() {
   sourceImg.src = imageUrls[0];
   waitForImage(sourceImg).then(() => {
     const quals = [1, 10, 50];
-    rowsEl.innerHTML = quals.map(q => {
-      const { result: pal, ms } = timed(() => getPaletteSync(sourceImg, { colorCount: 6, quality: q }));
-      return `<div class="quality-row">
-        <div class="quality-label">quality: ${q} <span class="timing">${ms}ms</span></div>
-        <div class="quality-swatches">${pal ? pal.map(c => swatchHTML(c, 'md')).join('') : ''}</div>
-      </div>`;
-    }).join('');
+    rowsEl.innerHTML =
+      '<table class="prop-table quality-table"><thead><tr><th>Quality</th><th>Time</th><th>Palette</th></tr></thead><tbody>' +
+      quals.map(q => {
+        const { result: pal, ms } = timed(() => getPaletteSync(sourceImg, { colorCount: 6, quality: q }));
+        return `<tr>
+          <td>${q}</td>
+          <td>${ms}ms</td>
+          <td class="quality-swatches">${pal ? pal.map(c => swatchHTML(c, 'md')).join('') : ''}</td>
+        </tr>`;
+      }).join('') +
+      '</tbody></table>';
     show('out-quality');
   });
 }
@@ -296,62 +301,7 @@ function initAsync() {
   });
 }
 
-// ─── 09. getPaletteProgressive ──────────────────────────────────────
-
-function initProgressive() {
-  const sourceImg = document.getElementById('progressive-source-img');
-  const passesEl = document.getElementById('progressive-passes');
-  const barEl = document.getElementById('progressive-bar');
-  if (!sourceImg || !passesEl) return;
-
-  sourceImg.src = imageUrls[2] || imageUrls[0];
-  waitForImage(sourceImg).then(async () => {
-    const passLabels = ['Rough (16x skip)', 'Medium (4x skip)', 'Final (full quality)'];
-    const passResults = [];
-    let i = 0;
-
-    for await (const { palette, progress } of getPaletteProgressive(sourceImg, { colorCount: 6 })) {
-      const pct = Math.round(progress * 100);
-      if (barEl) barEl.style.width = `${pct}%`;
-      passResults.push({ label: passLabels[i] || `Pass ${i + 1}`, pct, palette });
-      i++;
-    }
-
-    passesEl.innerHTML = passResults.map(pass => `<div class="progressive-pass">
-      <div class="progressive-pass-header">
-        <span class="progressive-pass-label">${pass.label}</span>
-        <span class="progressive-pass-pct">${pass.pct}%</span>
-      </div>
-      <div class="swatch-row">${pass.palette.map(c => swatchHTML(c, 'lg')).join('')}</div>
-    </div>`).join('');
-
-    show('out-progressive');
-  });
-}
-
-// ─── 10. AbortController ────────────────────────────────────────────
-
-function initAbort() {
-  const sourceImg = document.getElementById('abort-source-img');
-  const errorEl = document.getElementById('abort-error');
-  if (!sourceImg || !errorEl) return;
-
-  sourceImg.src = imageUrls[0];
-  waitForImage(sourceImg).then(async () => {
-    const controller = new AbortController();
-    controller.abort();
-
-    try {
-      await getColor(sourceImg, { signal: controller.signal });
-    } catch (e) {
-      errorEl.innerHTML = `<strong>Caught error:</strong>\n${e.name}: ${e.message}`;
-    }
-
-    show('out-abort');
-  });
-}
-
-// ─── 11. Drag and Drop ──────────────────────────────────────────────
+// ─── 09. Drag and Drop ──────────────────────────────────────────────
 
 function renderDroppedResult(image, result) {
   const roles = ['Vibrant', 'Muted', 'DarkVibrant', 'DarkMuted', 'LightVibrant', 'LightMuted'];
@@ -372,14 +322,14 @@ function renderDroppedResult(image, result) {
   const rgbPalette = getPaletteSync(image, { colorCount: 8 });
   if (rgbPalette) {
     result.querySelector('.dropped-rgb-swatches').innerHTML =
-      rgbPalette.map(c => swatchHTML(c, 'lg')).join('');
+      rgbPalette.map(c => swatchHTML(c, 'lg', { showHex: true })).join('');
   }
 
   // OKLCH palette
   const oklchPalette = getPaletteSync(image, { colorCount: 8, colorSpace: 'oklch' });
   if (oklchPalette) {
     result.querySelector('.dropped-oklch-swatches').innerHTML =
-      oklchPalette.map(c => swatchHTML(c, 'lg')).join('');
+      oklchPalette.map(c => swatchHTML(c, 'lg', { showHex: true })).join('');
   }
 
   // Semantic swatches
@@ -478,7 +428,7 @@ function isMobile() {
 // ─── Init ───────────────────────────────────────────────────────────
 
 export default function initV3Demos() {
-  initDominant(imageUrls);
+  initDominant(imageUrls.slice(0, 3));
   initPalette();
   initColorObject();
   initSwatches();
@@ -486,7 +436,5 @@ export default function initV3Demos() {
   initQuality();
   initVideoDemo();
   initAsync();
-  initProgressive();
-  initAbort();
   initDragAndDrop();
 }

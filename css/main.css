@@ -188,6 +188,8 @@ h3 {
 @media (min-width: 720px) {
   h1 {
     font-size: var(--text-3xl);
+    position: relative;
+    left: -0.1em;
   }
   h2,
   h3 {
@@ -508,6 +510,7 @@ a.nav-item:focus {
 .nav-link-sub.active {
   color: var(--color-text);
   font-weight: var(--weight-semibold);
+  background-color: var(--color-bg-hover);
 }
 
 @media (min-width: 720px) {
@@ -1059,10 +1062,6 @@ footer .button {
   max-width: 600px;
 }
 
-.section-num {
-  display: none;
-}
-
 
 /* -- Code blocks ----------------------------------------------------------- */
 
@@ -1146,11 +1145,6 @@ footer .button {
 .swatch {
   position: relative;
   cursor: default;
-  transition: transform 0.15s ease;
-}
-
-.swatch:hover {
-  transform: scale(1.08);
 }
 
 .swatch-lg {
@@ -1178,13 +1172,7 @@ footer .button {
   font-size: 0.65rem;
   color: var(--muted-color);
   white-space: nowrap;
-  opacity: 0;
-  transition: opacity 0.15s;
   pointer-events: none;
-}
-
-.swatch:hover[data-hex]::after {
-  opacity: 1;
 }
 
 .swatch-row {
@@ -1379,31 +1367,21 @@ footer .button {
 }
 
 
-/* -- Quality rows ---------------------------------------------------------- */
+/* -- Quality table --------------------------------------------------------- */
 
-.quality-row {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  padding: 12px 0;
+.quality-table {
+  max-width: none;
 }
 
-.quality-row:not(:last-child) {
-  border-bottom: 1px solid var(--color-border-faint);
-}
-
-.quality-label {
+.quality-table td:nth-child(2) {
   font-family: var(--code-font);
-  font-size: 0.8rem;
-  font-weight: var(--bold);
-  min-width: 100px;
-  color: var(--color-text-secondary);
+  padding-right: 24px;
+  white-space: nowrap;
 }
 
 .quality-swatches {
   display: flex;
   gap: 6px;
-  flex: 1;
   flex-wrap: wrap;
 }
 
@@ -1425,72 +1403,7 @@ footer .button {
 }
 
 
-/* -- Progressive palette --------------------------------------------------- */
-
-.progress-bar-wrap {
-  height: 6px;
-  background: var(--hover-bg-color);
-  border-radius: 3px;
-  margin-bottom: 24px;
-  overflow: hidden;
-}
-
-.progress-bar {
-  height: 100%;
-  width: 0;
-  background: var(--color-success);
-  border-radius: 3px;
-  transition: width 0.3s ease;
-}
-
-.progressive-pass {
-  padding: 12px 0;
-}
-
-.progressive-pass:not(:last-child) {
-  border-bottom: 1px solid var(--color-border-faint);
-}
-
-.progressive-pass-header {
-  margin-bottom: 8px;
-}
-
-.progressive-pass-label {
-  font-family: var(--code-font);
-  font-size: 0.8rem;
-  font-weight: var(--bold);
-  color: var(--color-text-secondary);
-  background: var(--hover-bg-color);
-  padding: 2px 10px;
-  border-radius: 99px;
-}
-
-.progressive-pass-pct {
-  font-family: var(--code-font);
-  font-size: 0.8rem;
-  color: var(--muted-color);
-  margin-left: 8px;
-}
-
-
 /* -- Abort error ----------------------------------------------------------- */
-
-.abort-error {
-  background: var(--color-error-bg);
-  border-left: 3px solid var(--color-error-border);
-  border-radius: 0 var(--radius-md) var(--radius-md) 0;
-  padding: 16px 20px;
-  font-family: var(--font-code);
-  font-size: 0.85rem;
-  line-height: var(--leading-relaxed);
-  color: var(--color-error-text);
-  white-space: pre-wrap;
-}
-
-.abort-error strong {
-  color: var(--color-error-bold);
-}
-
 
 /* -- Video / observe ------------------------------------------------------- */
 

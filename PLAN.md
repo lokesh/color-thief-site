@@ -28,30 +28,7 @@
   Individual Examples
 
 
-  14. Example 06 (Quality) could show timing more prominently. The speed difference between
-  quality: 1 and quality: 50 is a real practical concern. The timing values are there but styled as
-   secondary text. Making the ms timing the visual focus (maybe a small bar chart or bold number)
-  would make the tradeoff more tangible.
-
-  15. Example 09 (Progressive) would be more impressive if animated. Right now, all three passes
-  render at once after the async iterator completes. If the passes appeared sequentially with a
-  visible delay (even artificial), it would demonstrate the "show rough results first, then refine"
-   pattern more effectively.
-
-  16. Example 10 (Abort) is niche and low-impact as a visual demo. It shows a red error box.
-  Developers who need AbortSignal will find it in the README — it doesn't need premium real estate
-  as example #10 on the site. Consider dropping it from the visual demos and just mentioning it in
-  the Getting Started or API section.
-
   Visual Design
-
-  17. The section numbers (01–10) are hidden. .section-num { display: none; } — but they're in the
-  HTML. If they were shown, they'd add structure and a sense of progression. Library docs like GSAP
-   use numbered steps to good effect.
-
-  18. The swatch hex labels only show on hover. This is a nice touch for cleanliness, but it means
-  screenshots of the page (which drive social sharing) don't show the hex values. Consider always
-  showing hex for at least the dominant color and the first palette example.
 
   19. Code blocks don't use Prism syntax highlighting. The v3 code blocks use <div
   class="code-block"><code class="language-javascript"> but Prism expects <pre><code
@@ -66,13 +43,6 @@
   better choice. Even a brief feature comparison table or a few bullet points (zero browser deps,
   OKLCH quantization, video support, progressive extraction) positioned near the top would help.
 
-  21. No bundle size callout. extract-colors leads with "< 6kB." fast-average-color emphasizes
-  minimalism. If Color Thief v3's bundle is competitive, highlighting it would address a common
-  concern for frontend developers.
-
-  22. No framework integration examples. Motion.dev shows React, Vue, and vanilla JS examples. A
-  brief React or Vue snippet showing observe() with a component would resonate with the majority of
-   frontend developers who work in those frameworks.
 
   ---
   How Color Thief v3 Stacks Up Against Competitors
