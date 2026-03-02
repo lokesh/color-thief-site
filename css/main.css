@@ -546,6 +546,11 @@ a.nav-item:focus {
   color: var(--color-text);
 }
 
+.mobile-nav-link.active {
+  background: var(--color-text);
+  color: var(--color-text-inverse);
+}
+
 @media (min-width: 720px) {
   .mobile-nav {
     display: none;
