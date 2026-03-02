@@ -473,6 +473,11 @@ hr {
   background-color: var(--color-bg-hover);
 }
 
+.nav-link.active:not(.nav-link-sub) {
+  color: var(--color-text);
+  background-color: var(--color-bg-hover);
+}
+
 a.nav-item:focus {
   outline: 0;
 }
@@ -498,6 +503,11 @@ a.nav-item:focus {
 
 .nav-link-sub:hover {
   color: var(--color-text);
+}
+
+.nav-link-sub.active {
+  color: var(--color-text);
+  font-weight: var(--weight-semibold);
 }
 
 @media (min-width: 720px) {

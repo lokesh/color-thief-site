@@ -15,57 +15,113 @@ export default function initScrollLinks() {
     }, 600);
   });
 
-  initMobileNavSpy();
+  initNavSpy();
 }
 
-function initMobileNavSpy() {
-  const mobileNavs = document.querySelectorAll('.mobile-nav');
-  if (!mobileNavs.length) return;
-
-  // Build a map from each mobile nav to its links and target sections
-  const navDataMap = new Map();
-  mobileNavs.forEach(nav => {
-    const links = Array.from(nav.querySelectorAll('.mobile-nav-link'));
-    const sections = links
-      .map(link => ({ link, section: document.querySelector(link.hash) }))
-      .filter(entry => entry.section);
-    navDataMap.set(nav, sections);
+function initNavSpy() {
+  // Collect every section referenced by any nav link (mobile or desktop)
+  const allLinks = document.querySelectorAll('.nav-link, .mobile-nav-link');
+  const sectionIds = new Set();
+  allLinks.forEach(link => {
+    const id = link.hash?.slice(1);
+    if (id) sectionIds.add(id);
   });
 
-  const setActive = (nav, activeLink) => {
+  // Resolve to elements, keep DOM order
+  const sections = Array.from(sectionIds)
+    .map(id => document.getElementById(id))
+    .filter(Boolean);
+
+  if (!sections.length) return;
+
+  function update() {
+    // Find the most specific visible section (last in DOM order whose top
+    // is above the viewport center and whose bottom is still on screen)
+    let currentId = null;
+    for (const section of sections) {
+      if (section.offsetParent === null) continue;
+      const rect = section.getBoundingClientRect();
+      if (rect.top < window.innerHeight * 0.5 && rect.bottom > 60) {
+        currentId = section.id;
+      }
+    }
+
+    updateMobileNavs(currentId);
+    updateDesktopNavs(currentId);
+  }
+
+  const observer = new IntersectionObserver(update, {
+    threshold: 0,
+    rootMargin: '-60px 0px -50% 0px',
+  });
+
+  sections.forEach(s => observer.observe(s));
+}
+
+function updateMobileNavs(currentId) {
+  document.querySelectorAll('.mobile-nav').forEach(nav => {
+    if (nav.offsetParent === null) return;
+
     const links = nav.querySelectorAll('.mobile-nav-link');
     links.forEach(l => l.classList.remove('active'));
+
+    if (!currentId) return;
+
+    // Direct match or walk up the DOM to find a parent section with a nav link
+    let activeLink = nav.querySelector(`.mobile-nav-link[href="#${currentId}"]`);
+    if (!activeLink) {
+      const section = document.getElementById(currentId);
+      let parent = section?.parentElement;
+      while (parent) {
+        if (parent.id) {
+          activeLink = nav.querySelector(`.mobile-nav-link[href="#${parent.id}"]`);
+          if (activeLink) break;
+        }
+        parent = parent.parentElement;
+      }
+    }
+
     if (activeLink) {
       activeLink.classList.add('active');
-      // Scroll the active link into view within the nav
       activeLink.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
     }
-  };
+  });
+}
 
-  const observer = new IntersectionObserver(
-    () => {
-      // On any intersection change, find the topmost visible section for each nav
-      navDataMap.forEach((entries, nav) => {
-        // Skip hidden navs (e.g. the inactive version tab)
-        if (nav.offsetParent === null) return;
+function updateDesktopNavs(currentId) {
+  document.querySelectorAll('.nav').forEach(nav => {
+    if (nav.offsetParent === null) return;
 
-        let best = null;
-        for (const { link, section } of entries) {
-          const rect = section.getBoundingClientRect();
-          // Section is "in view" if its top is above the bottom half of the viewport
-          // and its bottom is still below the nav bar
-          if (rect.top < window.innerHeight * 0.5 && rect.bottom > 60) {
-            best = link;
+    nav.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+
+    if (!currentId) return;
+
+    // Find the exact link for this section
+    let activeLink = nav.querySelector(`.nav-link[href="#${currentId}"]`);
+
+    if (activeLink) {
+      activeLink.classList.add('active');
+
+      // If it's a sub-link, also activate its parent top-level link
+      if (activeLink.classList.contains('nav-link-sub')) {
+        const parentItem = activeLink.closest('.nav-list-item');
+        const parentLink = parentItem?.querySelector(':scope > .nav-link');
+        if (parentLink) parentLink.classList.add('active');
+      }
+    } else {
+      // Walk up the DOM to find a parent section that has a desktop nav link
+      const section = document.getElementById(currentId);
+      let parent = section?.parentElement;
+      while (parent) {
+        if (parent.id) {
+          activeLink = nav.querySelector(`.nav-link[href="#${parent.id}"]`);
+          if (activeLink) {
+            activeLink.classList.add('active');
+            break;
           }
         }
-        setActive(nav, best);
-      });
-    },
-    { threshold: 0, rootMargin: '-60px 0px -50% 0px' }
-  );
-
-  // Observe all target sections
-  navDataMap.forEach(entries => {
-    entries.forEach(({ section }) => observer.observe(section));
+        parent = parent.parentElement;
+      }
+    }
   });
 }
