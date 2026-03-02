@@ -173,7 +173,6 @@ h2 {
   margin-bottom: 6px;
   font-size: var(--text-xl);
   font-weight: var(--weight-bold);
-  text-align: center;
 }
 
 h3 {
@@ -527,11 +526,6 @@ a.nav-item:focus {
 /* -- Mobile nav ------------------------------------------------------------ */
 
 .mobile-nav {
-  display: flex;
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-  gap: 4px;
-  padding: 8px 16px;
   position: sticky;
   top: 0;
   z-index: 100;
@@ -539,12 +533,17 @@ a.nav-item:focus {
   border-bottom: 1px solid var(--color-border-subtle);
 }
 
-/* Hide scrollbar but keep scrollable */
-.mobile-nav::-webkit-scrollbar {
-  display: none;
-}
-.mobile-nav {
+.mobile-nav-scroll {
+  display: flex;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  gap: 4px;
+  padding: 8px 16px;
   scrollbar-width: none;
+}
+
+.mobile-nav-scroll::-webkit-scrollbar {
+  display: none;
 }
 
 .mobile-nav-link {
@@ -1149,9 +1148,14 @@ footer .button {
 
 .source-img {
   width: 100%;
-  max-width: 240px;
   border-radius: var(--border-radius-large);
   margin-bottom: 20px;
+}
+
+@media (min-width: 720px) {
+  .source-img {
+    max-width: 240px;
+  }
 }
 
 
@@ -1426,8 +1430,13 @@ footer .button {
   --glow-color: transparent;
   position: relative;
   border-radius: var(--border-radius-large);
-  max-width: 320px;
   margin-bottom: 24px;
+}
+
+@media (min-width: 720px) {
+  .video-glow-wrap {
+    max-width: 320px;
+  }
 }
 
 .video-glow-wrap::before {

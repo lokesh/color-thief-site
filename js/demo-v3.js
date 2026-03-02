@@ -373,7 +373,7 @@ function initDragAndDrop() {
   // Populate sample thumbnails
   const samplesEl = document.getElementById('v3-sample-images');
   if (samplesEl) {
-    imageUrls.slice(0, 3).forEach(url => {
+    imageUrls.forEach(url => {
       const img = document.createElement('img');
       img.src = url;
       img.alt = 'Sample image';

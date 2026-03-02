@@ -78,8 +78,5 @@
 
   2. Reorder: move one or two visually striking examples above "Try it yourself" — let the library
   make a first impression before asking the visitor to interact.
-  3. Add a compact feature/differentiator list near the top — 4-6 key points that say "this is why
-  v3 exists." Something a developer skimming can absorb in 5 seconds.
-  9. Add a bundle size badge — if the number is good, show it.
   10. Animate progressive extraction — make passes appear sequentially for visual impact.
 

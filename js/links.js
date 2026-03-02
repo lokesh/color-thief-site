@@ -83,7 +83,17 @@ function updateMobileNavs(currentId) {
 
     if (activeLink) {
       activeLink.classList.add('active');
-      activeLink.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+      // Scroll only the inner scroll container horizontally — avoid
+      // scrollIntoView which scrolls all ancestors and causes sticky-nav jank.
+      const scroller = nav.querySelector('.mobile-nav-scroll');
+      if (scroller) {
+        const scrollerLeft = scroller.getBoundingClientRect().left;
+        const scrollerWidth = scroller.offsetWidth;
+        const linkLeft = activeLink.getBoundingClientRect().left;
+        const linkWidth = activeLink.offsetWidth;
+        const targetScroll = scroller.scrollLeft + (linkLeft - scrollerLeft) - (scrollerWidth - linkWidth) / 2;
+        scroller.scrollTo({ left: targetScroll, behavior: 'smooth' });
+      }
     }
   });
 }
