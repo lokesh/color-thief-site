@@ -161,7 +161,7 @@ function initOklch() {
   const sourceImg = document.getElementById('oklch-source-img');
   if (!sourceImg) return;
 
-  sourceImg.src = imageUrls[2] || imageUrls[0];
+  sourceImg.src = imageUrls[3] || imageUrls[0];
   waitForImage(sourceImg).then(() => {
     const rgb = getPaletteSync(sourceImg, { colorCount: 8 });
     const oklch = getPaletteSync(sourceImg, { colorCount: 8, colorSpace: 'oklch' });

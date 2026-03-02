@@ -27,22 +27,6 @@
 
   Individual Examples
 
-  11. Example 01 (Dominant color) — the grid of images is a good start, but the images aren't shown
-   yet. The imageUrls are loaded via import.meta.glob('../images/*.jpg') — I can't see what they
-  look like, but the diversity of the source images matters a lot. Choose images that show range: a
-   portrait, a landscape, a product shot, something with muted tones, something vibrant. The
-  dominant color extraction is only as visually impressive as the source material.
-
-  12. Example 03 (Color Object) uses the same image as 01 and 02. imageUrls[0] is reused for
-  dominant, palette, and color object. Using different images for each example would feel more
-  varied and show that the library handles diverse inputs.
-
-  13. Example 05 (OKLCH vs RGB) — this is a differentiator that needs more visual explanation. The
-  side-by-side comparison is there, but there's no annotation about what to look for. The
-  description says "colors that 'feel' evenly spaced to the human eye" — but with just two rows of
-  swatches, a casual visitor might not see the difference. Consider choosing an image where the
-  difference is dramatic, or adding a brief label like "Notice the RGB palette has two very similar
-   greens, while OKLCH spreads the range."
 
   14. Example 06 (Quality) could show timing more prominently. The speed difference between
   quality: 1 and quality: 50 is a real practical concern. The timing values are there but styled as

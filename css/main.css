@@ -74,7 +74,7 @@
   --radius-full: 99px;
 
   /* ── Layout ────────────────────────────────────────────────────── */
-  --page-width:  56rem;
+  --page-width:  60rem;
 
   /* ═══════════════════════════════════════════════════════════════
      Legacy aliases — gradually remove as code is updated
@@ -1099,6 +1099,13 @@ footer .button {
 
 
 /* -- v3 Output areas ------------------------------------------------------- */
+
+.annotation {
+  font-size: 0.85rem;
+  color: var(--color-text-secondary);
+  max-width: 600px;
+  margin: 8px 0 12px;
+}
 
 .v3-output {
   opacity: 0;

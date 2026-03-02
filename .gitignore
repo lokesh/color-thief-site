@@ -11,3 +11,4 @@ dist
 
 .env
 CLAUDE.md
+.DS_Store

@@ -211,6 +211,7 @@ const oklch = getPaletteSync(img, { colorCount: 8, colorSpace: 'oklch' });</code
 
         <div class="v3-output" id="out-oklch">
           <img class="source-img" id="oklch-source-img" src="" alt="Source image">
+          <p class="annotation">RGB clusters around similar greens. OKLCH spreads the greens apart and captures the full range of what you actually see in the photo.</p>
           <div class="comparison">
             <div class="comparison-col">
               <h3>RGB (default)</h3>
@@ -285,9 +286,7 @@ controller.stop(); // clean up</code></div>
       <section id="v3-async" class="v3-section">
         <span class="section-num">08</span>
         <h2>Asynchronous methods</h2>
-        <p>The async API keeps your UI responsive during extraction. It breaks the work into chunks and pauses between them, giving the browser time to handle animations, scrolling, and clicks.</p>
-        <p>With <code>worker: true</code>, quantization runs in a Web Worker on a separate thread. The worker is created once and reused across calls, so batch processing doesn't repeat setup cost. Each call still pays the cost of transferring pixel data, so individual extractions are a bit slower. The benefit is that the main thread is completely free—useful when processing many images or large images while keeping scrolling and animations smooth.</p>
-        <p>In Node.js, use the standard async API, workers are browser-only.</p>
+        <p>The async API keeps your UI responsive during extraction. It breaks the work into chunks and pauses between them, giving the browser time to handle animations, scrolling, and clicks. Pass <code>worker: true</code> to offload quantization to a Web Worker thread entirely (browser-only). This is helpful when processing many images at once or working with very large images.</p>
 
         <div class="code-block"><code class="language-javascript">const color = await getColor(img);
 
