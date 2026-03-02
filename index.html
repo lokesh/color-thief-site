@@ -82,7 +82,7 @@
               <li class="nav-sub-item"><a href="#v3-swatches" class="nav-link nav-link-sub"><span class="nav-num">4.</span> Swatches</a></li>
               <li class="nav-sub-item"><a href="#v3-oklch" class="nav-link nav-link-sub"><span class="nav-num">5.</span> OKLCH vs RGB</a></li>
               <li class="nav-sub-item"><a href="#v3-quality" class="nav-link nav-link-sub"><span class="nav-num">6.</span> Quality</a></li>
-              <li class="nav-sub-item"><a href="#v3-observe" class="nav-link nav-link-sub"><span class="nav-num">7.</span> Observe</a></li>
+              <li class="nav-sub-item"><a href="#v3-observe" class="nav-link nav-link-sub"><span class="nav-num">7.</span> Video</a></li>
               <li class="nav-sub-item"><a href="#v3-async" class="nav-link nav-link-sub"><span class="nav-num">8.</span> Async</a></li>
 
 
@@ -119,7 +119,7 @@
           <div class="drop-zone-label dragging-label">Drop it!</div>
         </div>
         <div class="sample-images" id="v3-sample-images">
-          <span class="sample-images-label">or try it with these example images</span>
+          <span class="sample-images-label">or click an example image</span>
         </div>
         <div id="v3-dragged-images" class="dragged-images"></div>
       </section>
@@ -366,7 +366,7 @@ const palette = await getPalette(img, { colorCount: 6, worker: true });</code></
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 6l-9.5 9.5-5-5L1 18"/><polyline points="17 6 23 6 23 12"/></svg>
             </div>
             <strong>Real-time video</strong>
-            <p>Hook into video and canvas elements to to build reactive backgrounds, ambient lighting, and audio visualizers.</p>
+            <p>Hook into video and canvas elements to build reactive backgrounds, ambient lighting, and audio visualizers.</p>
           </div>
 
           <div class="why-card">
@@ -1002,10 +1002,10 @@ controller.stop();</code></div>
       <!-- FOOTER (v3) -->
 
       <footer>
-        <p>
+        <div>
           <div class="logo-credit">Created by Lokesh Dhakar</div>
           <a href="https://twitter.com/lokesh" class="button">Twitter</a> <a href="https://lokeshdhakar.com" class="button">Website</a>
-        </p>
+        </div>
       </footer>
 
     </div><!-- .content -->
@@ -1125,7 +1125,7 @@ ColorThief.getPalette(img, 5)
     if (img.complete) {
       colorThief.getColor(img);
     } else {
-      image.addEventListener('load', function() {
+      img.addEventListener('load', function() {
         colorThief.getColor(img);
       });
     }
@@ -1144,7 +1144,7 @@ const img = document.querySelector('img');
 if (img.complete) {
   colorThief.getColor(img);
 } else {
-  image.addEventListener('load', function() {
+  img.addEventListener('load', function() {
     colorThief.getColor(img);
   });
 }
@@ -1251,7 +1251,7 @@ const img = document.querySelector('img');
 if (img.complete) {
   colorThief.getColor(img);
 } else {
-  image.addEventListener('load', function() {
+  img.addEventListener('load', function() {
     colorThief.getColor(img);
   });
 }</code></pre>
@@ -1311,10 +1311,10 @@ rgbToHex(102, 51, 153); // #663399</code></pre>
       <!-- FOOTER (v2) -->
 
       <footer>
-        <p>
+        <div>
           <div class="logo-credit">Created by Lokesh Dhakar</div>
           <a href="https://twitter.com/lokesh" class="button">Twitter</a> <a href="https://lokeshdhakar.com" class="button">Website</a>
-        </p>
+        </div>
       </footer>
 
     </div><!-- .content -->
