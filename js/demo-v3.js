@@ -230,7 +230,7 @@ function initVideoDemo() {
         dominantEl.innerHTML =
           `<div class="observe-dominant-swatch" style="background:${dominant.hex()}"></div>` +
           `<div class="observe-dominant-meta">
-            <strong style="color:${dominant.hex()}">${dominant.hex()}</strong>
+            <strong>${dominant.hex()}</strong>
             <span class="observe-dark-light">${dominant.isDark ? 'Dark' : 'Light'}</span>
           </div>`;
 

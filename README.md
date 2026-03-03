@@ -9,15 +9,33 @@ by [Lokesh Dhakar](http://www.lokeshdhakar.com)
 
 ## Development
 
-- Uses Parcel for the build. 
-- Deployed via sftp to Dreamhost and served up from the lokeshdhakar.com/projects/color-thief folder.
+- Uses Vite for the build.
+- Deployed via SFTP to Dreamhost, served from the `lokeshdhakar.com/projects/color-thief` folder.
 - Uses Prism for syntax highlighting. `prism.min.js` is a custom build which includes the core library and a set of hand-picked plugins.
 
-**Why use Parcel?** Did I need a built tool for this site? The reason I added it was that I wanted to import the colorthief package via npm to test the import. I originally loaded the package directly from `node_modules`, but Netlify removes that folder after build. So at minimum, I needed to move the colorthief package's relevant files out of node_modules. I decided if I was going to add a build step, this would be a good time to try Parcel.
+### Commands
 
-**Would I use it again?** Yes. It mostly works out of the box and is great for smaller projects.
+```
+npm run dev      # Start local dev server
+npm run build    # Production build to dist/
+npm run deploy   # Build + SFTP deploy to Dreamhost
+```
 
-### Parcel configuration
-- `index.html` loads `index.js` which pulls in the rest of the JS files.
-- Parcel minifies svgs, including stripping out their viewbox attributes. This caused issues with the Github logo and star rendering. I've disabled this the `.htmlnanorc` file.
-- Using async/await was throwing errors in the console related to a runtime generator. A quick fix for this was to update the browser list in `package.json` to just support the latest browser.
+### Deploy configuration
+
+Copy `.env.example` to `.env` and fill in your Dreamhost SFTP credentials before running `npm run deploy`.
+
+### Vite configuration
+
+- `index.html` is the entry point. Vite bundles `js/index.js` and the CSS files.
+- `base` is set to `/projects/color-thief/` in `vite.config.js` to match the live URL path.
+- Output goes to `dist/`.
+
+### JS modules (`js/`)
+
+- `index.js` — Entry point, imports and initializes all other modules
+- `demo-v3.js` — Core demo functionality for Color Thief v3: renders example images with color extraction output, handles drag-and-drop uploads
+- `demo-v2.js` — Demo functionality for Color Thief v2
+- `version-toggle.js` — Handles switching between v2/v3 demo views
+- `links.js` — Smooth scroll navigation
+- `prism.min.js` — Vendored custom Prism.js build for syntax highlighting
