@@ -142,8 +142,8 @@
         <div class="code-block"><code class="language-javascript">import { getColorSync } from 'colorthief';
 
 const color = getColorSync(img);
-color.hex();       // '#e84393'
-color.textColor;   // '#000000'</code></div>
+color.hex();  // '#e84393'
+color.css();  // 'rgb(232, 67, 147)'</code></div>
 
         <div class="v3-output" id="out-dominant">
           <div class="dominant-grid" id="dominant-grid"></div>
@@ -158,7 +158,9 @@ color.textColor;   // '#000000'</code></div>
         <h2>Get a color palette</h2>
         <p>Extract a multi-color palette. Each color in the palette is a full Color object.</p>
 
-        <div class="code-block"><code class="language-javascript">const palette = getPaletteSync(img, { colorCount: 8 });
+        <div class="code-block"><code class="language-javascript">import { getPaletteSync } from 'colorthief';
+
+const palette = getPaletteSync(img, { colorCount: 8 });
 palette.forEach(c => console.log(c.hex()));</code></div>
 
         <div class="v3-output" id="out-palette">
@@ -176,16 +178,19 @@ palette.forEach(c => console.log(c.hex()));</code></div>
         <h2>Observe a video source</h2>
         <p>Reactively watch a video source and get palette updates on every frame. Works with <code>&lt;video&gt;</code>, <code>&lt;canvas&gt;</code>, and <code>&lt;img&gt;</code> elements.</p>
 
-        <div class="code-block"><code class="language-javascript">const controller = observe(videoElement, {
+        <div class="code-block"><code class="language-javascript">import { observe } from 'colorthief';
+
+const controller = observe(videoElement, {
     throttle: 200,
     colorCount: 5,
     onChange(palette) {
-        const dominant = palette[0];
+        const [dominant] = palette;
         document.body.style.background = dominant.css();
     },
 });
 
-controller.stop(); // clean up</code></div>
+// Later — clean up
+controller.stop();</code></div>
 
         <div class="v3-output" id="out-observe">
           <div class="video-glow-wrap" id="v3-video-glow">
@@ -213,16 +218,20 @@ controller.stop(); // clean up</code></div>
         <h2>The color object</h2>
         <p>Every extracted color is a rich object with format conversions, accessibility metadata, and contrast ratios.</p>
 
-        <div class="code-block"><code class="language-javascript">const color = getColorSync(img);
+        <div class="code-block"><code class="language-javascript">import { getColorSync } from 'colorthief';
 
-color.rgb()        // { r, g, b }
-color.hex()        // '#rrggbb'
-color.hsl()        // { h, s, l }
-color.oklch()      // { l, c, h }
-color.css()        // 'rgb(255, 128, 0)' — also 'hsl' and 'oklch'
-color.textColor    // '#ffffff' or '#000000'
-color.isDark       // true/false
-color.contrast     // { white, black, foreground }</code></div>
+const color = getColorSync(img);
+
+color.rgb()           // { r: 232, g: 67, b: 147 }
+color.hex()           // '#e84393'
+color.hsl()           // { h: 331, s: 77, l: 59 }
+color.oklch()         // { l: 0.64, c: 0.21, h: 353 }
+color.css()           // 'rgb(232, 67, 147)'
+color.css('oklch')    // 'oklch(0.64 0.21 353)'
+color.textColor       // '#ffffff' or '#000000'
+color.isDark          // true
+color.contrast.white  // 3.42
+color.contrast.black  // 6.14</code></div>
 
         <div class="v3-output" id="out-color-obj">
           <img class="source-img" id="color-obj-source-img" src="" alt="Source image">
@@ -239,9 +248,19 @@ color.contrast     // { white, black, foreground }</code></div>
         <h2>Get semantic swatches</h2>
         <p>Classify palette colors into six semantic roles. Each swatch includes text color recommendations.</p>
 
-        <div class="code-block"><code class="language-javascript">const swatches = getSwatchesSync(img);
-swatches.Vibrant?.color.hex();            // '#e84393'
-swatches.DarkMuted?.titleTextColor.hex(); // '#ffffff'</code></div>
+        <div class="code-block"><code class="language-javascript">import { getSwatchesSync } from 'colorthief';
+
+const swatches = getSwatchesSync(img);
+
+if (swatches.Vibrant) {
+    header.style.background = swatches.Vibrant.color.css();
+    header.style.color = swatches.Vibrant.titleTextColor.css();
+}
+
+if (swatches.DarkMuted) {
+    sidebar.style.background = swatches.DarkMuted.color.css();
+    sidebar.style.color = swatches.DarkMuted.bodyTextColor.css();
+}</code></div>
 
         <div class="v3-output" id="out-swatches">
           <img class="source-img" id="swatches-source-img" src="" alt="Source image">
@@ -257,7 +276,9 @@ swatches.DarkMuted?.titleTextColor.hex(); // '#ffffff'</code></div>
         <h2>OKLCH vs RGB quantization</h2>
         <p>OKLCH quantization produces more perceptually uniform palettes. Colors that "feel" evenly spaced to the human eye.</p>
 
-        <div class="code-block"><code class="language-javascript">// Default — quantize in sRGB
+        <div class="code-block"><code class="language-javascript">import { getPaletteSync } from 'colorthief';
+
+// Default — quantize in sRGB
 const rgb = getPaletteSync(img, { colorCount: 8 });
 
 // Perceptual — quantize in OKLCH
@@ -265,7 +286,7 @@ const oklch = getPaletteSync(img, { colorCount: 8, colorSpace: 'oklch' });</code
 
         <div class="v3-output" id="out-oklch">
           <img class="source-img" id="oklch-source-img" src="" alt="Source image">
-          <p class="annotation">RGB clusters around similar greens. OKLCH spreads the greens apart and captures the full range of what you actually see in the photo.</p>
+          <p class="annotation">The difference isn't always obvious at a quick glance, but it's meaningful. <strong>RGB</strong> tends to cluster around similar shades, while <strong>OKLCH</strong> spreads colors out to better match what your eyes actually see.</p>
           <div class="comparison">
             <div class="comparison-col">
               <h3>RGB (default)</h3>
@@ -287,7 +308,9 @@ const oklch = getPaletteSync(img, { colorCount: 8, colorSpace: 'oklch' });</code
         <h2>Quality settings</h2>
         <p>The <code>quality</code> option controls how many pixels are sampled. Lower values sample more pixels (slower, more accurate). Default is 10.</p>
 
-        <div class="code-block"><code class="language-javascript">getPaletteSync(img, { quality: 1 });   // Every pixel
+        <div class="code-block"><code class="language-javascript">import { getPaletteSync } from 'colorthief';
+
+getPaletteSync(img, { quality: 1 });   // Every pixel
 getPaletteSync(img, { quality: 10 });  // Every 10th pixel (default)
 getPaletteSync(img, { quality: 50 });  // Every 50th pixel</code></div>
 
@@ -305,12 +328,14 @@ getPaletteSync(img, { quality: 50 });  // Every 50th pixel</code></div>
         <h2>Asynchronous methods</h2>
         <p>The async API keeps your UI responsive during extraction. It breaks the work into chunks and pauses between them, giving the browser time to handle animations, scrolling, and clicks. Pass <code>worker: true</code> to offload quantization to a Web Worker thread entirely (browser-only). This is helpful when processing many images at once or working with very large images.</p>
 
-        <div class="code-block"><code class="language-javascript">const color = await getColor(img);
+        <div class="code-block"><code class="language-javascript">import { getColor, getPalette } from 'colorthief';
+
+const color = await getColor(img);
 
 const palette = await getPalette(img, { colorCount: 6 });
 
 // Offload to Web Worker (browser only)
-const palette = await getPalette(img, { colorCount: 6, worker: true });</code></div>
+const workerPalette = await getPalette(img, { colorCount: 6, worker: true });</code></div>
 
         <div class="v3-output" id="out-async">
           <img class="source-img" id="async-source-img" src="" alt="Source image">
@@ -389,7 +414,7 @@ const palette = await getPalette(img, { colorCount: 6, worker: true });</code></
             <thead>
               <tr>
                 <th></th>
-                <th class="comparison-highlight">Color Thief v3</th>
+                <th class="comparison-highlight">Color Thief</th>
                 <th>Vibrant.js</th>
                 <th>img-color-extractor</th>
               </tr>
@@ -415,12 +440,12 @@ const palette = await getPalette(img, { colorCount: 6, worker: true });</code></
               </tr>
               <tr>
                 <td>Rich color objects</td>
-                <td class="comparison-highlight">hex, hsl, oklch, css, contrast</td>
+                <td class="comparison-highlight">hex, hsl, oklch,<br /> css, contrast</td>
                 <td>hex, rgb, hsl</td>
                 <td>hex only</td>
               </tr>
               <tr>
-                <td>WCAG contrast / textColor</td>
+                <td>WCAG contrast</td>
                 <td class="comparison-highlight">Built-in</td>
                 <td>Partial</td>
                 <td>No</td>

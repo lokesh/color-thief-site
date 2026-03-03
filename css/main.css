@@ -1328,7 +1328,8 @@ footer .button {
 .swatch-row {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
+  column-gap: 8px;
+  row-gap: 28px;
   padding-bottom: 20px;
 }
 
@@ -1369,6 +1370,7 @@ footer .button {
   font-family: var(--code-font);
   font-size: 0.75rem;
   color: var(--muted-color);
+  margin-top: 12px;
 }
 
 
@@ -1562,6 +1564,11 @@ footer .button {
   position: relative;
   border-radius: var(--border-radius-large);
   margin-bottom: 24px;
+  overflow: hidden;
+}
+
+.video-glow-wrap:has(.video-play-btn:not(.hidden)) {
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1);
 }
 
 @media (min-width: 720px) {
@@ -1745,6 +1752,14 @@ footer .button {
   width: 100%;
   border-collapse: collapse;
   margin: 1rem 0 2rem 0;
+}
+
+@media (max-width: 719px) {
+  .options-table {
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
 }
 
 .options-table th,
