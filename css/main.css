@@ -179,7 +179,6 @@ h3 {
   font-size: var(--text-lg);
   font-weight: var(--weight-semibold);
   margin: 1rem 0;
-  text-align: center;
   line-height: var(--leading-tight);
 }
 
@@ -1333,6 +1332,11 @@ footer .button {
   padding-bottom: 20px;
 }
 
+.swatch-row:not(:has([data-hex])) {
+  row-gap: 8px;
+  padding-bottom: 0;
+}
+
 
 /* -- Dominant color grid --------------------------------------------------- */
 
@@ -1564,7 +1568,16 @@ footer .button {
   position: relative;
   border-radius: var(--border-radius-large);
   margin-bottom: 24px;
-  overflow: hidden;
+}
+
+@media (max-width: 719px) {
+  #v3-observe {
+    margin-left: -16px;
+    margin-right: -16px;
+    padding-left: 16px;
+    padding-right: 16px;
+    overflow: hidden;
+  }
 }
 
 .video-glow-wrap:has(.video-play-btn:not(.hidden)) {
@@ -1793,13 +1806,6 @@ footer .button {
   font-size: 0.9rem;
   font-weight: var(--weight-semibold);
   margin: 1.5rem 0 0.5rem;
-  text-align: center;
-}
-
-@media (min-width: 720px) {
-  .api-section h4 {
-    text-align: left;
-  }
 }
 
 .api-section .method:last-of-type {
