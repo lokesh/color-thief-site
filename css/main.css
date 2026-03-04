@@ -162,7 +162,7 @@ h1 {
   font-size: var(--text-2xl);
   line-height: var(--leading-none);
   letter-spacing: var(--tracking-tightest);
-  margin: 0 0 6px 0;
+  margin: 0;
   text-transform: uppercase;
   font-weight: var(--weight-x-bold);
 }
@@ -205,9 +205,10 @@ p.before-list {
 }
 
 .lead {
-  margin-top: 0.5rem;
+  /* margin-top: 0.5rem; */
   margin-bottom: 0.25rem;
   font-size: 1rem;
+  font-weight: var(--weight-semibold);
 }
 
 @media (min-width: 720px) {
@@ -409,13 +410,13 @@ hr {
 }
 
 .header {
-  padding-top: 4rem;
+  padding-top: 2rem;
   text-align: center;
 }
 
 .logo-credit {
   display: block;
-  margin-bottom: 0.15em;
+  margin-bottom: 2rem;
   color: var(--muted-color);
   font-weight: 500;
   font-size: 0.85rem;
@@ -423,12 +424,8 @@ hr {
 
 @media (min-width: 720px) {
   .header {
+    margin-top: 4rem;
     text-align: left;
-  }
-
-  .logo-credit {
-    position: relative;
-    top: -6px;
   }
 }
 
@@ -1105,7 +1102,7 @@ footer .button {
 .version-toggle {
   display: flex;
   gap: 0.25rem;
-  margin: 1rem auto 0;
+  margin: 0 auto 0.5rem auto;
   width: fit-content;
   padding: 0.2rem;
   background: var(--color-bg-hover);
@@ -1114,7 +1111,8 @@ footer .button {
 
 @media (min-width: 720px) {
   .version-toggle {
-    margin: 2rem 0 0 0;
+    margin-left: -2px;
+    margin-right: 0;
   }
 }
 
@@ -1146,7 +1144,7 @@ footer .button {
 }
 
 .version-details {
-  margin-top: 0.5rem;
+  margin-bottom: 2rem;
 }
 
 .version-date {
@@ -1158,6 +1156,7 @@ footer .button {
 }
 
 .version-subtitle {
+  display: none;
   font-size: 0.85rem;
   color: var(--color-text-secondary);
   margin: 0.2rem 0 0.4rem;
@@ -1169,7 +1168,7 @@ footer .button {
   color: var(--color-text-muted);
   font-weight: var(--weight-medium);
   letter-spacing: 0.02em;
-  margin: 0 0 0.75rem;
+  margin: 0 0 0.25rem;
 }
 
 
