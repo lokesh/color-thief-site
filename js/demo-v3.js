@@ -410,7 +410,11 @@ function initDragAndDrop() {
       img.src = url;
       img.alt = 'Sample image';
       img.addEventListener('click', () => {
-        const result = insertDroppedScaffold(container);
+        // Reuse existing sample result if present to avoid layout shift when switching images
+        let result = container.querySelector('.dropped-result:not(.user-upload)');
+        if (!result) {
+          result = insertDroppedScaffold(container);
+        }
         const image = result.querySelector('.dropped-img');
         image.classList.add('desaturated');
         image.src = url;

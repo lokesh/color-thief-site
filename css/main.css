@@ -1713,17 +1713,22 @@ footer .button {
 
 /* Swatch spring-in keyframes */
 @keyframes swatch-spring-in {
-  0%   { opacity: 0; transform: scale(0.5); }
+  0%   { opacity: 0; transform: scale(0.7); }
   60%  { opacity: 1; transform: scale(1.05); }
   80%  { transform: scale(0.98); }
   100% { opacity: 1; transform: scale(1); }
 }
 
-.dropped-result .swatch,
+.dropped-result .swatch {
+  opacity: 0;
+  transform: scale(0.7);
+}
+
 .dropped-result .swatch-card {
   opacity: 0;
-  transform: scale(0.5);
+  transform: scale(0.7);
 }
+
 
 .dropped-result .swatch.cascade-in,
 .dropped-result .swatch-card.cascade-in {
