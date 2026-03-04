@@ -961,7 +961,7 @@ footer .button {
   flex-wrap: nowrap;
   gap: 12px;
   margin: 0 -16px 2rem;
-  padding: 0 16px;
+  padding: 6px 16px;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
 }
