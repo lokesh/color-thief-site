@@ -121,12 +121,13 @@ body {
 /* Typography
  * *----------------------------------------------- */
 html {
-  font-size: 14px;
+  /* 15px base — all rem values scale from this */
+  font-size: 15px;
 }
 
 @media (min-width: 720px) {
   html {
-    font-size: 14px;
+    font-size: 15px;
   }
 }
 @media (min-width: 1200px) {
@@ -145,7 +146,7 @@ button,
 select,
 textarea {
   font-family: var(--font);
-  font-size: 1rem;
+  font-size: var(--text-base);
   line-height: var(--line-height);
   -webkit-font-smoothing: antialiased;
   font-feature-settings: "cv02", "cv03", "cv04", "cv11";
@@ -187,7 +188,7 @@ h3 {
   h1 {
     font-size: var(--text-3xl);
     position: relative;
-    left: -0.1em;
+    left: -0.1em; /* optical alignment: compensates for letter-spacing bleed on the left edge */
   }
   h2,
   h3 {
@@ -207,13 +208,13 @@ p.before-list {
 .lead {
   /* margin-top: 0.5rem; */
   margin-bottom: 0.25rem;
-  font-size: 1rem;
+  font-size: var(--text-base);
   font-weight: var(--weight-semibold);
 }
 
 @media (min-width: 720px) {
   .lead{
-    font-size: 1.1em;
+    font-size: 1.1em; /* em (not rem) so it scales relative to parent; slight bump over --text-base */
   }
 }
 
@@ -323,7 +324,7 @@ li > code {
   border: 1px solid var(--border-color-light);
   font-size: var(--code-font-size);
   border-radius: var(--border-radius);
-  line-height: 12px;
+  line-height: 12px; /* px keeps inline code from inflating surrounding line height */
 }
 
 .code-file {
@@ -355,16 +356,16 @@ th {
   border: 1px solid var(--link-color);
   color: var(--link-color);
   text-transform: uppercase;
-  letter-spacing: 0.05em;
-  font-size: 0.8rem;
+  letter-spacing: var(--tracking-wide);
+  font-size: var(--text-md);
   border-radius: var(--border-radius);
   vertical-align: middle;
   white-space: nowrap;
   font-weight: var(--bold);
-  background-color: white;
+  background-color: var(--color-bg-surface);
 }
 .button:hover {
-  color: white;
+  color: var(--color-text-inverse);
   background-color: var(--link-color);
   text-decoration: none;
 }
@@ -378,14 +379,14 @@ th {
 /* Elements
  * * ========================================================================== */
 hr {
-  width: 348px;
+  width: 348px; /* ~half a typical mobile viewport; not full-bleed by design */
   border: 0;
   border-top: 1px solid var(--border-color-light);
 }
 
 @media (min-width: 720px) {
   hr {
-    width: 480px;
+    width: 480px; /* wider fixed width for desktop; not full-bleed by design */
     margin-left: 0;
   }
 }
@@ -395,7 +396,7 @@ hr {
 .column {
   max-width: var(--page-width);
   margin: 0 auto;
-  padding: 0 16px;
+  padding: 0 16px; /* horizontal page gutter; matches .mobile-nav-scroll padding */
 }
 
 @media (min-width: 720px) {
@@ -418,8 +419,8 @@ hr {
   display: block;
   margin-bottom: 2rem;
   color: var(--muted-color);
-  font-weight: 500;
-  font-size: 0.85rem;
+  font-weight: var(--weight-medium);
+  font-size: 0.85rem; /* between --text-sm (0.75rem) and --text-base (1rem) for readable attribution */
 }
 
 @media (min-width: 720px) {
@@ -462,7 +463,7 @@ hr {
   display: inline-block;
   padding: 3px 6px;
   line-height: var(--leading-snug);
-  font-size: 0.875rem;
+  font-size: 0.875rem; /* between --text-sm (0.75rem) and --text-base (1rem); intentional mid-size for sidebar nav */
   color: var(--color-text-secondary);
   font-weight: var(--weight-semibold);
   border-radius: var(--radius-sm);
@@ -496,7 +497,7 @@ a.nav-item:focus {
 }
 
 .nav-link-sub {
-  font-size: 0.8rem;
+  font-size: var(--text-md);
   font-weight: var(--weight-regular);
   padding: 2px 8px;
   color: var(--color-text-secondary);
@@ -538,7 +539,7 @@ a.nav-item:focus {
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
   gap: 4px;
-  padding: 8px 16px;
+  padding: 8px 16px; /* 16px matches .column page gutter */
   scrollbar-width: none;
 }
 
@@ -549,7 +550,7 @@ a.nav-item:focus {
 .mobile-nav-link {
   flex-shrink: 0;
   padding: 6px 12px;
-  font-size: 0.8rem;
+  font-size: var(--text-md);
   font-weight: var(--weight-semibold);
   color: var(--color-text-secondary);
   white-space: nowrap;
@@ -639,13 +640,13 @@ section:last-of-type {
 .method-name {
   font-family: var(--code-font);
   font-weight: var(--bold);
-  font-size: 0.875rem;
+  font-size: 0.875rem; /* between --text-sm (0.75rem) and --text-base (1rem); readable monospace method name */
 }
 
 
 .method-return,
 .method-argument {
-  font-size: 0.875rem;
+  font-size: 0.875rem; /* between --text-sm (0.75rem) and --text-base (1rem); readable monospace method name */
   font-family: var(--code-font);
   font-weight: var(--bold);
   color: var(--primary-color);
@@ -655,7 +656,7 @@ section:last-of-type {
   .method-name,
   .method-return,
   .method-argument {
-    font-size: 0.9375rem;
+    font-size: 0.9375rem; /* 15px at 16px root — near-native size for desktop monospace */
   }
 }
 
@@ -696,11 +697,10 @@ footer .button {
 
 
 
-
 /* -- Why Color Thief ------------------------------------------------------- */
 
 .why-section > p {
-  max-width: 600px;
+  max-width: 600px; /* comfortable prose measure; also used by .v3-section > p */
 }
 
 .why-grid {
@@ -743,20 +743,20 @@ footer .button {
 
 .why-card strong {
   display: block;
-  font-size: 0.9rem;
+  font-size: 0.9rem; /* slightly below --text-base for compact card headings */
   font-weight: var(--weight-semibold);
   margin-bottom: 0.25rem;
 }
 
 .why-card p {
-  font-size: 0.85rem;
+  font-size: 0.85rem; /* small but readable card body; between --text-sm and --text-base */
   color: var(--color-text-secondary);
   margin: 0;
   line-height: var(--leading-normal);
 }
 
 .why-card code {
-  font-size: 0.75rem;
+  font-size: var(--text-sm);
   background: none;
   border: none;
   padding: 0;
@@ -774,9 +774,9 @@ footer .button {
 
 .comparison-table {
   width: 100%;
-  min-width: 600px;
+  min-width: 600px; /* prevents columns from collapsing before horizontal scroll kicks in */
   border-collapse: collapse;
-  font-size: 0.8rem;
+  font-size: var(--text-md);
 }
 
 .comparison-table th,
@@ -790,9 +790,9 @@ footer .button {
 .comparison-table thead th {
   background: var(--color-bg);
   font-weight: var(--weight-semibold);
-  font-size: 0.75rem;
+  font-size: var(--text-sm);
   text-transform: uppercase;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.04em; /* slightly tighter than --tracking-wide (0.05em) for denser table headers */
   color: var(--color-text-muted);
   white-space: nowrap;
   border-bottom: 1px solid var(--color-border-subtle);
@@ -809,6 +809,7 @@ footer .button {
 }
 
 .comparison-highlight {
+  /* --color-primary at 4% opacity; can't use var() directly inside rgba() without color-mix */
   background: rgba(230, 102, 34, 0.04);
 }
 
@@ -853,12 +854,12 @@ footer .button {
   left: 50%;
   width: 8rem;
   height: 8rem;
-  margin-top: -4rem;
-  margin-left: -4rem;
+  margin-top: -4rem; /* -half of height (8rem) to center vertically */
+  margin-left: -4rem; /* -half of width (8rem) to center horizontally */
   border: none;
   border-radius: 50%;
   color: var(--link-color);
-  background-color: white;
+  background-color: var(--color-bg-surface);
   border: 4px solid var(--link-color);
   font-size: 2rem;
   font-weight: var(--bold);
@@ -868,7 +869,7 @@ footer .button {
 }
 
 .run-functions-button:hover {
-  color: white;
+  color: var(--color-text-inverse);
   background-color: var(--link-color);
 }
 .run-functions-button:active {
@@ -876,7 +877,7 @@ footer .button {
 }
 .run-functions-button.hide {
   transition: transform 0.6s, top 0.6s cubic-bezier(0.22, -0.37, 0.75, 0.75);
-  top: 105%;
+  top: 105%; /* just past the image bottom edge so the button slides fully off-screen */
   transform: scale(0);
 }
 
@@ -908,7 +909,7 @@ footer .button {
   max-height: 0;
   overflow: hidden;
   padding: 0 1.5rem;
-  background-color: white;
+  background-color: var(--color-bg-surface);
   border: 1px solid var(--border-color-light);
   border-top-width: 0;
   border-radius: 0 0 var(--border-radius-xl) var(--border-radius-xl);
@@ -916,7 +917,7 @@ footer .button {
 }
 
 .color-thief-output.visible {
-  max-height: 600px;
+  max-height: 600px; /* large enough to never clip output; animates from 0 via transition */
   padding: 1.5rem;
 }
 
@@ -931,8 +932,8 @@ footer .button {
 
 .swatch {
   display: inline-block;
-  background: #dddddd;
-  border-radius: 6px;
+  background: #dddddd; /* placeholder gray shown before Color Thief populates the value */
+  border-radius: var(--radius-sm);
 }
 
 .get-color .swatch {
@@ -960,7 +961,7 @@ footer .button {
   display: flex;
   flex-wrap: nowrap;
   gap: 12px;
-  margin: 0 -16px 2rem;
+  margin: 0 -16px 2rem; /* negative margins bleed past .column's 16px gutter on mobile */
   padding: 6px 16px;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
@@ -977,7 +978,7 @@ footer .button {
 
 .sample-images-label {
   display: none;
-  font-size: 0.85rem;
+  font-size: 0.85rem; /* small but readable label; between --text-sm and --text-base */
   color: var(--muted-color);
   margin-bottom: 8px;
 }
@@ -1034,7 +1035,7 @@ footer .button {
 .drop-zone {
   height: 12.5rem;
   margin-bottom: 1rem;
-  background-color: white;
+  background-color: var(--color-bg-surface);
   border: 4px solid var(--link-color);
   border-radius: var(--border-radius-xl);
   font-weight: var(--bold);
@@ -1049,15 +1050,15 @@ footer .button {
 }
 
 .drop-zone.dragging .dragging-label {
-  color: white;
+  color: var(--color-text-inverse);
   display: block;
 }
 
 .drop-zone-label {
   position: relative;
-  top: 5rem;
+  top: 5rem; /* drop-zone is 12.5rem tall; 5rem centers a ~2.5rem-tall label */
   color: var(--link-color);
-  font-size: 1.8rem;
+  font-size: 1.8rem; /* large, prominent text for drag-target affordance */
   text-align: center;
   pointer-events: none;
   text-transform: uppercase;
@@ -1084,7 +1085,7 @@ footer .button {
   bottom: -1.5em;
   left: 50%;
   transform: translateX(-50%);
-  font-size: 0.65rem;
+  font-size: 0.65rem; /* intentionally smaller than --text-xs (0.7rem); tight label below swatch */
   font-family: var(--code-font);
   color: var(--muted-color);
   white-space: nowrap;
@@ -1111,7 +1112,7 @@ footer .button {
 
 @media (min-width: 720px) {
   .version-toggle {
-    margin-left: -2px;
+    margin-left: -2px; /* optical alignment: nudges toggle flush with content left edge */
     margin-right: 0;
   }
 }
@@ -1127,7 +1128,7 @@ footer .button {
   font-size: var(--text-sm);
   cursor: pointer;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: var(--tracking-wide);
   transition: background 0.15s, color 0.15s;
   border-radius: var(--radius-sm);
 }
@@ -1152,22 +1153,22 @@ footer .button {
   color: var(--color-text-muted);
   font-weight: var(--weight-semibold);
   text-transform: uppercase;
-  letter-spacing: 0.03em;
+  letter-spacing: 0.03em; /* tighter than --tracking-wide (0.05em); compact date stamp */
 }
 
 .version-subtitle {
   display: none;
-  font-size: 0.85rem;
+  font-size: 0.85rem; /* small supporting text; between --text-sm and --text-base */
   color: var(--color-text-secondary);
   margin: 0.2rem 0 0.4rem;
 }
 
 
 .credibility {
-  font-size: 0.85rem;
+  font-size: 0.85rem; /* small supporting text; between --text-sm and --text-base */
   color: var(--color-text-muted);
   font-weight: var(--weight-medium);
-  letter-spacing: 0.02em;
+  letter-spacing: 0.02em; /* very subtle tracking for legibility at small size */
   margin: 0 0 0.25rem;
 }
 
@@ -1194,7 +1195,7 @@ footer .button {
 
 .v3-section h2 {
   font-family: var(--font-body);
-  font-size: 1.15rem;
+  font-size: 1.15rem; /* between --text-lg (1rem) and --text-xl (1.4rem); v3 section heading */
   font-weight: var(--weight-bold);
   letter-spacing: var(--tracking-snug);
   margin-bottom: 2px;
@@ -1202,7 +1203,7 @@ footer .button {
 
 .v3-section > p {
   margin-bottom: 12px;
-  max-width: 600px;
+  max-width: 600px; /* comfortable prose measure; matches .why-section > p */
 }
 
 
@@ -1216,7 +1217,7 @@ footer .button {
   padding: 1rem;
   margin-bottom: 16px;
   overflow-x: auto;
-  font-size: 0.75rem;
+  font-size: var(--text-sm);
   line-height: var(--leading-relaxed);
   color: var(--color-code-text);
 }
@@ -1243,7 +1244,7 @@ footer .button {
 /* -- v3 Output areas ------------------------------------------------------- */
 
 .annotation {
-  font-size: 0.85rem;
+  font-size: 0.85rem; /* small supporting text; between --text-sm and --text-base */
   color: var(--color-text-secondary);
   max-width: 600px;
   margin: 8px 0 12px;
@@ -1317,7 +1318,7 @@ footer .button {
   left: 50%;
   transform: translateX(-50%);
   font-family: var(--code-font);
-  font-size: 0.65rem;
+  font-size: 0.65rem; /* intentionally smaller than --text-xs (0.7rem); tight hex label below swatch */
   color: var(--muted-color);
   white-space: nowrap;
   pointer-events: none;
@@ -1327,7 +1328,7 @@ footer .button {
   display: flex;
   flex-wrap: wrap;
   column-gap: 8px;
-  row-gap: 28px;
+  row-gap: 28px; /* extra row gap reserves space for hex labels positioned 20px below each swatch */
   padding-bottom: 20px;
 }
 
@@ -1361,7 +1362,7 @@ footer .button {
   font-family: var(--font-code);
   font-size: var(--text-md);
   color: var(--color-text-secondary);
-  line-height: 1.7;
+  line-height: 1.7; /* slightly looser than --leading-relaxed (1.6) for monospace readability */
 }
 
 .dominant-meta .hex {
@@ -1371,7 +1372,7 @@ footer .button {
 
 .timing {
   font-family: var(--code-font);
-  font-size: 0.75rem;
+  font-size: var(--text-sm);
   color: var(--muted-color);
   margin-top: 12px;
 }
@@ -1383,7 +1384,7 @@ footer .button {
   width: 100%;
   max-width: 560px;
   border-collapse: collapse;
-  font-size: 0.85rem;
+  font-size: 0.85rem; /* small but readable; between --text-sm and --text-base */
 }
 
 .prop-table th {
@@ -1394,9 +1395,9 @@ footer .button {
   padding: 8px 16px 8px 0;
   border-bottom: 1px solid var(--border-color-light);
   white-space: nowrap;
-  font-size: 0.8rem;
+  font-size: var(--text-md);
   text-transform: uppercase;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.04em; /* slightly tighter than --tracking-wide (0.05em) for table column headers */
 }
 
 .prop-table td {
@@ -1415,7 +1416,7 @@ footer .button {
 
 .prop-table td:last-child {
   font-family: var(--code-font);
-  font-size: 0.85rem;
+  font-size: 0.85rem; /* matches .prop-table base font-size */
 }
 
 .prop-table tr:last-child td {
@@ -1426,7 +1427,7 @@ footer .button {
   display: inline-block;
   width: 16px;
   height: 16px;
-  border-radius: 4px;
+  border-radius: 4px; /* smaller than --radius-sm (6px); tight corner for a small inline swatch */
   vertical-align: middle;
   margin-right: 6px;
 }
@@ -1446,13 +1447,13 @@ footer .button {
   align-items: center;
   justify-content: center;
   font-family: var(--code-font);
-  font-size: 0.75rem;
+  font-size: var(--text-sm);
   font-weight: var(--bold);
 }
 
 .color-preview-hex {
   font-family: var(--code-font);
-  font-size: 1.5rem;
+  font-size: 1.5rem; /* large, prominent display of the extracted hex value */
   font-weight: var(--bold);
 }
 
@@ -1484,20 +1485,20 @@ footer .button {
 
 .swatch-card .role {
   font-family: var(--code-font);
-  font-size: 0.7rem;
+  font-size: var(--text-xs);
   font-weight: var(--bold);
   text-transform: uppercase;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.04em; /* slightly tighter than --tracking-wide (0.05em) for compact role label */
 }
 
 .swatch-card .hex-label {
   font-family: var(--code-font);
-  font-size: 0.8rem;
+  font-size: var(--text-md);
   margin-top: 8px;
 }
 
 .swatch-card-empty .role {
-  font-size: 0.7rem;
+  font-size: var(--text-xs);
   color: var(--muted-color);
 }
 
@@ -1553,7 +1554,7 @@ footer .button {
 
 .async-label {
   font-family: var(--code-font);
-  font-size: 0.85rem;
+  font-size: 0.85rem; /* small but readable; between --text-sm and --text-base */
   margin-bottom: 8px;
 }
 
@@ -1571,7 +1572,7 @@ footer .button {
 
 @media (max-width: 719px) {
   #v3-observe {
-    margin-left: -16px;
+    margin-left: -16px; /* bleed past .column's 16px gutter on mobile */
     margin-right: -16px;
     padding-left: 16px;
     padding-right: 16px;
@@ -1580,7 +1581,7 @@ footer .button {
 }
 
 .video-glow-wrap:has(.video-play-btn:not(.hidden)) {
-  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1); /* 1px inset border via shadow to avoid layout shift */
 }
 
 @media (min-width: 720px) {
@@ -1634,10 +1635,10 @@ footer .button {
 
 .observe-label {
   font-family: var(--code-font);
-  font-size: 0.7rem;
+  font-size: var(--text-xs);
   font-weight: var(--bold);
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: var(--tracking-wide);
   color: var(--muted-color);
   margin-bottom: 6px;
 }
@@ -1659,7 +1660,7 @@ footer .button {
 
 .observe-dominant-meta {
   font-family: var(--code-font);
-  font-size: 0.85rem;
+  font-size: 0.85rem; /* small but readable; between --text-sm and --text-base */
   line-height: 1.5;
 }
 
@@ -1668,7 +1669,7 @@ footer .button {
 }
 
 .observe-dark-light {
-  font-size: 0.75rem;
+  font-size: var(--text-sm);
   color: var(--muted-color);
 }
 
@@ -1695,10 +1696,10 @@ footer .button {
 
 .dropped-section-label {
   font-family: var(--code-font);
-  font-size: 0.7rem;
+  font-size: var(--text-xs);
   font-weight: var(--bold);
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: var(--tracking-wide);
   color: var(--muted-color);
   margin: 20px 0 8px;
 }
@@ -1783,7 +1784,7 @@ footer .button {
 .options-table td {
   padding: 0.5rem 0.75rem;
   border-bottom: 1px solid var(--border-color-light);
-  font-size: 0.875rem;
+  font-size: 0.875rem; /* between --text-sm (0.75rem) and --text-base (1rem); readable table text */
   text-align: left;
 }
 
@@ -1793,7 +1794,7 @@ footer .button {
 }
 
 .options-table code {
-  font-size: 0.8rem;
+  font-size: var(--text-md);
 }
 
 /* -- API section (v3) ----------------------------------------------------- */
@@ -1807,7 +1808,7 @@ footer .button {
 }
 
 .api-section h4 {
-  font-size: 0.9rem;
+  font-size: 0.9rem; /* slightly below --text-base for sub-section headings */
   font-weight: var(--weight-semibold);
   margin: 1.5rem 0 0.5rem;
 }
@@ -1816,5 +1817,4 @@ footer .button {
   border-bottom: 0;
   margin-bottom: 0;
 }
-
 
