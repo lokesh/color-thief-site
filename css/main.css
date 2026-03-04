@@ -1686,13 +1686,6 @@ footer .button {
   margin: 20px 0 8px;
 }
 
-/* Image desaturation transition */
-.dropped-result .dropped-img {
-  transition: filter 0.6s ease-out;
-}
-.dropped-result .dropped-img.desaturated {
-  filter: grayscale(1);
-}
 
 /* Swatch spring-in keyframes */
 @keyframes swatch-spring-in {

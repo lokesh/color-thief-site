@@ -376,13 +376,6 @@ function renderDroppedResult(image, result) {
 }
 
 function animateDroppedResult(image, result) {
-  // Resaturate image: double rAF ensures at least one grayscale frame
-  requestAnimationFrame(() => {
-    requestAnimationFrame(() => {
-      image.classList.remove('desaturated');
-    });
-  });
-
   // Fade in section labels and cascade swatches
   const labels = result.querySelectorAll('.dropped-section-label');
   const swatches = result.querySelectorAll('.swatch, .swatch-card');
@@ -443,7 +436,6 @@ function initDragAndDrop() {
           result = insertDroppedScaffold(container);
         }
         const image = result.querySelector('.dropped-img');
-        image.classList.add('desaturated');
         image.src = url;
         waitForImage(image).then(() => {
           renderDroppedResult(image, result);
@@ -487,7 +479,6 @@ function initDragAndDrop() {
         const result = insertDroppedScaffold(container);
         result.classList.add('user-upload');
         const image = result.querySelector('.dropped-img');
-        image.classList.add('desaturated');
         image.src = event.target.result;
         image.addEventListener('load', () => {
           renderDroppedResult(image, result);
