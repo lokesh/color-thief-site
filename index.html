@@ -475,13 +475,9 @@ const workerPalette = await getPalette(img, { colorCount: 6, worker: true });</c
         <h3>Install</h3>
         <div class="code-block"><code>npm install colorthief</code></div>
 
-        <h3>ESM</h3>
-        <div class="code-block"><code class="prism language-javascript">import { getColor, getPalette } from 'colorthief';</code></div>
+        <h3>Browser</h3>
 
-        <h3>CommonJS</h3>
-        <div class="code-block"><code class="prism language-javascript">const { getColor, getPalette } = require('colorthief');</code></div>
-
-        <h3>Script tag</h3>
+        <h4>Script tag</h4>
         <p>Load the UMD build from a CDN. This exposes a global <code>ColorThief</code> object.</p>
         <div class="code-block"><code class="prism language-xml">&lt;script src="https://unpkg.com/colorthief@3/dist/umd/color-thief.global.js">&lt;/script>
 &lt;script>
@@ -489,7 +485,7 @@ const workerPalette = await getPalette(img, { colorCount: 6, worker: true });</c
     console.log(color.hex());
 &lt;/script></code></div>
 
-        <h3>ES module in the browser</h3>
+        <h4>ES module</h4>
         <div class="code-block"><code class="prism language-xml">&lt;script type="module">
     import { getColorSync } from 'https://unpkg.com/colorthief@3/dist/index.js';
 
@@ -499,6 +495,10 @@ const workerPalette = await getPalette(img, { colorCount: 6, worker: true });</c
         console.log(color.hex());
     });
 &lt;/script></code></div>
+
+        <h4>With a bundler</h4>
+        <div class="code-block"><code class="prism language-javascript">import { getColor, getPalette } from 'colorthief';</code></div>
+        <div class="code-block"><code class="prism language-javascript">const { getColor, getPalette } = require('colorthief');</code></div>
 
         <h3>Node.js</h3>
         <p>Node.js support requires the <a href="https://www.npmjs.com/package/sharp">sharp</a> image processing library as a peer dependency.</p>
@@ -511,11 +511,14 @@ console.log(color.hex());
 const palette = await getPalette('photo.jpg', { colorCount: 5 });
 palette.forEach(c => console.log(c.hex()));</code></div>
 
-        <h3>Important notes</h3>
-        <ul class="list">
-          <li><strong>Images must be loaded first.</strong> Color Thief will throw an error if the image hasn't finished loading. If you're unsure, check <code>img.complete</code> or use the <code>load</code> event.</li>
-          <li><strong>Cross-origin images.</strong> If the image is on another domain, set <code>crossorigin="anonymous"</code> on the image element and ensure the server sends the appropriate CORS headers.</li>
-        </ul>
+        <h3>CLI</h3>
+        <p>Install globally:</p>
+        <div class="code-block"><code>npm install -g colorthief</code></div>
+        <div class="code-block"><code class="prism language-bash">colorthief photo.jpg            # dominant color
+colorthief palette photo.jpg    # color palette
+colorthief swatches photo.jpg   # semantic swatches</code></div>
+        <p>Use <code>--json</code> for machine-readable output, <code>--css</code> for CSS custom properties.</p>
+        <p>See <a href="https://github.com/lokesh/color-thief#cli">CLI docs on GitHub</a> for all options.</p>
       </section>
 
 
