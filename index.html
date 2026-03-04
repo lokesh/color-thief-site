@@ -82,10 +82,10 @@
               <li class="nav-sub-item"><a href="#v3-palette" class="nav-link nav-link-sub"><span class="nav-num">2.</span> Palette</a></li>
               <li class="nav-sub-item"><a href="#v3-observe" class="nav-link nav-link-sub"><span class="nav-num">3.</span> Video</a></li>
               <li class="nav-sub-item"><a href="#v3-color-object" class="nav-link nav-link-sub"><span class="nav-num">4.</span> Color object</a></li>
-              <li class="nav-sub-item"><a href="#v3-swatches" class="nav-link nav-link-sub"><span class="nav-num">5.</span> Swatches</a></li>
-              <li class="nav-sub-item"><a href="#v3-quality" class="nav-link nav-link-sub"><span class="nav-num">6.</span> Quality</a></li>
-              <li class="nav-sub-item"><a href="#v3-async" class="nav-link nav-link-sub"><span class="nav-num">7.</span> Async</a></li>
-
+              <li class="nav-sub-item"><a href="#v3-proportions" class="nav-link nav-link-sub"><span class="nav-num">5.</span> Proportions</a></li>
+              <li class="nav-sub-item"><a href="#v3-swatches" class="nav-link nav-link-sub"><span class="nav-num">6.</span> Swatches</a></li>
+              <li class="nav-sub-item"><a href="#v3-quality" class="nav-link nav-link-sub"><span class="nav-num">7.</span> Quality</a></li>
+              <li class="nav-sub-item"><a href="#v3-async" class="nav-link nav-link-sub"><span class="nav-num">8.</span> Async</a></li>
 
             </ul>
           </li>
@@ -239,11 +239,28 @@ color.contrast.black  // 6.14</code></div>
         </div>
       </section>
 
+      <!-- Color Proportions -->
+
+      <section id="v3-proportions" class="v3-section">
+        <span class="example-num">5</span>
+        <h2>Color proportions</h2>
+        <p>Each color in a palette includes a <code>proportion</code> property (0&ndash;1) showing what fraction of the image it represents.</p>
+
+        <div class="code-block"><code class="language-javascript">const palette = getPaletteSync(img, { colorCount: 8 });
+
+palette.forEach(color => {
+  console.log(color.hex(), color.proportion); // e.g. "#4a6741" 0.32
+});</code></div>
+
+        <div class="v3-output" id="out-proportions">
+          <div class="proportions-grid" id="proportions-grid"></div>
+        </div>
+      </section>
 
       <!-- 05. getSwatches -->
 
       <section id="v3-swatches" class="v3-section">
-        <span class="example-num">5</span>
+        <span class="example-num">6</span>
         <h2>Get semantic swatches</h2>
         <p>Classify palette colors into six semantic roles. Each swatch includes text color recommendations.</p>
 
@@ -271,7 +288,7 @@ if (swatches.DarkMuted) {
       <!-- 06. Quality -->
 
       <section id="v3-quality" class="v3-section">
-        <span class="example-num">6</span>
+        <span class="example-num">7</span>
         <h2>Quality settings</h2>
         <p>The <code>quality</code> option controls how many pixels are sampled. Lower values sample more pixels (slower, more accurate). Default is 10.</p>
 
@@ -291,7 +308,7 @@ getPaletteSync(img, { quality: 50 });  // Every 50th pixel</code></div>
       <!-- 07. Asynchronous Methods -->
 
       <section id="v3-async" class="v3-section">
-        <span class="example-num">7</span>
+        <span class="example-num">8</span>
         <h2>Asynchronous methods</h2>
         <p>The async API keeps your UI responsive during extraction. It breaks the work into chunks and pauses between them, giving the browser time to handle animations, scrolling, and clicks. Pass <code>worker: true</code> to offload quantization to a Web Worker thread entirely (browser-only). This is helpful when processing many images at once or working with very large images.</p>
 

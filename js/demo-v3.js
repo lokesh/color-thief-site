@@ -281,7 +281,63 @@ function initAsync() {
   });
 }
 
-// ─── 08. Drag and Drop ──────────────────────────────────────────────
+// ─── 08. Color Proportions ──────────────────────────────────────────
+
+function extractProportionData(imgEl) {
+  const palette = getPaletteSync(imgEl, { colorCount: 8 });
+  if (!palette) return null;
+
+  const totalProp = palette.reduce((sum, c) => sum + (c.proportion || 0), 0);
+  return {
+    imgSrc: imgEl.src,
+    colors: palette.map(c => ({
+      hex: c.hex(),
+      textColor: c.textColor,
+      proportion: totalProp > 0 ? (c.proportion / totalProp) : (1 / palette.length),
+    })),
+  };
+}
+
+function initProportions() {
+  const grid = document.getElementById('proportions-grid');
+  if (!grid) return;
+
+  // Load 3 source images
+  const urls = imageUrls.slice(0, 3);
+  const imgEls = urls.map(url => {
+    const img = new Image();
+    img.crossOrigin = 'anonymous';
+    img.src = url;
+    return img;
+  });
+
+  Promise.all(imgEls.map(waitForImage)).then(() => {
+    const datasets = imgEls.map(extractProportionData).filter(Boolean);
+    if (datasets.length === 0) return;
+
+    grid.innerHTML = datasets.map(d =>
+      `<div class="proportion-viz-item">${renderProportionBar(d)}</div>`
+    ).join('');
+
+    show('out-proportions');
+  });
+}
+
+function renderProportionBar({ colors, imgSrc }) {
+  const segments = colors.map(c => {
+    const pct = Math.round(c.proportion * 100);
+    const label = c.proportion >= 0.08 ? `<span class="proportion-bar-label" style="color:${c.textColor}">${pct}%</span>` : '';
+    return `<div class="proportion-bar-segment" style="flex:${c.proportion};background:${c.hex}" title="${c.hex} ${pct}%">${label}</div>`;
+  }).join('');
+  return `<img class="proportion-bar-thumb" src="${imgSrc}" alt="">
+    <div class="proportion-bar">${segments}</div>`;
+}
+
+
+
+
+
+// ─── 09. Drag and Drop ──────────────────────────────────────────────
 
 function renderDroppedResult(image, result) {
   const roles = ['Vibrant', 'Muted', 'DarkVibrant', 'DarkMuted', 'LightVibrant', 'LightMuted'];
@@ -458,5 +514,6 @@ export default function initV3Demos() {
   initQuality();
   initVideoDemo();
   initAsync();
+  initProportions();
   initDragAndDrop();
 }
