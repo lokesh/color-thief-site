@@ -156,27 +156,7 @@ function initSwatches() {
   });
 }
 
-// ─── 05. OKLCH vs RGB ───────────────────────────────────────────────
-
-function initOklch() {
-  const sourceImg = document.getElementById('oklch-source-img');
-  if (!sourceImg) return;
-
-  sourceImg.src = imageUrls[3] || imageUrls[0];
-  waitForImage(sourceImg).then(() => {
-    const rgb = getPaletteSync(sourceImg, { colorCount: 8 });
-    const oklch = getPaletteSync(sourceImg, { colorCount: 8, colorSpace: 'oklch' });
-    if (rgb) {
-      document.getElementById('oklch-rgb').innerHTML = rgb.map(c => swatchHTML(c, 'lg')).join('');
-    }
-    if (oklch) {
-      document.getElementById('oklch-oklch').innerHTML = oklch.map(c => swatchHTML(c, 'lg')).join('');
-    }
-    show('out-oklch');
-  });
-}
-
-// ─── 06. Quality Settings ───────────────────────────────────────────
+// ─── 05. Quality Settings ───────────────────────────────────────────
 
 function initQuality() {
   const sourceImg = document.getElementById('quality-source-img');
@@ -201,7 +181,7 @@ function initQuality() {
   });
 }
 
-// ─── 07. observe — Live Video ───────────────────────────────────────
+// ─── 06. observe — Live Video ───────────────────────────────────────
 
 function initVideoDemo() {
   const video = document.getElementById('v3-video');
@@ -269,7 +249,7 @@ function initVideoDemo() {
   show('out-observe');
 }
 
-// ─── 08. Async API & Web Workers ────────────────────────────────────
+// ─── 07. Async API & Web Workers ────────────────────────────────────
 
 function initAsync() {
   const sourceImg = document.getElementById('async-source-img');
@@ -301,7 +281,7 @@ function initAsync() {
   });
 }
 
-// ─── 09. Drag and Drop ──────────────────────────────────────────────
+// ─── 08. Drag and Drop ──────────────────────────────────────────────
 
 function renderDroppedResult(image, result) {
   const roles = ['Vibrant', 'Muted', 'DarkVibrant', 'DarkMuted', 'LightVibrant', 'LightMuted'];
@@ -318,18 +298,11 @@ function renderDroppedResult(image, result) {
       </div>`;
   }
 
-  // RGB palette
-  const rgbPalette = getPaletteSync(image, { colorCount: 8 });
-  if (rgbPalette) {
-    result.querySelector('.dropped-rgb-swatches').innerHTML =
-      rgbPalette.map(c => swatchHTML(c, 'lg', { showHex: true })).join('');
-  }
-
-  // OKLCH palette
-  const oklchPalette = getPaletteSync(image, { colorCount: 8, colorSpace: 'oklch' });
-  if (oklchPalette) {
-    result.querySelector('.dropped-oklch-swatches').innerHTML =
-      oklchPalette.map(c => swatchHTML(c, 'lg', { showHex: true })).join('');
+  // Palette
+  const palette = getPaletteSync(image, { colorCount: 8 });
+  if (palette) {
+    result.querySelector('.dropped-palette-swatches').innerHTML =
+      palette.map(c => swatchHTML(c, 'lg', { showHex: true })).join('');
   }
 
   // Semantic swatches
@@ -384,10 +357,8 @@ function insertDroppedScaffold(container) {
       <img class="demo-img dropped-img" />
       <div class="dropped-section-label">Dominant color</div>
       <div class="dominant-result"></div>
-      <div class="dropped-section-label">Palette — RGB</div>
-      <div class="swatch-row dropped-rgb-swatches"></div>
-      <div class="dropped-section-label">Palette — OKLCH</div>
-      <div class="swatch-row dropped-oklch-swatches"></div>
+      <div class="dropped-section-label">Palette</div>
+      <div class="swatch-row dropped-palette-swatches"></div>
       <div class="dropped-section-label">Semantic swatches</div>
       <div class="swatch-cards dropped-swatch-cards"></div>
     </div>
@@ -482,7 +453,6 @@ export default function initV3Demos() {
   initPalette();
   initColorObject();
   initSwatches();
-  initOklch();
   initQuality();
   initVideoDemo();
   initAsync();
