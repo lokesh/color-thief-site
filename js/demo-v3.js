@@ -392,9 +392,11 @@ function initDragAndDrop() {
         waitForImage(image).then(() => {
           renderDroppedResult(image, result);
           animateDroppedResult(image, result);
-          const label = document.querySelector('.sample-images-label');
-          if (label) {
-            label.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          const scrollTarget = window.innerWidth < 720
+            ? document.querySelector('.drag-drop-desc-mobile')
+            : document.querySelector('.sample-images-label');
+          if (scrollTarget) {
+            scrollTarget.scrollIntoView({ behavior: 'smooth', block: 'start' });
           }
         });
       });
