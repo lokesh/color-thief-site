@@ -388,6 +388,14 @@ const workerPalette = await getPalette(img, { colorCount: 6, worker: true });</c
             <p>The async API yields to the browser between processing chunks so your UI never freezes. Opt into <code>worker: true</code> to offload quantization to a Web Worker entirely.</p>
           </div>
 
+          <div class="why-card">
+            <div class="why-card-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
+            </div>
+            <strong>CLI included</strong>
+            <p>Run <code>npx colorthief &lt;image&gt;</code> from the terminal to extract colors without writing any code. Great for scripts and quick checks.</p>
+          </div>
+
         </div>
 
         <h3>How it stacks up</h3>
@@ -456,6 +464,12 @@ const workerPalette = await getPalette(img, { colorCount: 6, worker: true });</c
                 <td>TypeScript</td>
                 <td class="comparison-highlight">Yes</td>
                 <td>DefinitelyTyped</td>
+                <td>No</td>
+              </tr>
+              <tr>
+                <td>CLI</td>
+                <td class="comparison-highlight">Yes</td>
+                <td>No</td>
                 <td>No</td>
               </tr>
             </tbody>
