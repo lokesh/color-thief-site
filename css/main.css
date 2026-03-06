@@ -183,6 +183,14 @@ h3 {
   line-height: var(--leading-tight);
 }
 
+h4 {
+  font-size: 0.9rem;
+  font-weight: var(--weight-semibold);
+  margin: 1.5rem 0 0.5rem;
+  line-height: var(--leading-tight);
+  letter-spacing: 0;
+}
+
 
 @media (min-width: 720px) {
   h1 {
@@ -1241,6 +1249,50 @@ footer .button {
 }
 
 
+/* -- CLI output example ----------------------------------------------------- */
+
+.cli-output code {
+  display: block;
+}
+
+.cli-prompt {
+  color: #6c757d;
+  user-select: none;
+  margin-right: 0.5em;
+}
+
+.cli-command-group {
+  margin-bottom: 1.25rem;
+}
+
+.cli-command-group:last-child {
+  margin-bottom: 0;
+}
+
+.cli-result {
+  margin-top: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.cli-color-row {
+  display: flex;
+  align-items: center;
+  gap: 0.6em;
+  font-family: var(--font-code);
+  font-size: var(--text-sm);
+  color: var(--color-code-text);
+}
+
+.cli-swatch {
+  display: inline-block;
+  width: 1.1em;
+  height: 1.1em;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
 /* -- v3 Output areas ------------------------------------------------------- */
 
 .annotation {
@@ -1782,11 +1834,6 @@ footer .button {
   margin-top: 1rem;
 }
 
-.api-section h4 {
-  font-size: 0.9rem; /* slightly below --text-base for sub-section headings */
-  font-weight: var(--weight-semibold);
-  margin: 1.5rem 0 0.5rem;
-}
 
 .api-section .method:last-of-type {
   border-bottom: 0;

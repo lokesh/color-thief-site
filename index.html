@@ -393,7 +393,7 @@ const workerPalette = await getPalette(img, { colorCount: 6, worker: true });</c
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
             </div>
             <strong>CLI included</strong>
-            <p>Run <code>npx colorthief &lt;image&gt;</code> from the terminal to extract colors without writing any code. Great for scripts and quick checks.</p>
+            <p>Run <code>npx colorthief-cli &lt;image&gt;</code> from the terminal to extract colors without writing any code. Great for scripts and quick checks.</p>
           </div>
 
         </div>
@@ -526,13 +526,46 @@ const palette = await getPalette('photo.jpg', { colorCount: 5 });
 palette.forEach(c => console.log(c.hex()));</code></div>
 
         <h3>CLI</h3>
-        <p>Install globally:</p>
-        <div class="code-block"><code>npm install -g colorthief</code></div>
-        <div class="code-block"><code class="prism language-bash">colorthief photo.jpg            # dominant color
-colorthief palette photo.jpg    # color palette
-colorthief swatches photo.jpg   # semantic swatches</code></div>
-        <p>Use <code>--json</code> for machine-readable output, <code>--css</code> for CSS custom properties.</p>
-        <p>See <a href="https://github.com/lokesh/color-thief#cli">CLI docs on GitHub</a> for all options.</p>
+        <p>Quick start — no install needed:</p>
+        <div class="code-block"><code>npx colorthief-cli photo.jpg</code></div>
+        <p>The <code>colorthief-cli</code> package bundles everything needed (including sharp for image decoding), so it works immediately with no extra setup.</p>
+
+        <h4>Commands</h4>
+        <div class="code-block cli-output">
+          <div class="cli-command-group">
+            <code><span class="cli-prompt">$</span> colorthief-cli photo.jpg</code>
+            <div class="cli-result">
+              <div class="cli-color-row"><span class="cli-swatch" style="background:#c94f6e"></span> #c94f6e</div>
+            </div>
+          </div>
+          <div class="cli-command-group">
+            <code><span class="cli-prompt">$</span> colorthief-cli palette photo.jpg --count 3</code>
+            <div class="cli-result">
+              <div class="cli-color-row"><span class="cli-swatch" style="background:#c94f6e"></span> #c94f6e</div>
+              <div class="cli-color-row"><span class="cli-swatch" style="background:#5a8fa3"></span> #5a8fa3</div>
+              <div class="cli-color-row"><span class="cli-swatch" style="background:#d4a853"></span> #d4a853</div>
+            </div>
+          </div>
+          <div class="cli-command-group">
+            <code><span class="cli-prompt">$</span> colorthief-cli swatches photo.jpg</code>
+            <div class="cli-result">
+              <div class="cli-color-row"><span class="cli-swatch" style="background:#e84393"></span> Vibrant         #e84393</div>
+              <div class="cli-color-row"><span class="cli-swatch" style="background:#a0b4c0"></span> Muted           #a0b4c0</div>
+              <div class="cli-color-row"><span class="cli-swatch" style="background:#8b1a3a"></span> DarkVibrant     #8b1a3a</div>
+              <div class="cli-color-row"><span class="cli-swatch" style="background:#4a5568"></span> DarkMuted       #4a5568</div>
+              <div class="cli-color-row"><span class="cli-swatch" style="background:#f6a5c1"></span> LightVibrant    #f6a5c1</div>
+              <div class="cli-color-row"><span class="cli-swatch" style="background:#d4d8dc"></span> LightMuted      #d4d8dc</div>
+            </div>
+          </div>
+        </div>
+
+        <h4>Flags</h4>
+        <div class="code-block"><code class="prism language-bash">--json                # Full color data as JSON
+--css                 # CSS custom properties
+--count 5             # Number of palette colors (2-20)
+--quality 1           # Sampling quality (1 = every pixel)
+--color-space rgb     # Quantization space (rgb or oklch)</code></div>
+        <p>Stdin is supported (<code>cat photo.jpg | colorthief-cli -</code>), and multiple files can be passed at once. If you already have <code>colorthief</code> and <code>sharp</code> installed, you can use <code>colorthief</code> as the command name directly.</p>
       </section>
 
 
