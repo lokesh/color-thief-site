@@ -700,6 +700,12 @@ palette.forEach(c => console.log(c.hex()));</code></div>
               <td><code>'oklch'</code> or <code>'rgb'</code>. OKLCH produces more perceptually uniform palettes.</td>
             </tr>
             <tr>
+              <td><code>gamut</code></td>
+              <td>string</td>
+              <td><code>'srgb'</code></td>
+              <td><code>'srgb'</code>, <code>'display-p3'</code>, or <code>'auto'</code>. Read wide-gamut colors from Display&nbsp;P3 images instead of collapsing them to sRGB. <code>'auto'</code> upgrades to P3 only when the image actually uses out-of-sRGB colors. Browser only; Node output is sRGB. Falls back to sRGB when P3 canvases are unsupported.</td>
+            </tr>
+            <tr>
               <td><code>ignoreWhite</code></td>
               <td>boolean</td>
               <td><code>true</code></td>
@@ -757,14 +763,14 @@ palette.forEach(c => console.log(c.hex()));</code></div>
           </thead>
           <tbody>
             <tr>
-              <td><code>rgb()</code></td>
+              <td><code>rgb(gamut?)</code></td>
               <td><code>{ r, g, b }</code></td>
-              <td>RGB values, each 0–255.</td>
+              <td>RGB values, each 0–255. Defaults to sRGB (gamut-mapped for wide-gamut colors). Pass <code>'display-p3'</code> for the raw P3 components.</td>
             </tr>
             <tr>
               <td><code>hex()</code></td>
               <td><code>string</code></td>
-              <td>Hex string, e.g. <code>'#e84393'</code>.</td>
+              <td>Hex string, e.g. <code>'#e84393'</code>. Always sRGB (gamut-mapped) so existing consumers keep working.</td>
             </tr>
             <tr>
               <td><code>hsl()</code></td>
@@ -774,17 +780,17 @@ palette.forEach(c => console.log(c.hex()));</code></div>
             <tr>
               <td><code>oklch()</code></td>
               <td><code>{ l, c, h }</code></td>
-              <td>Lightness 0–1, chroma 0–0.4, hue 0–360.</td>
+              <td>Lightness 0–1, chroma 0–0.4, hue 0–360. Reports the true wider chroma for wide-gamut colors.</td>
             </tr>
             <tr>
               <td><code>css(format?)</code></td>
               <td><code>string</code></td>
-              <td>CSS color string. Format: <code>'rgb'</code> (default), <code>'hsl'</code>, or <code>'oklch'</code>.</td>
+              <td>CSS color string. Format: <code>'rgb'</code> (default), <code>'hsl'</code>, or <code>'oklch'</code>. For a <code>'display-p3'</code> color, the default emits <code>color(display-p3 …)</code>.</td>
             </tr>
             <tr>
               <td><code>array()</code></td>
               <td><code>[r, g, b]</code></td>
-              <td>RGB tuple as a three-element array.</td>
+              <td>RGB tuple as a three-element array. Always sRGB (gamut-mapped).</td>
             </tr>
             <tr>
               <td><code>toString()</code></td>
@@ -805,6 +811,11 @@ palette.forEach(c => console.log(c.hex()));</code></div>
             </tr>
           </thead>
           <tbody>
+            <tr>
+              <td><code>gamut</code></td>
+              <td><code>string</code></td>
+              <td><code>'srgb'</code> or <code>'display-p3'</code> — the color space this color was extracted in.</td>
+            </tr>
             <tr>
               <td><code>textColor</code></td>
               <td><code>string</code></td>
@@ -847,6 +858,13 @@ color.hsl();             // { h: 331, s: 77, l: 59 }
 color.oklch();           // { l: 0.64, c: 0.21, h: 353 }
 color.css();             // 'rgb(232, 67, 147)'
 color.css('oklch');      // 'oklch(0.64 0.21 353)'
+
+// Wide-gamut (Display P3)
+const p3 = getColorSync(img, { gamut: 'display-p3' });
+p3.gamut;                // 'display-p3'
+p3.css();                // 'color(display-p3 …)'
+p3.rgb('display-p3');    // raw P3 components
+p3.hex();                // '#e84393' — still sRGB, gamut-mapped
 
 // Accessibility
 color.textColor;         // '#ffffff'
