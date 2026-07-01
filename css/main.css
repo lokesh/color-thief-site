@@ -457,6 +457,28 @@ hr {
   margin-right: 24px;
 }
 
+.nav-github {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 16px;
+  padding: 3px 6px;
+  font-size: 0.875rem;
+  font-weight: var(--weight-semibold);
+  color: var(--color-text-muted);
+  text-decoration: none;
+}
+
+.nav-github:hover {
+  color: var(--color-text);
+}
+
+.nav-github svg {
+  width: 16px;
+  height: 16px;
+  fill: currentColor;
+}
+
 .nav-list {
   margin: 0;
   padding: 0;
