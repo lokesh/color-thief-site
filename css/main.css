@@ -910,9 +910,11 @@ footer .button {
   margin: 1.75rem 0 2rem;
 }
 
-/* v3's headline capabilities — the "why this is modern" line. */
+/* v3's headline capabilities — the "why this is modern" line. Hidden on
+   narrow screens, where it wraps into a mess; the proof strip carries the
+   header alone there. */
 .version-features {
-  display: flex;
+  display: none;
   flex-wrap: wrap;
   align-items: baseline;
   gap: 0 0.5rem;
@@ -945,11 +947,18 @@ footer .button {
   font-weight: var(--weight-semibold);
 }
 
-.version-subtitle {
-  display: none;
+/* Objective de-riskers — license, weight, deps, freshness. Quieter than the
+   features line above it: these reassure rather than sell. */
+.proof-strip {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: center;
+  gap: 0 0.5rem;
   font-size: 0.875rem; /* small supporting text; between --text-sm and --text-base */
-  color: var(--color-text-secondary);
-  margin: 0.2rem 0 0.4rem;
+  font-weight: var(--weight-medium);
+  color: var(--color-text-muted);
+  margin: 0.4rem 0 0;
 }
 
 
@@ -1339,6 +1348,17 @@ footer .button {
      the band comes out narrower than every section below it. */
   .header .content {
     flex: 1;
+  }
+
+  /* Room for each line to fit whole: the features line comes back and both
+     rows return to the left edge with the rest of the column. */
+  .version-features {
+    display: flex;
+  }
+
+  .version-features,
+  .proof-strip {
+    justify-content: flex-start;
   }
 
   .hero-palette {
