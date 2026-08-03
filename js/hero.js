@@ -12,9 +12,9 @@ import { getPaletteSync, getSwatchesSync } from 'colorthief';
 
 const imageModules = import.meta.glob('../images/*.jpg', { eager: true, query: '?url', import: 'default' });
 
-// Hand-picked rather than globbed in order; the third tile in the row is the
+// Hand-picked rather than globbed in order; the last tile in the row is the
 // drop target.
-const imageUrls = ['../images/image-1.jpg', '../images/image-5.jpg']
+const imageUrls = ['../images/image-1.jpg', '../images/image-5.jpg', '../images/image-7.jpg']
   .map((path) => imageModules[path])
   .filter(Boolean);
 
@@ -104,67 +104,6 @@ function step(a, dt) {
   return true;
 }
 
-// ─── Wordmark sprinkle ──────────────────────────────────────────────
-// When a palette settles, a few letters of the "Color Thief" wordmark pick up
-// its colors — the header steals from the image too.
-
-// WCAG relative luminance, for keeping sprinkled letters legible on the
-// near-white page background.
-function luminance([r, g, b]) {
-  const [lr, lg, lb] = [r, g, b].map(v => {
-    const c = v / 255;
-    return c <= 0.03928 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4;
-  });
-  return 0.2126 * lr + 0.7152 * lg + 0.0722 * lb;
-}
-
-const BG_LUMINANCE = luminance([249, 249, 249]); /* --color-bg */
-
-function contrastWithBg(color) {
-  const { r, g, b } = color.rgb();
-  return (BG_LUMINANCE + 0.05) / (luminance([r, g, b]) + 0.05);
-}
-
-function initWordmarkSprinkle() {
-  const wordmark = document.querySelector('h1.logo');
-  if (!wordmark) return null;
-
-  const text = wordmark.textContent.trim();
-  wordmark.textContent = '';
-  const letters = [];
-  for (const ch of text) {
-    if (/\s/.test(ch)) {
-      wordmark.appendChild(document.createTextNode(' '));
-      continue;
-    }
-    const span = document.createElement('span');
-    span.className = 'logo-letter';
-    span.textContent = ch;
-    wordmark.appendChild(span);
-    letters.push(span);
-  }
-
-  return {
-    clear() {
-      letters.forEach(s => { s.style.color = ''; });
-    },
-    // seed shifts which letters get hit, so each image colors the wordmark
-    // differently.
-    paint(palette, seed) {
-      // Letters are display-sized, so a modest ratio keeps them readable
-      // without rejecting most of a light image's palette.
-      const usable = palette.filter(c => contrastWithBg(c) >= 2.5).slice(0, letters.length);
-      this.clear();
-      if (!usable.length) return;
-
-      const stride = Math.max(1, Math.floor(letters.length / usable.length));
-      usable.forEach((color, i) => {
-        letters[(seed + i * stride) % letters.length].style.color = color.hex();
-      });
-    },
-  };
-}
-
 // getPaletteSync's proportions describe the quantizer's boxes, not the five
 // colors it handed back, so they don't sum to 1 on their own.
 function shares(palette) {
@@ -249,10 +188,8 @@ export default function initHero() {
   });
 
   const urls = imageUrls;
-  const wordmark = initWordmarkSprinkle();
   let timers = [];
   let run = 0;
-  let activeIndex = 0;
 
   // What each row is currently aiming at. Kept around so a resize can recompute
   // the same arrangement against the new width.
@@ -348,7 +285,6 @@ export default function initHero() {
   }
 
   function showPalette({ colors: palette, percents }, snap) {
-    wordmark?.paint(palette, activeIndex);
     const width = Math.max(1, chart.clientWidth);
 
     // getColorSync() returns exactly the highest-share entry of getPalette(),
@@ -423,7 +359,6 @@ export default function initHero() {
   }
 
   function hidePalette(snap) {
-    wordmark?.clear();
     bars.forEach(({ bar }) => { bar.style.opacity = '0'; });
     scene = { at: i => ({ x: bars[i].x.value, y: 0, w: bars[i].w.value, h: 0, delay: 0 }) };
     arrange(snap);
@@ -523,17 +458,20 @@ export default function initHero() {
     timers.forEach(clearTimeout);
     timers = [];
     const token = ++run;
-    activeIndex = index;
 
-    // Drops the call-to-action and opens up the two output rows. Has to happen
-    // before anything measures them — they're display:none until now, so their
-    // clientWidth would read 0.
+    // Opens up the two output rows. Has to happen before anything measures
+    // them — they're display:none until now, so their clientWidth would
+    // read 0.
     root.classList.remove('is-idle');
 
     Array.from(thumbRow.children).forEach((thumb, i) => {
       thumb.classList.toggle('active', i === index);
       thumb.setAttribute('aria-pressed', String(i === index));
     });
+
+    // Each pill is spent by its own thumbnail: the ones on tiles not yet
+    // tried stay up as an invitation.
+    thumbRow.children[index]?.querySelector('.hero-thumb-cta')?.remove();
 
     const src = sourceAt(index);
     if (!src) return;
@@ -586,14 +524,14 @@ export default function initHero() {
   thumbRow.innerHTML = urls.map((url, i) => `
     <button type="button" class="hero-thumb" aria-pressed="false" aria-label="Extract colors from example image ${i + 1}">
       <img src="${url}" alt="">
-      ${i === 0 ? '<span class="hero-thumb-cta">Click me</span>' : ''}
+      <span class="hero-thumb-cta"><span class="hero-cta-pointer">Click me</span><span class="hero-cta-touch">Tap me</span></span>
     </button>
   `).join('') + `
     <button type="button" class="hero-thumb hero-drop" aria-pressed="false" aria-label="Extract colors from your own image">
       <img alt="">
       <span class="hero-drop-prompt">
         <span class="hero-drop-wide">Drop an image<span class="hero-drop-sub">or click to browse</span></span>
-        <span class="hero-drop-narrow">Browse<span class="hero-drop-sub">your photos</span></span>
+        <span class="hero-drop-narrow">Pick a photo<span class="hero-drop-sub">from your library</span></span>
       </span>
       <span class="hero-drop-error">Images only</span>
     </button>`;
@@ -671,6 +609,6 @@ export default function initHero() {
   document.addEventListener('drop', e => e.preventDefault());
 
   // Nothing runs until the reader asks for it: the hero opens as plain images
-  // with one "Click me" on them, and the extraction is the payoff.
+  // with "Click me" pills on them, and the extraction is the payoff.
   root.classList.add('is-idle');
 }

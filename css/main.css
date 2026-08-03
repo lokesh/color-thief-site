@@ -196,18 +196,6 @@ h1 {
   font-weight: var(--weight-x-bold);
 }
 
-
-/* Letters the hero demo picks out with the settled palette (js/hero.js). */
-.logo-letter {
-  transition: color 0.6s ease;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .logo-letter {
-    transition: none;
-  }
-}
-
 h2 {
   margin-top: 16px;
   margin-bottom: 6px;
@@ -1145,9 +1133,9 @@ footer .button {
 
 .hero-thumb {
   position: relative;
-  /* Big enough to read on a phone, narrow enough that the next tile peeks in
-     and gives the scroll away. */
-  flex: 0 0 70%;
+  /* Short enough that a couple of tiles and the next one's edge fit the row —
+     the peek is what gives the scroll away. */
+  flex: 0 0 45%;
   scroll-snap-align: start;
   /* Matches the sample images in "Try it yourself" — the sources are 4:3, so
      nothing gets cropped either. */
@@ -1316,8 +1304,29 @@ footer .button {
   animation: hero-cta-sheen 5s ease-in-out infinite;
 }
 
-.hero-demo:not(.is-idle) .hero-thumb-cta {
+/* Staggered so the sheen travels across the row as one wave rather than
+   flashing on every pill at once. */
+.hero-thumb:nth-child(2) .hero-thumb-cta::after {
+  animation-delay: 0.12s;
+}
+
+.hero-thumb:nth-child(3) .hero-thumb-cta::after {
+  animation-delay: 0.24s;
+}
+
+/* "Tap me" where there's no cursor to click with. */
+.hero-cta-touch {
   display: none;
+}
+
+@media (hover: none) {
+  .hero-cta-pointer {
+    display: none;
+  }
+
+  .hero-cta-touch {
+    display: inline;
+  }
 }
 
 @keyframes hero-cta-sheen {
@@ -1348,7 +1357,7 @@ footer .button {
     display: none;
   }
 
-  /* Wide enough for all three tiles to share the row again. */
+  /* Wide enough for all four tiles to share the row again. */
   .hero-thumbs {
     margin: 0;
     padding: 0;
