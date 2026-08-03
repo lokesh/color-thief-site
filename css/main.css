@@ -60,6 +60,13 @@
   --color-code-inline:  var(--color-primary);
   --color-code-bg:      #fff;
 
+  /* ── Colors — terminal (shell command blocks) ──────────────────── */
+  --color-terminal-bg:      #1e2127;
+  --color-terminal-text:    #e6e9ef;
+  --color-terminal-muted:   #8b93a1;
+  --color-terminal-border:  #2c313a;
+  --color-terminal-accent:  #8ed6a0;
+
   /* ── Colors — status ───────────────────────────────────────────── */
   --color-error-bg:     #fdf0f0;
   --color-error-border: #d44;
@@ -189,6 +196,17 @@ h1 {
   font-weight: var(--weight-x-bold);
 }
 
+
+/* Letters the hero demo picks out with the settled palette (js/hero.js). */
+.logo-letter {
+  transition: color 0.6s ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .logo-letter {
+    transition: none;
+  }
+}
 
 h2 {
   margin-top: 16px;
@@ -711,12 +729,6 @@ section:last-of-type {
   }
 }
 
-/* -- FAQ -- */
-
-.faq-section h3:not(:first-of-type) {
-  margin-top: 2em;
-}
-
 /* -- Credits -- */
 
 footer {
@@ -869,117 +881,7 @@ footer .button {
 }
 
 
-/* -- Examples -------------------------------------------------------------- */
-
-.image-section {
-  margin-bottom: 80px;
-}
-.image-section .image-wrap {
-  position: relative;
-  line-height: 1em;
-  min-height: 240px;
-  background-color: var(--hover-bg-color);
-  border-radius: var(--border-radius-xl);
-}
-
-.examples-section .image-section .target-image {
-  border-radius: var(--border-radius-xl);
-  transition: border-radius 0.2s 0.3s;
-}
-.examples-section .image-section.with-color-thief-output .target-image {
-  border-radius: var(--border-radius-xl) var(--border-radius-xl) 0 0;
-}
-
-.output-layout {
-  display: flex;
-}
-
-.function.get-color {
-  flex: 0 1 16rem;
-  margin-right: 2rem;
-}
-
-.run-functions-button {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 8rem;
-  height: 8rem;
-  margin-top: -4rem; /* -half of height (8rem) to center vertically */
-  margin-left: -4rem; /* -half of width (8rem) to center horizontally */
-  border: none;
-  border-radius: 50%;
-  color: var(--link-color);
-  background-color: var(--color-bg-surface);
-  border: 4px solid var(--link-color);
-  font-size: 2rem;
-  font-weight: var(--bold);
-  cursor: pointer;
-  text-transform: uppercase;
-  outline: none;
-}
-
-.run-functions-button:hover {
-  color: var(--color-text-inverse);
-  background-color: var(--link-color);
-}
-.run-functions-button:active {
-  transform: scale(0.9);
-}
-.run-functions-button.hide {
-  transition: transform 0.6s, top 0.6s cubic-bezier(0.22, -0.37, 0.75, 0.75);
-  top: 105%; /* just past the image bottom edge so the button slides fully off-screen */
-  transform: scale(0);
-}
-
-.touch-label {
-  display: inline;
-}
-
-.no-touch-label {
-  display: none;
-}
-
-@media (min-width: 640px) {
-  .touch-label {
-    display: none;
-  }
-
-  .no-touch-label {
-    display: inline;
-  }
-}
-
-.target-image {
-  display: block;
-  width: 100%;
-  border-radius: var(--border-radius-xl) var(--border-radius-xl) 0 0;
-}
-
-.color-thief-output {
-  max-height: 0;
-  overflow: hidden;
-  padding: 0 1.5rem;
-  background-color: var(--color-bg-surface);
-  border: 1px solid var(--border-color-light);
-  border-top-width: 0;
-  border-radius: 0 0 var(--border-radius-xl) var(--border-radius-xl);
-  transition: max-height 0.5s ease, padding 0.5s ease;
-}
-
-.color-thief-output.visible {
-  max-height: 600px; /* large enough to never clip output; animates from 0 via transition */
-  padding: 1.5rem;
-}
-
-.function-title {
-  text-align: left;
-  margin-top: 0;
-}
-
-.function-code {
-  display: none;
-}
+/* -- Swatches -------------------------------------------------------------- */
 
 .swatch {
   display: inline-block;
@@ -987,142 +889,6 @@ footer .button {
   border-radius: var(--radius-sm);
 }
 
-.get-color .swatch {
-  width: 4rem;
-  height: 4rem;
-}
-
-.get-palette .swatch {
-  width: 3rem;
-  height: 3rem;
-}
-
-
-/* -- Sample images --------------------------------------------------------- */
-
-.drag-drop-desc-desktop {
-  display: none;
-}
-
-.drag-drop-desc-mobile {
-  display: block;
-}
-
-.sample-images {
-  display: flex;
-  flex-wrap: nowrap;
-  gap: 12px;
-  margin: 0 -16px 2rem; /* negative margins bleed past .column's 16px gutter on mobile */
-  padding: 6px 16px;
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-}
-
-@media (min-width: 720px) {
-  .sample-images {
-    margin-left: 0;
-    margin-right: 0;
-    padding-left: 0;
-    padding-right: 0;
-  }
-}
-
-.sample-images-label {
-  display: none;
-  font-size: 0.875rem; /* small but readable label; between --text-sm and --text-base */
-  color: var(--muted-color);
-  margin-bottom: 8px;
-}
-
-.sample-images img {
-  height: 8rem;
-  flex-shrink: 0;
-  border-radius: var(--radius-md);
-  object-fit: cover;
-  cursor: pointer;
-  transition: transform 0.15s;
-}
-
-.sample-images img:hover {
-  transform: scale(1.05);
-}
-
-@media (min-width: 720px) {
-  .drag-drop-desc-desktop {
-    display: block;
-  }
-
-  .drag-drop-desc-mobile {
-    display: none;
-  }
-
-  .sample-images-label {
-    display: block;
-  }
-
-  .sample-images img {
-    height: 8rem;
-    border-radius: var(--radius-sm);
-  }
-}
-
-
-/* -- Drag and drop --------------------------------------------------------- */
-
-.drag-drop-section {
-  display: none;
-}
-
-.drag-drop-section .drop-zone {
-  display: none;
-}
-
-@media (min-width: 720px) {
-  .drag-drop-section .drop-zone {
-    display: block;
-  }
-}
-
-.drop-zone {
-  height: 12.5rem;
-  margin-bottom: 1rem;
-  background-color: var(--color-bg-surface);
-  border: 4px solid var(--link-color);
-  border-radius: var(--border-radius-xl);
-  font-weight: var(--bold);
-}
-.drop-zone.dragging {
-  background-color: var(--link-color);
-}
-
-.drop-zone.dragging .default-label {
-  display: none;
-  color: var(--link-color);
-}
-
-.drop-zone.dragging .dragging-label {
-  color: var(--color-text-inverse);
-  display: block;
-}
-
-.drop-zone-label {
-  position: relative;
-  top: 5rem; /* drop-zone is 12.5rem tall; 5rem centers a ~2.5rem-tall label */
-  color: var(--link-color);
-  font-size: 1.8rem; /* large, prominent text for drag-target affordance */
-  text-align: center;
-  pointer-events: none;
-  text-transform: uppercase;
-  border-radius: var(--border-radius-xl);
-}
-
-.dragging-label {
-  display: none;
-}
-
-.dropped-image .run-functions-button {
-  display: none;
-}
 
 /* -- Swatch hex labels (v3) ------------------------------------------------ */
 
@@ -1149,62 +915,11 @@ footer .button {
 }
 
 
-/* -- Version Toggle -------------------------------------------------------- */
+/* -- Version details ------------------------------------------------------- */
 
-.version-toggle {
-  display: flex;
-  gap: 0.25rem;
-  margin: 0 auto 0.5rem auto;
-  width: fit-content;
-  padding: 0.2rem;
-  background: var(--color-bg-hover);
-  border-radius: var(--radius-md);
-}
-
-@media (min-width: 720px) {
-  .version-toggle {
-    margin-left: -2px; /* optical alignment: nudges toggle flush with content left edge */
-    margin-right: 0;
-  }
-}
-
-.version-btn {
-  display: flex;
-  align-items: center;
-  padding: 0.3rem 0.75rem;
-  border: none;
-  background: transparent;
-  color: var(--color-text-muted);
-  font-weight: var(--weight-semibold);
-  font-size: var(--text-sm);
-  cursor: pointer;
-  text-transform: uppercase;
-  letter-spacing: var(--tracking-wide);
-  transition: background 0.15s, color 0.15s;
-  border-radius: var(--radius-sm);
-}
-
-.version-btn.active {
-  background: var(--color-text);
-  color: var(--color-text-inverse);
-}
-
-.version-btn:not(.active):hover {
-  text-decoration: none;
-  background: var(--color-bg-hover);
-  color: var(--color-text);
-}
-
+/* Sits under the histogram demo, so its own top margin does the spacing. */
 .version-details {
-  margin-bottom: 2rem;
-}
-
-.version-date {
-  font-size: var(--text-sm);
-  color: var(--color-text-muted);
-  font-weight: var(--weight-semibold);
-  text-transform: uppercase;
-  letter-spacing: 0.03em; /* tighter than --tracking-wide (0.05em); compact date stamp */
+  margin: 1.75rem 0 2rem;
 }
 
 /* v3's headline capabilities — the "why this is modern" line. */
@@ -1213,7 +928,9 @@ footer .button {
   flex-wrap: wrap;
   align-items: baseline;
   gap: 0 0.5rem;
-  max-width: 34rem;
+  /* No prose cap: it's a caption spanning the demo above it now, not a
+     paragraph. The content column does the constraining, and it wraps on its
+     own when the column gets narrow. */
   font-size: 0.875rem; /* small supporting text; between --text-sm and --text-base */
   font-weight: var(--weight-medium);
   color: var(--color-text-secondary);
@@ -1235,6 +952,11 @@ footer .button {
   color: var(--color-text-muted);
 }
 
+.version-features-label {
+  color: var(--color-text-muted);
+  font-weight: var(--weight-semibold);
+}
+
 .version-subtitle {
   display: none;
   font-size: 0.875rem; /* small supporting text; between --text-sm and --text-base */
@@ -1249,6 +971,409 @@ footer .button {
   font-weight: var(--weight-medium);
   letter-spacing: 0.02em; /* very subtle tracking for legibility at small size */
   margin: 0 0 0.25rem;
+}
+
+
+/* -- Hero install command -------------------------------------------------- */
+
+/* The wrapper is created by js/copy.js with a fixed class name, so :has() is
+   the only way to reach it from here. */
+.code-copy-wrap:has(.hero-install) {
+  display: inline-block;
+  margin: 0.9rem 0 1.25rem;
+  max-width: 100%;
+}
+
+/* The byline sits directly on top of the install row now, so it doesn't need
+   the 2rem it carries elsewhere. */
+.header .logo-credit {
+  margin-bottom: 0;
+}
+
+/* Two classes so the padding beats .code-block's shorthand, which is defined
+   further down the file. */
+.code-block.hero-install {
+  margin-bottom: 0;
+  padding: 0.55rem 2.75rem 0.55rem 0.85rem; /* right side leaves room for the copy button */
+  text-align: left;
+}
+
+/* It's the hero call to action, not an incidental snippet — no hover to reveal. */
+.code-copy-wrap:has(.hero-install) .code-copy-btn {
+  top: 50%;
+  transform: translateY(-50%);
+  opacity: 1;
+}
+
+.hero-install code {
+  font-weight: var(--weight-medium);
+}
+
+
+/* -- Hero histogram -------------------------------------------------------- */
+
+/* Thirty-four hue buckets that rise, then collapse into the five colors
+   getPaletteSync() returns. Every bar keeps its slot — the palette bar is made
+   of the same elements the histogram was. See js/hero.js. */
+
+/* The install row above doesn't margin-collapse (inline-block wrap), so this
+   top margin is the whole gap on top; .version-details owns the gap below. */
+.hero-demo {
+  margin: 0.75rem 0 0;
+}
+
+/* Bars are absolutely positioned and their transform/width/height are driven
+   frame by frame by the springs in js/hero.js — only color and opacity are left
+   to CSS. */
+/* Same treatment as the "Try it yourself" section headings below, so the hero
+   and the demos name the three outputs the same way. */
+.hero-section-label {
+  font-family: var(--code-font);
+  font-size: var(--text-xs);
+  font-weight: var(--bold);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wide);
+  color: var(--muted-color);
+  margin: 0.75rem 0 0.35rem;
+}
+
+.hero-palette {
+  position: relative;
+  height: 72px;
+  overflow: hidden; /* contains the springs' overshoot at the two outer edges */
+}
+
+.hero-swatch {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  align-items: flex-end;
+  height: 6px;
+  overflow: hidden;
+  border-radius: 4px;
+  transition: opacity 0.45s ease, background-color 0.6s ease;
+}
+
+.hero-palette .hero-swatch[data-hex] {
+  /* Survivors expand over the bars still fading out beneath them. */
+  z-index: 1;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+}
+
+.hero-swatch-label {
+  padding: 0 0 6px 8px;
+  font-family: var(--code-font);
+  font-size: 11px;
+  font-weight: var(--weight-medium);
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.5s 0.4s;
+}
+
+.hero-swatch.has-label .hero-swatch-label {
+  opacity: 1;
+}
+
+/* getColorSync() is the widest swatch — this only names what's already there. */
+.hero-swatch-tag {
+  margin-left: 0.7rem;
+  padding: 2px 6px;
+  border-radius: 3px;
+  /* Tinted from the label's own ink, so it reads on light and dark swatches
+     alike without a second contrast calculation. */
+  background: color-mix(in srgb, currentColor 20%, transparent);
+  font-family: var(--font-body);
+  font-size: 9.5px;
+  font-weight: var(--weight-semibold);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* Semantic roles from getSwatchesSync(). Each chip opens in place, height only,
+   staggered left to right — same spring engine as the bars above.
+
+   js/hero.js reads --hero-chip-height to lay the grid out and sets the
+   container's height from the resulting row count, so this stays the one place
+   the chip size is declared. Below 560px the chips wrap to two columns rather
+   than shrink past what "DarkVibrant" needs. */
+.hero-swatches {
+  --hero-chip-height: 38px;
+  position: relative;
+  height: 0;
+  overflow: hidden;
+}
+
+.hero-chip {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: flex-end;
+  height: 0;
+  overflow: hidden;
+  border-radius: var(--radius-sm);
+  opacity: 0;
+  cursor: pointer;
+  transition: opacity 0.35s ease, background-color 0.6s ease;
+}
+
+.hero-chip-label {
+  padding: 0 0 5px 8px;
+  font-family: var(--code-font);
+  font-size: 10px;
+  font-weight: var(--weight-medium);
+  white-space: nowrap;
+}
+
+/* The source images double as the picker — big enough to read on their own, so
+   nothing else has to caption the band. */
+.hero-thumbs {
+  display: flex;
+  gap: 0.5rem;
+  /* On phones each tile is wider than the column can fit, so the row scrolls
+     sideways. Negative margins let it bleed across the page gutter to the
+     viewport edge; the matching padding keeps the resting position aligned
+     with the rest of the column. */
+  margin: 0 -16px;
+  padding: 0 16px;
+  overflow-x: auto;
+  scroll-snap-type: x proximity;
+  scroll-padding: 0 16px;
+}
+
+.hero-thumb {
+  position: relative;
+  /* Big enough to read on a phone, narrow enough that the next tile peeks in
+     and gives the scroll away. */
+  flex: 0 0 70%;
+  scroll-snap-align: start;
+  /* Matches the sample images in "Try it yourself" — the sources are 4:3, so
+     nothing gets cropped either. */
+  aspect-ratio: 4 / 3;
+  min-width: 0;
+  padding: 0;
+  border: none;
+  border-radius: var(--radius-md);
+  background: none;
+  overflow: hidden;
+  cursor: pointer;
+  opacity: 0.45;
+  transition: opacity 0.2s, outline-color 0.2s;
+  /* Drawn inside the thumbnail so the active one doesn't grow past the column
+     edge that the histogram below it lines up with. */
+  outline: 3px solid transparent;
+  outline-offset: -3px;
+}
+
+.hero-thumb img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hero-thumb:hover {
+  opacity: 0.8;
+}
+
+.hero-thumb.active {
+  opacity: 1;
+  outline-color: var(--color-text);
+  cursor: default;
+}
+
+/* Before the first click there's nothing to be "active" against, so the row
+   reads as equal images with one invitation on it. */
+.hero-demo.is-idle .hero-section-label,
+.hero-demo.is-idle .hero-palette,
+.hero-demo.is-idle .hero-swatches {
+  display: none;
+}
+
+.hero-demo.is-idle .hero-thumb,
+.hero-demo.is-idle .hero-thumb:hover {
+  opacity: 1;
+}
+
+/* -- Hero drop tile -------------------------------------------------------- */
+
+/* The last tile in the row: bring your own image. The whole demo accepts the
+   drop; this is just where the invitation lives. */
+.hero-drop {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px dashed var(--color-border-light);
+  background: var(--color-bg-surface);
+  opacity: 1;
+}
+
+.hero-drop img {
+  display: none;
+}
+
+.hero-drop.has-image img {
+  display: block;
+}
+
+.hero-drop.has-image {
+  border-style: solid;
+  border-color: transparent;
+}
+
+.hero-drop.has-image .hero-drop-prompt {
+  display: none;
+}
+
+.hero-drop-prompt,
+.hero-drop-error {
+  padding: 0 0.5rem;
+  font-size: var(--text-md);
+  font-weight: var(--weight-semibold);
+  line-height: var(--leading-tight);
+  color: var(--color-text-secondary);
+  text-align: center;
+  text-wrap: balance;
+}
+
+.hero-drop-sub {
+  display: block;
+  margin-top: 0.15rem;
+  font-size: var(--text-xs);
+  font-weight: var(--weight-medium);
+  color: var(--color-text-muted);
+}
+
+/* Wording swaps at the breakpoint: there's no dragging on a phone. */
+.hero-drop-wide {
+  display: none;
+}
+
+.hero-drop-error {
+  display: none;
+  color: var(--color-error-text);
+}
+
+.hero-drop.is-invalid {
+  border-color: var(--color-error-border);
+}
+
+.hero-drop.is-invalid .hero-drop-prompt,
+.hero-drop.is-invalid img {
+  display: none;
+}
+
+.hero-drop.is-invalid .hero-drop-error {
+  display: block;
+}
+
+/* Dragging anywhere over the demo lights the tile up, wherever the cursor is. */
+.hero-demo.is-dragging .hero-drop {
+  border-style: solid;
+  border-color: var(--color-text);
+  background: var(--color-bg-hover);
+}
+
+.hero-demo.is-dragging .hero-drop.has-image img {
+  opacity: 0.4;
+}
+
+.hero-demo.is-dragging .hero-drop .hero-drop-prompt {
+  display: block;
+}
+
+.hero-thumb-cta {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius-full);
+  background: var(--color-text);
+  color: var(--color-text-inverse);
+  border: 2px solid #fff;
+  font-size: var(--text-md);
+  font-weight: var(--weight-semibold);
+  white-space: nowrap;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
+  overflow: hidden; /* clips the sheen to the pill's rounded edge */
+  pointer-events: none; /* the whole thumbnail is the target */
+}
+
+/* A slanted highlight that crosses the pill and then waits. The sweep is the
+   first fifth of the cycle; the rest of the keyframe holds it off-screen, which
+   is what makes it read as occasional rather than as a loop. */
+.hero-thumb-cta::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  bottom: -50%;
+  left: 0;
+  width: 45%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), transparent);
+  animation: hero-cta-sheen 5s ease-in-out infinite;
+}
+
+.hero-demo:not(.is-idle) .hero-thumb-cta {
+  display: none;
+}
+
+@keyframes hero-cta-sheen {
+  0%        { transform: translateX(-160%) skewX(-20deg); }
+  20%, 100% { transform: translateX(360%) skewX(-20deg); }
+}
+
+@media (min-width: 720px) {
+  /* Without this the header's content column shrink-wraps its longest line and
+     the band comes out narrower than every section below it. */
+  .header .content {
+    flex: 1;
+  }
+
+  .hero-palette {
+    height: 96px;
+  }
+
+  .hero-swatches {
+    --hero-chip-height: 46px;
+  }
+
+  .hero-drop-wide {
+    display: block;
+  }
+
+  .hero-drop-narrow {
+    display: none;
+  }
+
+  /* Wide enough for all three tiles to share the row again. */
+  .hero-thumbs {
+    margin: 0;
+    padding: 0;
+    overflow-x: visible;
+    scroll-snap-type: none;
+  }
+
+  .hero-thumb {
+    flex: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-palette,
+  .hero-swatch,
+  .hero-swatch-label,
+  .hero-chip,
+  .hero-thumb {
+    transition: none;
+  }
+
+  .hero-thumb-cta::after {
+    animation: none;
+    opacity: 0;
+  }
 }
 
 
@@ -1320,6 +1445,63 @@ footer .button {
 }
 
 
+/* -- Terminal blocks -------------------------------------------------------- */
+
+/* Shell commands and CLI transcripts get the classic dark-terminal treatment,
+   so "type this into a shell" reads differently at a glance from the light
+   blocks that show library code. */
+
+.code-block.terminal {
+  background: var(--color-terminal-bg);
+  border-color: var(--color-terminal-border);
+  color: var(--color-terminal-text);
+}
+
+/* Prism sets a dark base color on any code[class*="language-"], which is
+   invisible here — the block's own light text wins instead. */
+.code-block.terminal code,
+.code-block.terminal code[class*="language-"] {
+  color: inherit;
+}
+
+/* Prism's light-background token colors wash out on the dark fill, so the few
+   tokens that actually show up in shell samples get their own palette. */
+.code-block.terminal .token.comment,
+.code-block.terminal .token.prolog,
+.code-block.terminal .token.cdata {
+  color: var(--color-terminal-muted);
+}
+
+.code-block.terminal .token.function,
+.code-block.terminal .token.builtin,
+.code-block.terminal .token.keyword {
+  color: var(--color-terminal-accent);
+}
+
+.code-block.terminal .token.string,
+.code-block.terminal .token.parameter {
+  color: #a8c7fa;
+}
+
+.code-block.terminal .token.operator,
+.code-block.terminal .token.punctuation,
+.code-block.terminal .token.variable {
+  color: var(--color-terminal-text);
+}
+
+/* The white copy button would glare against the dark fill. */
+.code-copy-wrap:has(.terminal) .code-copy-btn {
+  background: transparent;
+  border-color: #3a4049;
+  color: var(--color-terminal-muted);
+}
+
+.code-copy-wrap:has(.terminal) .code-copy-btn:hover {
+  color: var(--color-terminal-text);
+  border-color: #4d545f;
+}
+
+
 /* -- CLI output example ----------------------------------------------------- */
 
 .cli-output code {
@@ -1327,9 +1509,15 @@ footer .button {
 }
 
 .cli-prompt {
-  color: #6c757d;
+  color: var(--color-terminal-muted);
   user-select: none;
   margin-right: 0.5em;
+}
+
+/* Prism doesn't run on these hand-written shell samples, so comments are marked
+   up by hand rather than tokenized. */
+.cli-comment {
+  color: var(--color-terminal-muted);
 }
 
 .cli-command-group {
@@ -1353,7 +1541,7 @@ footer .button {
   gap: 0.6em;
   font-family: var(--font-code);
   font-size: var(--text-sm);
-  color: var(--color-code-text);
+  color: inherit; /* follows the block — dark text on light, light text on terminal */
 }
 
 .cli-swatch {
@@ -1884,89 +2072,6 @@ footer .button {
 }
 
 
-/* -- Dropped images (drag-and-drop) ---------------------------------------- */
-
-.dropped-result {
-  margin-bottom: 2rem;
-  padding-bottom: 2rem;
-  border-bottom: 1px solid var(--border-color-light);
-}
-
-.dropped-result:last-child {
-  border-bottom: none;
-}
-
-.dropped-result .demo-img {
-  display: none;
-}
-
-.dropped-result.user-upload .demo-img {
-  display: block;
-}
-
-.dropped-section-label {
-  font-family: var(--code-font);
-  font-size: var(--text-xs);
-  font-weight: var(--bold);
-  text-transform: uppercase;
-  letter-spacing: var(--tracking-wide);
-  color: var(--muted-color);
-  margin: 20px 0 8px;
-}
-
-
-/* Swatch spring-in keyframes */
-@keyframes swatch-spring-in {
-  0%   { opacity: 0; transform: scale(0.7); }
-  60%  { opacity: 1; transform: scale(1.05); }
-  80%  { transform: scale(0.98); }
-  100% { opacity: 1; transform: scale(1); }
-}
-
-.dropped-result .swatch {
-  opacity: 0;
-  transform: scale(0.7);
-}
-
-.dropped-result .swatch-card {
-  opacity: 0;
-  transform: scale(0.7);
-}
-
-
-.dropped-result .swatch.cascade-in,
-.dropped-result .swatch-card.cascade-in {
-  animation: swatch-spring-in 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) both;
-}
-
-/* Section label fade-in */
-.dropped-result .dropped-section-label {
-  opacity: 0;
-  transform: translateY(4px);
-  transition: opacity 0.3s ease, transform 0.3s ease;
-}
-.dropped-result .dropped-section-label.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* Reduced motion override */
-@media (prefers-reduced-motion: reduce) {
-  .dropped-result .swatch,
-  .dropped-result .swatch-card {
-    opacity: 1; transform: none;
-  }
-  .dropped-result .swatch.cascade-in,
-  .dropped-result .swatch-card.cascade-in {
-    animation: none;
-  }
-  .dropped-result .dropped-img { transition: none; }
-  .dropped-result .dropped-section-label {
-    opacity: 1; transform: none; transition: none;
-  }
-}
-
-
 /* -- Options table (v2) ---------------------------------------------------- */
 
 .options-table {
@@ -2125,17 +2230,19 @@ footer .button {
   position: absolute;
   top: 8px;
   right: 8px;
-  padding: 4px 8px;
+  padding: 5px;
   border: 1px solid var(--color-border-subtle);
   border-radius: var(--radius-sm);
   background: var(--color-bg-surface);
   color: var(--color-text-secondary);
-  font-family: var(--font-body);
-  font-size: var(--text-xs);
-  line-height: 1;
+  line-height: 0;
   cursor: pointer;
   opacity: 0;
   transition: opacity 0.12s ease, color 0.12s ease, border-color 0.12s ease;
+}
+
+.code-copy-btn svg {
+  display: block;
 }
 
 .code-copy-wrap:hover .code-copy-btn,

@@ -40,15 +40,21 @@
 
         <a href="https://lokeshdhakar.com" class="logo-credit">by Lokesh Dhakar</a>
 
-        <div class="version-toggle" role="group" aria-label="Version toggle">
-          <button id="toggle-v3" class="version-btn active">v3</button>
-          <button id="toggle-v2" class="version-btn">v2</button>
+        <div class="code-block hero-install"><code>$ npm install colorthief</code></div>
+
+        <!-- Click a source image to extract from it. Swatches, chips and
+             thumbnails are all built by js/hero.js; this is just the shell. -->
+        <div class="hero-demo" id="hero-demo">
+          <div class="hero-thumbs" id="hero-thumbs"></div>
+          <p class="hero-section-label">Palette</p>
+          <div class="hero-palette" id="hero-palette" aria-hidden="true"></div>
+          <p class="hero-section-label">Semantic swatches</p>
+          <div class="hero-swatches" id="hero-swatches" aria-hidden="true"></div>
         </div>
 
         <div class="version-details">
-          <div class="version-date">v3 released March 2026</div>
           <p class="version-features">
-            <a href="#v3-color-space">Perceptual OKLCH quantization</a><span class="version-features-sep">·</span><a href="#v3-api-options">Wide-gamut Display&nbsp;P3</a><span class="version-features-sep">·</span><a href="#v3-observe">Live video</a><span class="version-features-sep">·</span><a href="#v3-getting-started">CLI</a>
+            <span class="version-features-label">Features:</span><a href="#v3-color-space">Perceptual OKLCH quantization</a><span class="version-features-sep">·</span><a href="#v3-api-options">Wide-gamut Display&nbsp;P3</a><span class="version-features-sep">·</span><a href="#v3-observe">Live video</a><span class="version-features-sep">·</span><a href="#v3-getting-started">CLI</a>
           </p>
           <p class="version-subtitle">Completely rewritten in TypeScript. Zero browser dependencies. New API.</p>
         </div>
@@ -66,7 +72,7 @@
   <div id="content-v3" class="main">
     <nav class="mobile-nav">
       <div class="mobile-nav-scroll">
-        <a href="#v3-drag-drop" class="mobile-nav-link">Try it</a>
+        <a href="#hero-demo" class="mobile-nav-link">Try it</a>
         <a href="#v3-examples" class="mobile-nav-link">Examples</a>
         <a href="#v3-getting-started" class="mobile-nav-link">Getting started</a>
         <a href="#v3-api" class="mobile-nav-link">API</a>
@@ -81,7 +87,6 @@
           GitHub
         </a>
         <ul class="nav-list">
-          <li class="nav-list-item"><a href="#v3-drag-drop" class="nav-link">Try it</a></li>
           <li class="nav-list-item"><a href="#v3-examples" class="nav-link">Examples</a>
             <ul class="nav-sub-list">
               <li class="nav-sub-item"><a href="#v3-dominant" class="nav-link nav-link-sub"><span class="nav-num">1.</span> Dominant color</a></li>
@@ -113,24 +118,6 @@
     </div>
 
     <div class="content">
-
-
-      <!-- TRY IT -->
-
-      <section id="v3-drag-drop" class="drag-drop-section">
-        <h2>Try it yourself</h2>
-        <p class="drag-drop-desc-desktop">Drag an image from your computer onto the drop zone below.</p>
-        <p class="drag-drop-desc-mobile">Tap an example image to see Color Thief in action.</p>
-
-        <div id="v3-drop-zone" class="drop-zone">
-          <div class="drop-zone-label default-label">Drag an image here</div>
-          <div class="drop-zone-label dragging-label">Drop it!</div>
-        </div>
-        <div class="sample-images-label">or click an example image</div>
-        <div class="sample-images" id="v3-sample-images">
-        </div>
-        <div id="v3-dragged-images" class="dragged-images"></div>
-      </section>
 
 
       <!-- EXAMPLES -->
@@ -547,7 +534,7 @@ const palette = await getPalette(img, { colorCount: 6 });</code></div>
         <p>The package name is <strong>colorthief</strong> (not color-thief).</p>
 
         <h3>Install</h3>
-        <div class="code-block"><code>npm install colorthief</code></div>
+        <div class="code-block terminal"><code>npm install colorthief</code></div>
 
         <h3>Browser</h3>
 
@@ -576,7 +563,7 @@ const palette = await getPalette(img, { colorCount: 6 });</code></div>
 
         <h3>Node.js</h3>
         <p>Node.js support requires the <a href="https://www.npmjs.com/package/sharp">sharp</a> image processing library as a peer dependency.</p>
-        <div class="code-block"><code>npm install sharp</code></div>
+        <div class="code-block terminal"><code>npm install sharp</code></div>
         <div class="code-block"><code class="prism language-javascript">import { getColor, getPalette } from 'colorthief';
 
 const color = await getColor('photo.jpg');
@@ -587,11 +574,11 @@ palette.forEach(c => console.log(c.hex()));</code></div>
 
         <h3>CLI</h3>
         <p>Quick start, no install needed:</p>
-        <div class="code-block"><code>npx colorthief-cli photo.jpg</code></div>
+        <div class="code-block terminal"><code>npx colorthief-cli photo.jpg</code></div>
         <p>The <code>colorthief-cli</code> package bundles everything needed (including sharp for image decoding), so it works immediately with no extra setup.</p>
 
         <h4>Commands</h4>
-        <div class="code-block cli-output">
+        <div class="code-block terminal cli-output">
           <div class="cli-command-group">
             <code><span class="cli-prompt">$</span> colorthief-cli photo.jpg</code>
             <div class="cli-result">
@@ -620,11 +607,11 @@ palette.forEach(c => console.log(c.hex()));</code></div>
         </div>
 
         <h4>Flags</h4>
-        <div class="code-block"><code class="prism language-bash">--json                # Full color data as JSON
---css                 # CSS custom properties
---count 5             # Number of palette colors (2-20)
---quality 1           # Sampling quality (1 = every pixel)
---color-space rgb     # Quantization space (rgb or oklch)</code></div>
+        <div class="code-block terminal"><code>--json                <span class="cli-comment"># Full color data as JSON</span>
+--css                 <span class="cli-comment"># CSS custom properties</span>
+--count 5             <span class="cli-comment"># Number of palette colors (2-20)</span>
+--quality 1           <span class="cli-comment"># Sampling quality (1 = every pixel)</span>
+--color-space rgb     <span class="cli-comment"># Quantization space (rgb or oklch)</span></code></div>
         <p>Stdin is supported (<code>cat photo.jpg | colorthief-cli -</code>), and multiple files can be passed at once. If you already have <code>colorthief</code> and <code>sharp</code> installed, you can use <code>colorthief</code> as the command name directly.</p>
       </section>
 
@@ -1147,316 +1134,6 @@ controller.stop();</code></div>
 
 
 
-  <!-- ═══════════════════════════════════════════════════════════════
-       v2 CONTENT
-       ═══════════════════════════════════════════════════════════════ -->
-
-  <div id="content-v2" class="main" hidden>
-    <nav class="mobile-nav">
-      <div class="mobile-nav-scroll">
-        <a href="#v2-examples" class="mobile-nav-link">Examples</a>
-        <a href="#v2-getting-started" class="mobile-nav-link">Getting started</a>
-        <a href="#v2-api" class="mobile-nav-link">API</a>
-        <a href="#v2-faq" class="mobile-nav-link">FAQ</a>
-        <a href="#v2-support" class="mobile-nav-link">Support</a>
-        <a href="#v2-license" class="mobile-nav-link">License</a>
-      </div>
-    </nav>
-    <div class="column">
-
-    <div class="sidebar">
-      <nav id="nav-v2" class="nav">
-        <a href="https://github.com/lokesh/color-thief" class="nav-github" target="_blank" rel="noopener">
-          <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
-          GitHub
-        </a>
-        <ul class="nav-list">
-          <li class="nav-list-item"><a href="#v2-examples" class="nav-link">Examples</a></li>
-          <li class="nav-list-item"><a href="#v2-getting-started" class="nav-link">Getting started</a></li>
-          <li class="nav-list-item"><a href="#v2-api" class="nav-link">API</a></li>
-          <li class="nav-list-item"><a href="#v2-faq" class="nav-link">FAQ</a></li>
-          <li class="nav-list-item"><a href="#v2-support" class="nav-link">Support</a></li>
-          <li class="nav-list-item"><a href="#v2-license" class="nav-link">License</a></li>
-        </ul>
-      </nav>
-    </div>
-
-    <div class="content">
-
-
-      <!-- EXAMPLES (v2) -->
-
-      <section id="v2-examples" class="examples-section">
-        <h2>Examples</h2>
-        <div id="v2-example-images"></div>
-      </section>
-
-      <section id="v2-drag-drop" class="drag-drop-section">
-        <div class="container">
-          <h2>Try it yourself</h2>
-          <div id="v2-drop-zone" class="drop-zone">
-            <div class="drop-zone-label default-label">Drag an image here</div>
-            <div class="drop-zone-label dragging-label">Drop it!</div>
-          </div>
-          <div id="v2-dragged-images" class="dragged-images"></div>
-        </div>
-      </section>
-
-
-      <!-- GETTING STARTED (v2) -->
-
-      <section id="v2-getting-started" class="getting-started-section">
-        <h2>Getting started</h2>
-
-        <p class="before-list">The Color Thief package includes multiple distribution files to support different environments and build processes. Here is the list of all the files in the <code>/dist</code> folder and what formats they support:</p>
-        <ul class="list">
-          <li><strong>color-thief.js</strong> - CommonJS module for use in Node.</li>
-          <li><strong>color-thief.mjs</strong> - ES6 module. For modern browsers as well as Webpack and Rollup.</li>
-          <li><strong>color-thief.umd.js</strong> - UMD module. For simple script tag loading that exposes a global variable or for RequireJS AMD support.</li>
-        </ul>
-
-        <h3>Using in Node</h3>
-
-        <ol class="guide-steps">
-          <li><strong>Install and import.</strong> The name of the package is <em>colorthief</em>, not <em>color-thief</em>.
-<pre><code class="prism language-javascript">$ npm i --save colorthief</code></pre>
-
-<pre><code class="prism language-javascript">const ColorThief = require('colorthief');</code></pre>
-          </li>
-          <li><strong>Get colors.</strong> Both the <code>getColor()</code> and <code>getPalette()</code> methods return a Promise when used in Node.
-<pre><code class="prism language-javascript line-numbers">const img = resolve(process.cwd(), 'rainbow.png');
-
-ColorThief.getColor(img)
-    .then(color => { console.log(color) })
-    .catch(err => { console.log(err) })
-
-ColorThief.getPalette(img, 5)
-    .then(palette => { console.log(palette) })
-    .catch(err => { console.log(err) })</code></pre>
-          </li>
-        </ol>
-
-         <h3>Using in the browser</h3>
-
-        <h4>1. Install</h4>
-        <p class="before-list">There are multiples ways to install Color Thief when using it in the browser:</p>
-        <ul class="guide-steps">
-          <li><strong>Install as dependency with npm</strong>. The name of the package is <em>colorthief</em>, not <em>color-thief</em>.
-<pre><code class="prism language-javascript">$ npm i --save colorthief</code></pre>
-          </li>
-          <li><strong>Load from a CDN.</strong>
-<pre><code class="prism language-xml">&lt;script src="https://cdnjs.cloudflare.com/ajax/libs/color-thief/2.7.0/color-thief.umd.js">&lt;/script></code></pre>
-          </li>
-        </ul>
-
-
-        <h4>2. Import and use</h4>
-        <ul class="guide-steps">
-          <li><strong>As a global variable.</strong>
-<pre><code class="prism language-xml line-numbers">&lt;script src="node_modules/colorthief/dist/color-thief.umd.js">&lt;/script>
-&lt;script>
-    const colorThief = new ColorThief();
-    const img = document.querySelector('img');
-
-    // Make sure image is finished loading
-    if (img.complete) {
-      colorThief.getColor(img);
-    } else {
-      img.addEventListener('load', function() {
-        colorThief.getColor(img);
-      });
-    }
-&lt;/script></code></pre>
-</li>
-          <li><strong>As an ES6 module.</strong>
-<div class="code-file">index.html</div>
-<pre><code class="prism language-xml">&lt;script type="module" src="app.js">&lt;/script></code></pre>
-
-<div class="code-file">app.js</div>
-<pre><code class="prism language-javascript line-numbers">import ColorThief from './node_modules/colorthief/dist/color-thief.mjs'
-
-const colorThief = new ColorThief();
-const img = document.querySelector('img');
-
-if (img.complete) {
-  colorThief.getColor(img);
-} else {
-  img.addEventListener('load', function() {
-    colorThief.getColor(img);
-  });
-}
-</code></pre>
-          </li>
-        </ul>
-      </section>
-
-
-      <!-- API (v2) -->
-
-      <section id="v2-api" class="options-section">
-        <h2>API</h2>
-
-        <p><em>Note: Both <code>getColor</code> and <code>getPalette</code> return a <code>Promise</code> when used in Node.</em></p>
-
-        <div class="method">
-          <div class="method-name">getColor(image [, quality])</div>
-          <div class="method-name">getColor(image [, options])</div>
-          <div class="method-return">Returns: [Number, Number, Number] | null</div>
-          <div class="method-description">
-            <p>Gets the dominant color from the image. Color is returned as an array of three integers representing red, green, and blue values.</p>
-            <p><span class="method-argument">image</span> - When called in the browser, this argument accepts an <code>HTMLImageElement</code>, <code>HTMLCanvasElement</code>, <code>ImageData</code>, or <code>ImageBitmap</code>. When run in Node, this argument expects a path to the image.</p>
-            <p><span class="method-argument">quality</span> is an optional argument that must be an Integer of value 1 or greater, and defaults to 10.</p>
-          </div>
-        </div>
-
-        <div class="method">
-          <div class="method-name">getPalette(image [, colorCount, quality])</div>
-          <div class="method-name">getPalette(image [, options])</div>
-          <div class="method-return">Returns: [[Number, Number, Number], ...] | null</div>
-          <div class="method-description">
-            <p>Gets a palette from the image by clustering similar colors. The palette is returned as an array containing colors, each color itself an array of three integers.</p>
-          </div>
-        </div>
-
-        <h3 id="v2-options">Options</h3>
-
-        <table class="options-table">
-          <thead>
-            <tr>
-              <th>Option</th>
-              <th>Type</th>
-              <th>Default</th>
-              <th>Description</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><code>colorCount</code></td>
-              <td>Integer</td>
-              <td><code>10</code></td>
-              <td>Number of colors in the palette. Must be between 2 and 20. (<code>getPalette</code> only)</td>
-            </tr>
-            <tr>
-              <td><code>quality</code></td>
-              <td>Integer</td>
-              <td><code>10</code></td>
-              <td>Quality setting. 1 is highest quality.</td>
-            </tr>
-            <tr>
-              <td><code>ignoreWhite</code></td>
-              <td>Boolean</td>
-              <td><code>true</code></td>
-              <td>Whether to ignore white pixels during color sampling.</td>
-            </tr>
-            <tr>
-              <td><code>whiteThreshold</code></td>
-              <td>Integer</td>
-              <td><code>250</code></td>
-              <td>RGB channel threshold (0–255) above which a pixel is considered white.</td>
-            </tr>
-            <tr>
-              <td><code>alphaThreshold</code></td>
-              <td>Integer</td>
-              <td><code>125</code></td>
-              <td>Alpha channel threshold (0–255) below which a pixel is considered transparent and skipped.</td>
-            </tr>
-            <tr>
-              <td><code>minSaturation</code></td>
-              <td>Number</td>
-              <td><code>0</code></td>
-              <td>Minimum HSV saturation (0–1). Pixels with saturation below this value are skipped.</td>
-            </tr>
-          </tbody>
-        </table>
-
-      </section>
-
-
-      <!-- FAQ (v2) -->
-
-      <section id="v2-faq" class="faq-section">
-        <h2>FAQ</h2>
-        <p>All questions are about the usage of Color Thief in the browser, not Node.</p>
-
-        <h3>Do I have to wait for the image to load?</h3>
-        <p>Yes. As of v2.7.0, Color Thief will throw a descriptive error if the image hasn't loaded: <code>Image has not finished loading</code>.</p>
-
-<pre><code class="prism language-javascript line-numbers">// BETTER
-const colorThief = new ColorThief();
-const img = document.querySelector('img');
-
-if (img.complete) {
-  colorThief.getColor(img);
-} else {
-  img.addEventListener('load', function() {
-    colorThief.getColor(img);
-  });
-}</code></pre>
-
-        <h3>Does it work if the image is hosted on another domain?</h3>
-        <p>Yes, if CORS is configured. Set <code>access-control-allow-origin</code> on the server and add <code>crossorigin="anonymous"</code> to the image element.</p>
-
-<pre><code class="prism language-xml">&lt;img src="https://example.com/image.jpg" crossorigin="anonymous" /></code></pre>
-
-        <h3>How do I get hex values?</h3>
-        <p>In v2, colors are returned as <code>[r, g, b]</code> arrays. Convert with:</p>
-
-<pre><code class="prism language-javascript line-numbers">const rgbToHex = (r, g, b) => '#' + [r, g, b].map(x => {
-  const hex = x.toString(16)
-  return hex.length === 1 ? '0' + hex : hex
-}).join('')
-
-rgbToHex(102, 51, 153); // #663399</code></pre>
-
-        <p><em>Tip: In v3, just use <code>color.hex()</code> — no conversion needed.</em></p>
-      </section>
-
-
-      <!-- SUPPORT (v2) -->
-
-      <section id="v2-support">
-        <h2>Help</h2>
-
-        <h3>Trouble using Color Thief?</h3>
-        <ol>
-          <li><a href="//stackoverflow.com/questions/tagged/color-thief">Search Stackoverflow</a> to see if other people have run into the same issue.</li>
-          <li>If your issue is unique, <a href="//stackoverflow.com/questions/ask">post a new question on Stackoverflow</a>. Use the <code>color-thief</code> tag.</li>
-        </ol>
-
-        <h3>Have a feature request?</h3>
-        <ol>
-          <li><a href="https://github.com/lokesh/color-thief/issues">Search existing Github Issues</a>.</li>
-          <li><a href="https://github.com/lokesh/color-thief/issues/new">Post a new issue</a> detailing your request.</li>
-        </ol>
-
-        <h3>Found a bug?</h3>
-        <ol>
-          <li><a href="https://github.com/lokesh/color-thief/issues">Search existing Github Issues</a>.</li>
-          <li><a href="https://github.com/lokesh/color-thief/issues/new">Create a new issue</a> with your browser, OS, library version, and steps to reproduce.</li>
-        </ol>
-      </section>
-
-
-      <!-- LICENSE (v2) -->
-
-      <section id="v2-license" class="license-section">
-        <h2>License</h2>
-        <p>Color Thief is licensed under the <a href="https://github.com/lokesh/color-thief/blob/master/LICENSE">MIT License</a>.</p>
-      </section>
-
-
-      <!-- FOOTER (v2) -->
-
-      <footer>
-        <div>
-          <div class="logo-credit">Created by Lokesh Dhakar</div>
-          <a href="https://twitter.com/lokesh" class="button">Twitter</a> <a href="https://lokeshdhakar.com" class="button">Website</a>
-        </div>
-      </footer>
-
-    </div><!-- .content -->
-    </div><!-- .column -->
-  </div><!-- #content-v2 -->
 
 
 
