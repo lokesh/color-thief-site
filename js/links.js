@@ -1,24 +1,6 @@
-export default function initScrollLinks() {
-  document.addEventListener('click', (event) => {
-    const link = event.target.closest('.nav-link, .mobile-nav-link');
-    if (!link) return;
-
-    event.preventDefault();
-    const hash = link.hash;
-    const target = document.querySelector(hash);
-    if (!target) return;
-
-    target.scrollIntoView({ behavior: 'smooth' });
-
-    setTimeout(() => {
-      history.replaceState(null, '', hash);
-    }, 600);
-  });
-
-  initNavSpy();
-}
-
-function initNavSpy() {
+// Scrolling itself is handled by CSS (scroll-behavior + scroll-padding-top);
+// this module only keeps the nav highlighting in sync with scroll position.
+export default function initNavSpy() {
   // Collect every section referenced by any nav link (mobile or desktop)
   const allLinks = document.querySelectorAll('.nav-link, .mobile-nav-link');
   const sectionIds = new Set();
