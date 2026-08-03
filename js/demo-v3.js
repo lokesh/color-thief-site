@@ -392,7 +392,9 @@ function renderProportionBar({ colors, imgSrc }) {
   const segments = colors.map(c => {
     const pct = Math.round(c.proportion * 100);
     const label = c.proportion >= 0.08 ? `<span class="proportion-bar-label" style="color:${c.textColor}">${pct}%</span>` : '';
-    return `<div class="proportion-bar-segment" style="flex:${c.proportion};background:${c.hex}" title="${c.hex} ${pct}%">${label}</div>`;
+    // data-copy-hint rather than title: the copy chip already shows the hex on
+    // hover, and a native tooltip on top of it would just be noise.
+    return `<div class="proportion-bar-segment" style="flex:${c.proportion};background:${c.hex}" data-copy-hint="${pct}%">${label}</div>`;
   }).join('');
   return `<img class="proportion-bar-thumb" src="${imgSrc}" alt="">
     <div class="proportion-bar">${segments}</div>`;
