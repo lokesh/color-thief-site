@@ -47,6 +47,9 @@
 
         <div class="version-details">
           <div class="version-date">v3 released March 2026</div>
+          <p class="version-features">
+            <a href="#v3-color-space">Perceptual OKLCH quantization</a><span class="version-features-sep">·</span><a href="#v3-api-options">Wide-gamut Display&nbsp;P3</a><span class="version-features-sep">·</span><a href="#v3-observe">Live video</a><span class="version-features-sep">·</span><a href="#v3-getting-started">CLI</a>
+          </p>
           <p class="version-subtitle">Completely rewritten in TypeScript. Zero browser dependencies. New API.</p>
         </div>
       </div>
@@ -83,13 +86,14 @@
             <ul class="nav-sub-list">
               <li class="nav-sub-item"><a href="#v3-dominant" class="nav-link nav-link-sub"><span class="nav-num">1.</span> Dominant color</a></li>
               <li class="nav-sub-item"><a href="#v3-palette" class="nav-link nav-link-sub"><span class="nav-num">2.</span> Palette</a></li>
-              <li class="nav-sub-item"><a href="#v3-observe" class="nav-link nav-link-sub"><span class="nav-num">3.</span> Video</a></li>
-              <li class="nav-sub-item"><a href="#v3-color-object" class="nav-link nav-link-sub"><span class="nav-num">4.</span> Color object</a></li>
-              <li class="nav-sub-item"><a href="#v3-proportions" class="nav-link nav-link-sub"><span class="nav-num">5.</span> Proportions</a></li>
-              <li class="nav-sub-item"><a href="#v3-swatches" class="nav-link nav-link-sub"><span class="nav-num">6.</span> Swatches</a></li>
-              <li class="nav-sub-item"><a href="#v3-quality" class="nav-link nav-link-sub"><span class="nav-num">7.</span> Quality</a></li>
-              <li class="nav-sub-item"><a href="#v3-region" class="nav-link nav-link-sub"><span class="nav-num">8.</span> Region</a></li>
-              <li class="nav-sub-item"><a href="#v3-async" class="nav-link nav-link-sub"><span class="nav-num">9.</span> Async</a></li>
+              <li class="nav-sub-item"><a href="#v3-color-space" class="nav-link nav-link-sub"><span class="nav-num">3.</span> Color space</a></li>
+              <li class="nav-sub-item"><a href="#v3-observe" class="nav-link nav-link-sub"><span class="nav-num">4.</span> Video</a></li>
+              <li class="nav-sub-item"><a href="#v3-color-object" class="nav-link nav-link-sub"><span class="nav-num">5.</span> Color object</a></li>
+              <li class="nav-sub-item"><a href="#v3-proportions" class="nav-link nav-link-sub"><span class="nav-num">6.</span> Proportions</a></li>
+              <li class="nav-sub-item"><a href="#v3-swatches" class="nav-link nav-link-sub"><span class="nav-num">7.</span> Swatches</a></li>
+              <li class="nav-sub-item"><a href="#v3-quality" class="nav-link nav-link-sub"><span class="nav-num">8.</span> Quality</a></li>
+              <li class="nav-sub-item"><a href="#v3-region" class="nav-link nav-link-sub"><span class="nav-num">9.</span> Region</a></li>
+              <li class="nav-sub-item"><a href="#v3-async" class="nav-link nav-link-sub"><span class="nav-num">10.</span> Async</a></li>
 
             </ul>
           </li>
@@ -173,10 +177,34 @@ palette.forEach(c => console.log(c.hex()));</code></div>
       </section>
 
 
-      <!-- 03. Observe a video source -->
+      <!-- 03. Color space -->
+
+      <section id="v3-color-space" class="v3-section">
+        <span class="example-num">3</span>
+        <h2>Perceptual color space</h2>
+        <p>v3 quantizes in <strong>OKLCH</strong>, a perceptually uniform space, so palettes are grouped by how colors actually look to the eye. Quantizing in raw RGB — what v2 did, and still available via <code>colorSpace</code> — clusters colors by numeric distance, which tends to return near-duplicates and miss saturated tones.</p>
+
+        <div class="code-block"><code class="language-javascript">import { getPaletteSync } from 'colorthief';
+
+// Perceptual OKLCH — the v3 default
+const perceptual = getPaletteSync(img, { colorCount: 6 });
+
+// Raw RGB — the v2 algorithm
+const raw = getPaletteSync(img, { colorCount: 6, colorSpace: 'rgb' });</code></div>
+
+        <div class="v3-output" id="out-color-space">
+          <img class="source-img" id="color-space-source-img" src="" alt="Source image">
+          <div class="colorspace-compare" id="colorspace-compare"></div>
+        </div>
+
+        <p class="annotation">Colors are read in sRGB by default. Pass <code>gamut: 'display-p3'</code> to keep the wide-gamut colors in a Display&nbsp;P3 image instead of collapsing them to sRGB, or <code>'auto'</code> to upgrade only when an image actually uses colors outside sRGB.</p>
+      </section>
+
+
+      <!-- 04. Observe a video source -->
 
       <section id="v3-observe" class="v3-section">
-        <span class="example-num">3</span>
+        <span class="example-num">4</span>
         <h2>Observe a video source</h2>
         <p>Reactively watch a video source and get palette updates on every frame. Works with <code>&lt;video&gt;</code>, <code>&lt;canvas&gt;</code>, and <code>&lt;img&gt;</code> elements.</p>
 
@@ -213,10 +241,10 @@ controller.stop();</code></div>
       </section>
 
 
-      <!-- 04. Color Object -->
+      <!-- 05. Color Object -->
 
       <section id="v3-color-object" class="v3-section">
-        <span class="example-num">4</span>
+        <span class="example-num">5</span>
         <h2>The color object</h2>
         <p>Every extracted color is a rich object with format conversions, accessibility metadata, and contrast ratios.</p>
 
@@ -245,7 +273,7 @@ color.contrast.black  // 6.14</code></div>
       <!-- Color Proportions -->
 
       <section id="v3-proportions" class="v3-section">
-        <span class="example-num">5</span>
+        <span class="example-num">6</span>
         <h2>Color proportions</h2>
         <p>Each color in a palette includes a <code>proportion</code> property (0&ndash;1) showing what fraction of the image it represents.</p>
 
@@ -260,10 +288,10 @@ palette.forEach(color => {
         </div>
       </section>
 
-      <!-- 05. getSwatches -->
+      <!-- 07. getSwatches -->
 
       <section id="v3-swatches" class="v3-section">
-        <span class="example-num">6</span>
+        <span class="example-num">7</span>
         <h2>Get semantic swatches</h2>
         <p>Classify palette colors into six semantic roles. Each swatch includes text color recommendations.</p>
 
@@ -288,10 +316,10 @@ if (swatches.DarkMuted) {
       </section>
 
 
-      <!-- 06. Quality -->
+      <!-- 08. Quality -->
 
       <section id="v3-quality" class="v3-section">
-        <span class="example-num">7</span>
+        <span class="example-num">8</span>
         <h2>Quality settings</h2>
         <p>The <code>quality</code> option controls how many pixels are sampled. Lower values sample more pixels (slower, more accurate). Default is 10.</p>
 
@@ -308,10 +336,10 @@ getPaletteSync(img, { quality: 50 });  // Every 50th pixel</code></div>
       </section>
 
 
-      <!-- 07. Region -->
+      <!-- 09. Region -->
 
       <section id="v3-region" class="v3-section">
-        <span class="example-num">8</span>
+        <span class="example-num">9</span>
         <h2>Region extraction</h2>
         <p>Pass a <code>region</code> to sample only part of the image. Coordinates are fractions of the image size (0–1) measured from the top-left, so the same values work on a thumbnail and the full-size original. Useful when the colors you care about live in a known corner &mdash; a product against a backdrop, or the strip of image a caption sits on.</p>
 
@@ -340,10 +368,10 @@ getPaletteSync(img, {
       </section>
 
 
-      <!-- 08. Asynchronous Methods -->
+      <!-- 10. Asynchronous Methods -->
 
       <section id="v3-async" class="v3-section">
-        <span class="example-num">9</span>
+        <span class="example-num">10</span>
         <h2>Asynchronous methods</h2>
         <p>The async API keeps your UI responsive during extraction. It breaks the work into chunks and pauses between them, giving the browser time to handle animations, scrolling, and clicks. This is helpful when processing many images at once or working with very large images.</p>
 

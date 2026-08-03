@@ -113,7 +113,36 @@ function initPalette() {
   });
 }
 
-// ─── 03. Color Object ───────────────────────────────────────────────
+// ─── 03. Color Space (OKLCH vs RGB) ─────────────────────────────────
+
+const COLOR_SPACES = [
+  { space: 'oklch', label: "colorSpace: 'oklch'", tag: 'default' },
+  { space: 'rgb', label: "colorSpace: 'rgb'", tag: 'v2 algorithm' },
+];
+
+function initColorSpace() {
+  const sourceImg = document.getElementById('color-space-source-img');
+  const compareEl = document.getElementById('colorspace-compare');
+  if (!sourceImg || !compareEl) return;
+
+  // A sunset photo — the space where the two algorithms diverge most visibly.
+  sourceImg.src = imageUrls[5] || imageUrls[0];
+  waitForImage(sourceImg).then(() => {
+    compareEl.innerHTML = COLOR_SPACES.map(({ space, label, tag }) => {
+      const palette = getPaletteSync(sourceImg, { colorCount: 6, colorSpace: space });
+      return `<div class="colorspace-col">
+        <div class="colorspace-label">
+          <code>${label}</code>
+          <span class="colorspace-tag">${tag}</span>
+        </div>
+        <div class="swatch-row">${palette ? palette.map(c => swatchHTML(c, 'md', { showHex: true })).join('') : ''}</div>
+      </div>`;
+    }).join('');
+    show('out-color-space');
+  });
+}
+
+// ─── 04. Color Object ───────────────────────────────────────────────
 
 function initColorObject() {
   const sourceImg = document.getElementById('color-obj-source-img');
@@ -132,7 +161,7 @@ function initColorObject() {
   });
 }
 
-// ─── 04. getSwatchesSync — Semantic Swatches ────────────────────────
+// ─── 05. getSwatchesSync — Semantic Swatches ────────────────────────
 
 function initSwatches() {
   const sourceImg = document.getElementById('swatches-source-img');
@@ -156,7 +185,7 @@ function initSwatches() {
   });
 }
 
-// ─── 05. Quality Settings ───────────────────────────────────────────
+// ─── 06. Quality Settings ───────────────────────────────────────────
 
 function initQuality() {
   const sourceImg = document.getElementById('quality-source-img');
@@ -181,7 +210,7 @@ function initQuality() {
   });
 }
 
-// ─── 06. observe — Live Video ───────────────────────────────────────
+// ─── 07. observe — Live Video ───────────────────────────────────────
 
 function initVideoDemo() {
   const video = document.getElementById('v3-video');
@@ -249,7 +278,7 @@ function initVideoDemo() {
   show('out-observe');
 }
 
-// ─── 07. Region Extraction ──────────────────────────────────────────
+// ─── 08. Region Extraction ──────────────────────────────────────────
 
 const REGIONS = [
   { label: 'Whole image', region: null },
@@ -289,7 +318,7 @@ function initRegion() {
   });
 }
 
-// ─── 08. Async API ──────────────────────────────────────────────────
+// ─── 09. Async API ──────────────────────────────────────────────────
 
 function initAsync() {
   const sourceImg = document.getElementById('async-source-img');
@@ -317,7 +346,7 @@ function initAsync() {
   });
 }
 
-// ─── 09. Color Proportions ──────────────────────────────────────────
+// ─── 10. Color Proportions ──────────────────────────────────────────
 
 function extractProportionData(imgEl) {
   const palette = getPaletteSync(imgEl, { colorCount: 8 });
@@ -373,7 +402,7 @@ function renderProportionBar({ colors, imgSrc }) {
 
 
 
-// ─── 10. Drag and Drop ──────────────────────────────────────────────
+// ─── 11. Drag and Drop ──────────────────────────────────────────────
 
 function renderDroppedResult(image, result) {
   const roles = ['Vibrant', 'Muted', 'DarkVibrant', 'DarkMuted', 'LightVibrant', 'LightMuted'];
@@ -536,6 +565,7 @@ function isMobile() {
 export default function initV3Demos() {
   initDominant(imageUrls.slice(0, 3));
   initPalette();
+  initColorSpace();
   initColorObject();
   initSwatches();
   initQuality();
