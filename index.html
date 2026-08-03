@@ -88,7 +88,8 @@
               <li class="nav-sub-item"><a href="#v3-proportions" class="nav-link nav-link-sub"><span class="nav-num">5.</span> Proportions</a></li>
               <li class="nav-sub-item"><a href="#v3-swatches" class="nav-link nav-link-sub"><span class="nav-num">6.</span> Swatches</a></li>
               <li class="nav-sub-item"><a href="#v3-quality" class="nav-link nav-link-sub"><span class="nav-num">7.</span> Quality</a></li>
-              <li class="nav-sub-item"><a href="#v3-async" class="nav-link nav-link-sub"><span class="nav-num">8.</span> Async</a></li>
+              <li class="nav-sub-item"><a href="#v3-region" class="nav-link nav-link-sub"><span class="nav-num">8.</span> Region</a></li>
+              <li class="nav-sub-item"><a href="#v3-async" class="nav-link nav-link-sub"><span class="nav-num">9.</span> Async</a></li>
 
             </ul>
           </li>
@@ -307,21 +308,50 @@ getPaletteSync(img, { quality: 50 });  // Every 50th pixel</code></div>
       </section>
 
 
-      <!-- 07. Asynchronous Methods -->
+      <!-- 07. Region -->
+
+      <section id="v3-region" class="v3-section">
+        <span class="example-num">8</span>
+        <h2>Region extraction</h2>
+        <p>Pass a <code>region</code> to sample only part of the image. Coordinates are fractions of the image size (0–1) measured from the top-left, so the same values work on a thumbnail and the full-size original. Useful when the colors you care about live in a known corner &mdash; a product against a backdrop, or the strip of image a caption sits on.</p>
+
+        <div class="code-block"><code class="language-javascript">import { getPaletteSync } from 'colorthief';
+
+// Whole image
+getPaletteSync(img, { colorCount: 6 });
+
+// Center crop
+getPaletteSync(img, {
+  colorCount: 6,
+  region: { x: 0.25, y: 0.25, width: 0.5, height: 0.5 },
+});
+
+// Bottom third
+getPaletteSync(img, {
+  colorCount: 6,
+  region: { x: 0, y: 0.66, width: 1, height: 0.34 },
+});</code></div>
+
+        <div class="v3-output" id="out-region">
+          <!-- Loaded but not displayed; each row below renders its own copy with the region drawn on top. -->
+          <img class="region-source" id="region-source-img" src="" alt="">
+          <div id="region-rows"></div>
+        </div>
+      </section>
+
+
+      <!-- 08. Asynchronous Methods -->
 
       <section id="v3-async" class="v3-section">
-        <span class="example-num">8</span>
+        <span class="example-num">9</span>
         <h2>Asynchronous methods</h2>
-        <p>The async API keeps your UI responsive during extraction. It breaks the work into chunks and pauses between them, giving the browser time to handle animations, scrolling, and clicks. Pass <code>worker: true</code> to offload quantization to a Web Worker thread entirely (browser-only). This is helpful when processing many images at once or working with very large images.</p>
+        <p>The async API keeps your UI responsive during extraction. It breaks the work into chunks and pauses between them, giving the browser time to handle animations, scrolling, and clicks. This is helpful when processing many images at once or working with very large images.</p>
 
         <div class="code-block"><code class="language-javascript">import { getColor, getPalette } from 'colorthief';
 
 const color = await getColor(img);
 
-const palette = await getPalette(img, { colorCount: 6 });
-
-// Offload to Web Worker (browser only)
-const workerPalette = await getPalette(img, { colorCount: 6, worker: true });</code></div>
+const palette = await getPalette(img, { colorCount: 6 });</code></div>
 
         <div class="v3-output" id="out-async">
           <img class="source-img" id="async-source-img" src="" alt="Source image">
@@ -387,7 +417,7 @@ const workerPalette = await getPalette(img, { colorCount: 6, worker: true });</c
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
             </div>
             <strong>Non-blocking async</strong>
-            <p>The async API yields to the browser between processing chunks so your UI never freezes. Opt into <code>worker: true</code> to offload quantization to a Web Worker entirely.</p>
+            <p>The async API yields to the browser between processing chunks so your UI never freezes. To move extraction off the main thread entirely, run Color Thief inside your own worker.</p>
           </div>
 
           <div class="why-card">
@@ -451,7 +481,7 @@ const workerPalette = await getPalette(img, { colorCount: 6, worker: true });</c
                 <td>No</td>
               </tr>
               <tr>
-                <td>Async / Web Workers</td>
+                <td>Sync &amp; async API</td>
                 <td class="comparison-highlight">Both</td>
                 <td>Promises only</td>
                 <td>Sync only</td>
@@ -669,7 +699,7 @@ palette.forEach(c => console.log(c.hex()));</code></div>
 
         <h3 id="v3-api-options">Options</h3>
 
-        <p>All extraction functions accept an options object. The async API supports every option; the sync API omits <code>signal</code>, <code>worker</code>, and <code>loader</code>.</p>
+        <p>All extraction functions accept an options object. The async API supports every option; the sync API omits <code>signal</code> and <code>loader</code>.</p>
 
         <table class="options-table">
           <thead>
@@ -692,6 +722,12 @@ palette.forEach(c => console.log(c.hex()));</code></div>
               <td>number</td>
               <td><code>10</code></td>
               <td>Pixel sampling rate. <code>1</code> samples every pixel (highest quality, slowest). <code>10</code> samples every 10th pixel.</td>
+            </tr>
+            <tr>
+              <td><code>region</code></td>
+              <td>object</td>
+              <td>—</td>
+              <td>Sample only a sub-rectangle: <code>{ x, y, width, height }</code> in normalized 0–1 coordinates from the top-left. A region running past the right or bottom edge is clamped to the image; out-of-range or zero-sized values throw.</td>
             </tr>
             <tr>
               <td><code>colorSpace</code></td>
@@ -734,12 +770,6 @@ palette.forEach(c => console.log(c.hex()));</code></div>
               <td>AbortSignal</td>
               <td>—</td>
               <td>Cancel a running extraction. Async API only.</td>
-            </tr>
-            <tr>
-              <td><code>worker</code></td>
-              <td>boolean</td>
-              <td><code>false</code></td>
-              <td>Offload quantization to a Web Worker thread. Browser async API only.</td>
             </tr>
           </tbody>
         </table>

@@ -249,7 +249,47 @@ function initVideoDemo() {
   show('out-observe');
 }
 
-// ─── 07. Async API & Web Workers ────────────────────────────────────
+// ─── 07. Region Extraction ──────────────────────────────────────────
+
+const REGIONS = [
+  { label: 'Whole image', region: null },
+  { label: 'Center crop', region: { x: 0.25, y: 0.25, width: 0.5, height: 0.5 } },
+  { label: 'Bottom third', region: { x: 0, y: 0.66, width: 1, height: 0.34 } },
+];
+
+function formatRegion(region) {
+  if (!region) return 'no region';
+  const { x, y, width, height } = region;
+  return `{ x: ${x}, y: ${y}, width: ${width}, height: ${height} }`;
+}
+
+function initRegion() {
+  const sourceImg = document.getElementById('region-source-img');
+  const rowsEl = document.getElementById('region-rows');
+  if (!sourceImg || !rowsEl) return;
+
+  sourceImg.src = imageUrls[0];
+  waitForImage(sourceImg).then(() => {
+    rowsEl.innerHTML = REGIONS.map(({ label, region }) => {
+      const palette = getPaletteSync(sourceImg, region ? { colorCount: 6, region } : { colorCount: 6 });
+      // The box is positioned in percentages, which is exactly what the
+      // normalized 0–1 coords mean — no pixel math needed.
+      const box = region
+        ? `<div class="region-box" style="left:${region.x * 100}%;top:${region.y * 100}%;width:${region.width * 100}%;height:${region.height * 100}%"></div>`
+        : '';
+      return `<div class="region-row">
+        <div class="region-preview"><img src="${sourceImg.src}" alt="">${box}</div>
+        <div class="region-detail">
+          <div class="region-label"><strong>${label}</strong> <span class="timing">${formatRegion(region)}</span></div>
+          <div class="swatch-row">${palette ? palette.map(c => swatchHTML(c, 'md')).join('') : ''}</div>
+        </div>
+      </div>`;
+    }).join('');
+    show('out-region');
+  });
+}
+
+// ─── 08. Async API ──────────────────────────────────────────────────
 
 function initAsync() {
   const sourceImg = document.getElementById('async-source-img');
@@ -268,10 +308,6 @@ function initAsync() {
     const async_ = await timedAsync(() => getPalette(sourceImg, { colorCount: 6 }));
     rows.push({ label: 'Async', ms: async_.ms, palette: async_.result });
 
-    // Async + Worker
-    const worker = await timedAsync(() => getPalette(sourceImg, { colorCount: 6, worker: true }));
-    rows.push({ label: 'Async + Worker', ms: worker.ms, palette: worker.result });
-
     rowsEl.innerHTML = rows.map(row => `<div class="async-row">
       <div class="async-label"><strong>${row.label}</strong> <span class="timing">${row.ms}ms</span></div>
       <div class="swatch-row">${row.palette ? row.palette.map(c => swatchHTML(c, 'lg')).join('') : ''}</div>
@@ -281,7 +317,7 @@ function initAsync() {
   });
 }
 
-// ─── 08. Color Proportions ──────────────────────────────────────────
+// ─── 09. Color Proportions ──────────────────────────────────────────
 
 function extractProportionData(imgEl) {
   const palette = getPaletteSync(imgEl, { colorCount: 8 });
@@ -337,7 +373,7 @@ function renderProportionBar({ colors, imgSrc }) {
 
 
 
-// ─── 09. Drag and Drop ──────────────────────────────────────────────
+// ─── 10. Drag and Drop ──────────────────────────────────────────────
 
 function renderDroppedResult(image, result) {
   const roles = ['Vibrant', 'Muted', 'DarkVibrant', 'DarkMuted', 'LightVibrant', 'LightMuted'];
@@ -504,6 +540,7 @@ export default function initV3Demos() {
   initSwatches();
   initQuality();
   initVideoDemo();
+  initRegion();
   initAsync();
   initProportions();
   initDragAndDrop();

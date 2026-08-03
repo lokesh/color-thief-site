@@ -1598,6 +1598,56 @@ footer .button {
 }
 
 
+/* -- Region rows ----------------------------------------------------------- */
+
+/* Loaded so Color Thief can read it; each row renders its own visible copy. */
+.region-source {
+  display: none;
+}
+
+.region-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 12px 0;
+}
+
+.region-row:not(:last-child) {
+  border-bottom: 1px solid var(--color-border-faint);
+}
+
+.region-preview {
+  position: relative;
+  flex-shrink: 0;
+  width: 120px;
+  line-height: 0;
+}
+
+.region-preview img {
+  width: 100%;
+  border-radius: var(--border-radius);
+}
+
+/* Positioned in percentages, which is exactly what the normalized 0–1
+   region coordinates mean — the box needs no pixel math to stay in sync. */
+.region-box {
+  position: absolute;
+  border: 2px solid var(--color-text-inverse);
+  border-radius: 2px;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.4), inset 0 0 0 1px rgba(0, 0, 0, 0.4);
+}
+
+.region-detail {
+  min-width: 0;
+}
+
+.region-label {
+  font-family: var(--code-font);
+  font-size: 0.875rem; /* matches .async-label */
+  margin-bottom: 8px;
+}
+
+
 /* -- Async rows ------------------------------------------------------------ */
 
 .async-row {
