@@ -11,14 +11,14 @@
   --weight-x-bold:   800;
 
   /* ── Font sizes ────────────────────────────────────────────────── */
-  --text-xs:   0.7rem;   /* badges, tiny labels */
-  --text-sm:   0.75rem;    /* sub-nav, code inline */
-  --text-base: 1rem;      /* body copy */
-  --text-md:   0.8rem;    /* nav, buttons, small UI */
-  --text-lg:   1rem;      /* h3, v3 section headings */
-  --text-xl:   1.4rem;    /* h2 */
-  --text-2xl:  3.5rem;    /* h1 mobile */
-  --text-3xl:  4.5rem;    /* h1 desktop */
+  --text-xs:   0.75rem;   /* 12px — badges, tiny labels */
+  --text-sm:   0.8125rem; /* 13px — sub-nav, code inline */
+  --text-md:   0.875rem;  /* 14px — nav, buttons, small UI */
+  --text-base: 1rem;      /* 16px — body copy */
+  --text-lg:   1rem;      /* 16px — h3, v3 section headings */
+  --text-xl:   1.4rem;    /* 22px — h2 */
+  --text-2xl:  3.5rem;    /* 56px — h1 mobile */
+  --text-3xl:  4.5rem;    /* 72px — h1 desktop */
 
   /* ── Line heights ──────────────────────────────────────────────── */
   --leading-none:    0.9;
@@ -121,23 +121,23 @@ body {
 /* Typography
  * *----------------------------------------------- */
 html {
-  /* 15px base — all rem values scale from this */
-  font-size: 15px;
+  /* 16px base — all rem values scale from this */
+  font-size: 16px;
 }
 
 @media (min-width: 720px) {
   html {
-    font-size: 15px;
+    font-size: 16px;
   }
 }
 @media (min-width: 1200px) {
   html {
-    font-size: 15px;
+    font-size: 16px;
   }
 }
 @media (min-width: 1600px) {
   html {
-    font-size: 15px;
+    font-size: 16px;
   }
 }
 body,
@@ -184,7 +184,7 @@ h3 {
 }
 
 h4 {
-  font-size: 0.9rem;
+  font-size: 0.9375rem;
   font-weight: var(--weight-semibold);
   margin: 1.5rem 0 0.5rem;
   line-height: var(--leading-tight);
@@ -428,7 +428,7 @@ hr {
   margin-bottom: 2rem;
   color: var(--muted-color);
   font-weight: var(--weight-medium);
-  font-size: 0.85rem; /* between --text-sm (0.75rem) and --text-base (1rem) for readable attribution */
+  font-size: 0.875rem; /* between --text-sm (0.8125rem) and --text-base (1rem) for readable attribution */
 }
 
 @media (min-width: 720px) {
@@ -465,7 +465,7 @@ hr {
   padding: 3px 6px;
   font-size: 0.875rem;
   font-weight: var(--weight-semibold);
-  color: var(--color-text-muted);
+  color: var(--color-text-secondary);
   text-decoration: none;
 }
 
@@ -493,7 +493,7 @@ hr {
   display: inline-block;
   padding: 3px 6px;
   line-height: var(--leading-snug);
-  font-size: 0.875rem; /* between --text-sm (0.75rem) and --text-base (1rem); intentional mid-size for sidebar nav */
+  font-size: 0.875rem; /* between --text-sm (0.8125rem) and --text-base (1rem); intentional mid-size for sidebar nav */
   color: var(--color-text-secondary);
   font-weight: var(--weight-semibold);
   border-radius: var(--radius-sm);
@@ -670,13 +670,13 @@ section:last-of-type {
 .method-name {
   font-family: var(--code-font);
   font-weight: var(--bold);
-  font-size: 0.875rem; /* between --text-sm (0.75rem) and --text-base (1rem); readable monospace method name */
+  font-size: 0.875rem; /* between --text-sm (0.8125rem) and --text-base (1rem); readable monospace method name */
 }
 
 
 .method-return,
 .method-argument {
-  font-size: 0.875rem; /* between --text-sm (0.75rem) and --text-base (1rem); readable monospace method name */
+  font-size: 0.875rem; /* between --text-sm (0.8125rem) and --text-base (1rem); readable monospace method name */
   font-family: var(--code-font);
   font-weight: var(--bold);
   color: var(--primary-color);
@@ -773,13 +773,13 @@ footer .button {
 
 .why-card strong {
   display: block;
-  font-size: 0.9rem; /* slightly below --text-base for compact card headings */
+  font-size: 0.9375rem; /* slightly below --text-base for compact card headings */
   font-weight: var(--weight-semibold);
   margin-bottom: 0.25rem;
 }
 
 .why-card p {
-  font-size: 0.85rem; /* small but readable card body; between --text-sm and --text-base */
+  font-size: 0.875rem; /* small but readable card body; between --text-sm and --text-base */
   color: var(--color-text-secondary);
   margin: 0;
   line-height: var(--leading-normal);
@@ -1008,7 +1008,7 @@ footer .button {
 
 .sample-images-label {
   display: none;
-  font-size: 0.85rem; /* small but readable label; between --text-sm and --text-base */
+  font-size: 0.875rem; /* small but readable label; between --text-sm and --text-base */
   color: var(--muted-color);
   margin-bottom: 8px;
 }
@@ -1115,7 +1115,7 @@ footer .button {
   bottom: -1.5em;
   left: 50%;
   transform: translateX(-50%);
-  font-size: 0.65rem; /* intentionally smaller than --text-xs (0.7rem); tight label below swatch */
+  font-size: 0.6875rem; /* intentionally smaller than --text-xs (0.75rem); tight label below swatch */
   font-family: var(--code-font);
   color: var(--muted-color);
   white-space: nowrap;
@@ -1188,14 +1188,14 @@ footer .button {
 
 .version-subtitle {
   display: none;
-  font-size: 0.85rem; /* small supporting text; between --text-sm and --text-base */
+  font-size: 0.875rem; /* small supporting text; between --text-sm and --text-base */
   color: var(--color-text-secondary);
   margin: 0.2rem 0 0.4rem;
 }
 
 
 .credibility {
-  font-size: 0.85rem; /* small supporting text; between --text-sm and --text-base */
+  font-size: 0.875rem; /* small supporting text; between --text-sm and --text-base */
   color: var(--color-text-muted);
   font-weight: var(--weight-medium);
   letter-spacing: 0.02em; /* very subtle tracking for legibility at small size */
@@ -1318,7 +1318,7 @@ footer .button {
 /* -- v3 Output areas ------------------------------------------------------- */
 
 .annotation {
-  font-size: 0.85rem; /* small supporting text; between --text-sm and --text-base */
+  font-size: 0.875rem; /* small supporting text; between --text-sm and --text-base */
   color: var(--color-text-secondary);
   max-width: 600px;
   margin: 8px 0 12px;
@@ -1392,7 +1392,7 @@ footer .button {
   left: 50%;
   transform: translateX(-50%);
   font-family: var(--code-font);
-  font-size: 0.65rem; /* intentionally smaller than --text-xs (0.7rem); tight hex label below swatch */
+  font-size: 0.6875rem; /* intentionally smaller than --text-xs (0.75rem); tight hex label below swatch */
   color: var(--muted-color);
   white-space: nowrap;
   pointer-events: none;
@@ -1458,7 +1458,7 @@ footer .button {
   width: 100%;
   max-width: 560px;
   border-collapse: collapse;
-  font-size: 0.85rem; /* small but readable; between --text-sm and --text-base */
+  font-size: 0.875rem; /* small but readable; between --text-sm and --text-base */
 }
 
 .prop-table th {
@@ -1490,7 +1490,7 @@ footer .button {
 
 .prop-table td:last-child {
   font-family: var(--code-font);
-  font-size: 0.85rem; /* matches .prop-table base font-size */
+  font-size: 0.875rem; /* matches .prop-table base font-size */
 }
 
 .prop-table tr:last-child td {
@@ -1610,7 +1610,7 @@ footer .button {
 
 .async-label {
   font-family: var(--code-font);
-  font-size: 0.85rem; /* small but readable; between --text-sm and --text-base */
+  font-size: 0.875rem; /* small but readable; between --text-sm and --text-base */
   margin-bottom: 8px;
 }
 
@@ -1716,7 +1716,7 @@ footer .button {
 
 .observe-dominant-meta {
   font-family: var(--code-font);
-  font-size: 0.85rem; /* small but readable; between --text-sm and --text-base */
+  font-size: 0.875rem; /* small but readable; between --text-sm and --text-base */
   line-height: 1.5;
 }
 
@@ -1833,7 +1833,7 @@ footer .button {
 .options-table td {
   padding: 0.5rem 0.75rem;
   border-bottom: 1px solid var(--border-color-light);
-  font-size: 0.875rem; /* between --text-sm (0.75rem) and --text-base (1rem); readable table text */
+  font-size: 0.875rem; /* between --text-sm (0.8125rem) and --text-base (1rem); readable table text */
   text-align: left;
 }
 
